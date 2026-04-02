@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Štěpán Synek | SYS-2026-01</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --border-color: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.4;
+            padding: 20px;
+            font-size: 14px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-badge {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            padding: 2px 6px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid var(--border-color);
+            padding: 15px;
+            background-color: #f0f0f0;
+            margin-bottom: 20px;
+        }
+
+        .logo-mark {
+            font-size: 36px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .logo-text {
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 600px) {
+            .grid-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .section {
+            border: 1px solid var(--border-color);
+        }
+
+        .section-header {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            padding: 5px 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-row {
+            display: flex;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .data-row:last-child {
+            border-bottom: none;
+        }
+
+        .data-key {
+            flex: 0 0 120px;
+            padding: 8px 10px;
+            border-right: 1px solid #ccc;
+            font-weight: bold;
+            background-color: #f9f9f9;
+        }
+
+        .data-value {
+            flex: 1;
+            padding: 8px 10px;
+        }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--text-color);
+        }
+
+        a:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 11px;
+            text-align: center;
+            color: #666;
+            border-top: 1px dashed #ccc;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1>Štěpán Synek</h1>
+            <div>Katalogové číslo: SYS-2026-01</div>
+        </div>
+        <div class="status-badge">AKTIVNÍ</div>
+    </header>
+
+    <div class="logo-container">
+        <div class="logo-mark">SYS</div>
+        <div class="logo-text">ŠTĚPÁN SYNEK</div>
+    </div>
+
+    <div class="grid-container">
+        
+        <div class="section">
+            <div class="section-header">[01] Technické parametry</div>
+            <div class="data-row">
+                <div class="data-key">Lokalita</div>
+                <div class="data-value">Brno, CZ / Moravský kras</div>
+            </div>
+            <div class="data-row">
+                <div class="data-key">Architektura</div>
+                <div class="data-value">Průnik B2B inženýringu a ekonomiky</div>
+            </div>
+            <div class="data-row">
+                <div class="data-key">Provozní doba</div>
+                <div class="data-value">06:00 - 21:30 (Striktní time-blocking)</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">[02] Instalované moduly</div>
+            <div class="data-row">
+                <div class="data-key">Modul A</div>
+                <div class="data-value">VUT FEKT: Automatizační a měřicí technika</div>
+            </div>
+            <div class="data-row">
+                <div class="data-key">Modul B</div>
+                <div class="data-value">MUNI ESF: Podniková ekonomika a management</div>
+            </div>
+            <div class="data-row">
+                <div class="data-key">Modul C</div>
+                <div class="data-value">Vlastní startup operace & alokace kapitálu</div>
+            </div>
+        </div>
+
+        <div class="section" style="grid-column: 1 / -1;">
+            <div class="section-header">[03] B2B Výkon a aplikace (Nabídka služeb)</div>
+            <div class="data-row">
+                <div class="data-key">Aplikace 1</div>
+                <div class="data-value"><strong>Digitální transformace pro průmysl:</strong> Redesign a modernizace firemních prezentací, převod zastaralých struktur do moderních B2B standardů.</div>
+            </div>
+            <div class="data-row">
+                <div class="data-key">Aplikace 2</div>
+                <div class="data-value"><strong>Technická vizuální identita:</strong> Čisté vektorové facelifty, UI/UX návrhy pro strojírenské, automatizační a elektrotechnické společnosti.</div>
+            </div>
+            <div class="data-row">
+                <div class="data-key">Aplikace 3</div>
+                <div class="data-value"><strong>Optimalizace procesů:</strong> GTD implementace, Notion architektura, redukce technologického dluhu.</div>
+            </div>
+        </div>
+
+        <div class="section" style="grid-column: 1 / -1;">
+            <div class="section-header">[04] Komunikační protokoly</div>
+            <div class="data-row">
+                <div class="data-key">Poptávky</div>
+                <div class="data-value" id="secure-email">Načítání...</div>
+            </div>
+            <div class="data-row">
+                <div class="data-key">Sítě</div>
+                <div class="data-value"><a href="https://www.linkedin.com/in/" target="_blank">LinkedIn Profil</a></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-note">
+        Verze dokumentu: 1.0 | Generováno: 2026 | Optimalizováno pro B2B sektor.
+    </div>
+
+    <script>
+        // Inženýrská obrana proti spam botům
+        const user = "s"; 
+        const domain = "stepansynek.com";
+        const mailLink = document.createElement("a");
+        mailLink.href = "mailto:" + user + "&#64;" + domain;
+        mailLink.innerHTML = user + "&#64;" + domain;
+        
+        const emailDiv = document.getElementById("secure-email");
+        emailDiv.innerHTML = ""; 
+        emailDiv.appendChild(mailLink);
+    </script>
+</body>
+</html>
