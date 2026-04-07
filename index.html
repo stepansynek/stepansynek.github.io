@@ -3,6 +3,351 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Štěpán Synek | Digital Consultant & B2B Web Designer</title>
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-main: #111111;
+            --text-muted: #555555;
+            --border-light: #e0e0e0;
+            --border-dark: #111111;
+            --accent: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* Prémiová a čistá systémová typografie */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-dark);
+            margin-top: 5rem;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-light);
+            transition: border-color 0.2s ease;
+        }
+
+        a:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 40px;
+            margin-bottom: 4rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-image-wrapper {
+            flex-shrink: 0;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            background-color: #eeeeee;
+        }
+
+        @media (min-width: 768px) {
+            .hero-image-wrapper {
+                width: 220px;
+                height: 220px;
+            }
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%); /* Technický, profesionální vzhled */
+            transition: filter 0.3s ease;
+        }
+
+        .hero-image-wrapper img:hover {
+            filter: grayscale(0%);
+        }
+
+        /* --- GRID LAYOUTS --- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px 30px;
+        }
+
+        @media (min-width: 600px) {
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* --- CASE STUDIES (Transformace) --- */
+        .case-study {
+            border-left: 3px solid var(--border-light);
+            padding-left: 20px;
+            margin-bottom: 3rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .case-study:hover {
+            border-left-color: var(--accent);
+        }
+
+        .cs-metrics {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .metric-highlight {
+            background: #f0f0f0;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* --- ITEMS & BADGES --- */
+        .item {
+            margin-bottom: 2rem;
+        }
+
+        .meta {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-block;
+            border: 1px solid var(--border-light);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 5px;
+            margin-top: 5px;
+            color: var(--text-muted);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            margin-top: 6rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        @media (min-width: 600px) {
+            footer {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="hero">
+            <div class="hero-text">
+                <h1>Štěpán Synek</h1>
+                <div class="hero-subtitle">Digital Image Consultant & B2B Web Designer</div>
+                <p>Navrhuji vizuální identitu a digitální infrastrukturu, která budí respekt. Spojuji inženýrský přístup a analytické myšlení s moderním designem a podnikovou ekonomií. Pomáhám firmám zredukovat technologický dluh a prezentovat se na úrovni, která odpovídá kvalitě jejich produktů.</p>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="profilovka.jpg" alt="Štěpán Synek - Portrét" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'220\' height=\'220\' background=\'%23eee\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23f5f5f5\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%23aaa\' text-anchor=\'middle\' dy=\'.3em\'%3EFoto 1:1%3C/text%3E%3C/svg%3E'">
+            </div>
+        </header>
+
+        <main>
+            <section id="vysledky">
+                <h2>Úspěšné transformace</h2>
+                
+                <div class="case-study">
+                    <span class="meta">Průmyslová výroba • 2025</span>
+                    <h3>Redesign digitální prezentace a akvizice</h3>
+                    <p><strong>Výzva:</strong> Zastaralý web neodrážející technologickou úroveň firmy, složitá cesta zákazníka a nízký konverzní poměr z organického vyhledávání.</p>
+                    <p><strong>Řešení:</strong> Kompletní facelift B2B identity, nasazení rychlého statického webu s čistým UI/UX a restrukturalizace nabídky služeb.</p>
+                    <div class="cs-metrics">
+                        <span class="metric-highlight">+ 45 % poptávek B2B</span>
+                        <span class="metric-highlight">Zrychlení načítání o 80 %</span>
+                    </div>
+                </div>
+
+                <div class="case-study">
+                    <span class="meta">Technologický Startup • 2024</span>
+                    <h3>Zavedení řádu do interních procesů a marketingu</h3>
+                    <p><strong>Výzva:</strong> Roztříštěná komunikace, neexistující systém správy úkolů a chaotická digitální stopa, která odrazovala investory.</p>
+                    <p><strong>Řešení:</strong> Návrh nové korporátní identity, sjednocení komunikačních kanálů a plná implementace architektury procesů.</p>
+                    <div class="cs-metrics">
+                        <span class="metric-highlight">Sjednocení brandu</span>
+                        <span class="metric-highlight">Redukce operativy</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sluzby">
+                <h2>Kompetence & Služby</h2>
+                <div class="grid-2">
+                    <div class="item">
+                        <h3>B2B Web Design</h3>
+                        <p>Tvorba čistých, bleskově rychlých a uživatelsky přívětivých webových prezentací. Bez těžkých frameworků. Zaměřeno na čitelnost, perfektní typografii a vysokou konverzi v technických odvětvích.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Digital Image Remake</h3>
+                        <p>Facelift zastaralých vizuálů. Převádím komplikované technické služby do srozumitelného, moderního a důvěryhodného designu, který rezonuje s vedoucími pracovníky a investory.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Procesní optimalizace & IT</h3>
+                        <p>Návrh a implementace interních struktur pro extrémní efektivitu. Využívám GTD metodiku a buduji škálovatelnou architekturu v nástrojích jako je Notion pro radikální snížení technologického dluhu.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Marketingové strategie</h3>
+                        <p>Konzultace pro digitální marketing, přesné cílení kampaní a alokace rozpočtu s ohledem na maximální ROI a strategický růst podniku.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="zkusenosti">
+                <h2>Zázemí & Zkušenosti</h2>
+                
+                <div class="item">
+                    <span class="meta">2023 – Současnost</span>
+                    <h3>Digital Marketing Specialist & Consultant</h3>
+                    <p>Řízení a exekuce marketingových strategií s přesahem do tvorby digitální identity a správy IT procesů.</p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="item">
+                        <span class="meta">Probíhající (Bc.)</span>
+                        <h3>VUT v Brně, FEKT</h3>
+                        <p><strong>Automatizační a měřicí technika.</strong> Tvrdé analytické základy, práce se systémy, inženýrský přístup k řešení problémů a hluboké porozumění technickým oborům.</p>
+                        <span class="badge">Systémové inženýrství</span>
+                    </div>
+
+                    <div class="item">
+                        <span class="meta">Probíhající (Bc.)</span>
+                        <h3>Masarykova univerzita, ESF</h3>
+                        <p><strong>Podniková ekonomika a management.</strong> Strategické plánování, alokace kapitálu a řízení firemních struktur, což umožňuje navrhovat weby a systémy, které dávají ekonomický smysl.</p>
+                        <span class="badge">Management</span> <span class="badge">Ekonomika</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="kontakt">
+                <h2>Kontakt</h2>
+                <p>Propojme se. V rámci zachování hluboké práce a time-blockingu řeším komunikaci ve vyhrazených oknech. Očekávejte věcnou a strukturovanou odpověď.</p>
+                <p>
+                    <strong>Email:</strong> <span id="secure-email">Načítání...</span><br>
+                    <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/" target="_blank">linkedin.com/in/stepansynek</a>
+                </p>
+            </section>
+        </main>
+
+        <footer>
+            <div>Brno, Česká republika</div>
+            <div>&copy; 2026 Štěpán Synek • Optimalizováno pro výkon.</div>
+        </footer>
+    </div>
+
+    <script>
+        const user = "s"; 
+        const domain = "stepansynek.com";
+        const mailLink = document.createElement("a");
+        mailLink.href = "mailto:" + user + "&#64;" + domain;
+        mailLink.innerHTML = user + "&#64;" + domain;
+        
+        const emailDiv = document.getElementById("secure-email");
+        emailDiv.innerHTML = ""; 
+        emailDiv.appendChild(mailLink);
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Štěpán Synek | Digital Consultant & Web Designer</title>
     <style>
         :root {
