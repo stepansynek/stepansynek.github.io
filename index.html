@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Štěpán Synek | SYS-2026-01</title>
+    <title>Štěpán Synek | Digital Consultant & Web Designer</title>
     <style>
         :root {
             --bg-color: #ffffff;
-            --text-color: #000000;
-            --border-color: #000000;
+            --text-color: #1a1a1a;
+            --text-muted: #666666;
+            --border-color: #e5e5e5;
+            --accent-color: #000000;
         }
 
         * {
@@ -18,216 +20,209 @@
         }
 
         body {
-            font-family: 'Courier New', Courier, monospace;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.4;
-            padding: 20px;
-            font-size: 14px;
-            max-width: 900px;
+            line-height: 1.6;
+            font-size: 16px;
+            max-width: 800px;
             margin: 0 auto;
+            padding: 40px 20px;
         }
 
-        header {
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
+        /* Typography */
         h1 {
-            font-size: 24px;
-            font-weight: bold;
-            text-transform: uppercase;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            line-height: 1.1;
+            margin-bottom: 10px;
         }
 
-        .status-badge {
-            background-color: var(--text-color);
-            color: var(--bg-color);
-            padding: 2px 6px;
-            font-weight: bold;
-            font-size: 12px;
-        }
-
-        .logo-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border: 2px solid var(--border-color);
-            padding: 15px;
-            background-color: #f0f0f0;
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
             margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 50px;
         }
 
-        .logo-mark {
-            font-size: 36px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: -2px;
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
         }
 
-        .logo-text {
-            font-size: 10px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-top: 5px;
+        p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
         }
 
-        .grid-container {
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        a:hover {
+            border-bottom-color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        header {
+            margin-bottom: 60px;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Layout Grids */
+        .grid-2 {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 30px;
         }
 
         @media (min-width: 600px) {
-            .grid-container {
+            .grid-2 {
                 grid-template-columns: 1fr 1fr;
             }
         }
 
-        .section {
-            border: 1px solid var(--border-color);
+        /* Cards / Items */
+        .item {
+            margin-bottom: 25px;
         }
 
-        .section-header {
-            background-color: var(--text-color);
-            color: var(--bg-color);
-            padding: 5px 10px;
-            font-weight: bold;
+        .item-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
             text-transform: uppercase;
-            border-bottom: 1px solid var(--border-color);
+            letter-spacing: 0.05em;
+            margin-bottom: 5px;
+            display: block;
         }
 
-        .data-row {
+        /* Badge */
+        .badge {
+            display: inline-block;
+            background-color: #f3f4f6;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 80px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: var(--text-muted);
             display: flex;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .data-row:last-child {
-            border-bottom: none;
-        }
-
-        .data-key {
-            flex: 0 0 120px;
-            padding: 8px 10px;
-            border-right: 1px solid #ccc;
-            font-weight: bold;
-            background-color: #f9f9f9;
-        }
-
-        .data-value {
-            flex: 1;
-            padding: 8px 10px;
-        }
-
-        a {
-            color: var(--text-color);
-            text-decoration: none;
-            border-bottom: 1px solid var(--text-color);
-        }
-
-        a:hover {
-            background-color: var(--text-color);
-            color: var(--bg-color);
-        }
-
-        .footer-note {
-            margin-top: 30px;
-            font-size: 11px;
-            text-align: center;
-            color: #666;
-            border-top: 1px dashed #ccc;
-            padding-top: 10px;
+            justify-content: space-between;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div>
-            <h1>Štěpán Synek</h1>
-            <div>Katalogové číslo: SYS-2026-01</div>
-        </div>
-        <div class="status-badge">AKTIVNÍ</div>
+        <h1>Štěpán Synek</h1>
+        <div class="subtitle">Digital Image Consultant, Web Designer & IT Strategist</div>
     </header>
 
-    <div class="logo-container">
-        <div class="logo-mark">SYS</div>
-        <div class="logo-text">ŠTĚPÁN SYNEK</div>
-    </div>
+    <main>
+        <section>
+            <p>Spojuji technický background s byznysovým myšlením. Pomáhám firmám optimalizovat jejich digitální prezentaci, navrhuji moderní weby a nastavuji efektivní procesy. Zkracuji propast mezi B2B inženýringem a moderním marketingem.</p>
+        </section>
 
-    <div class="grid-container">
-        
-        <div class="section">
-            <div class="section-header">[01] Technické parametry</div>
-            <div class="data-row">
-                <div class="data-key">Lokalita</div>
-                <div class="data-value">Brno, CZ / Moravský kras</div>
+        <section>
+            <h2>Služby</h2>
+            <div class="grid-2">
+                <div class="item">
+                    <h3>Digital Company Image Remake</h3>
+                    <p>Komplexní modernizace firemní prezentace. Převod zastaralých struktur a vizuálů do moderních B2B standardů, které budí důvěru a prodávají.</p>
+                </div>
+                <div class="item">
+                    <h3>Web Design & Vývoj</h3>
+                    <p>Návrh a tvorba čistých, bleskově rychlých a uživatelsky přívětivých webů s důrazem na skvělé UI/UX a vysokou konverzi.</p>
+                </div>
+                <div class="item">
+                    <h3>Marketing Consulting</h3>
+                    <p>Strategické řízení digitálního marketingu, optimalizace komunikačních kanálů a budování silného brandu v technických odvětvích.</p>
+                </div>
+                <div class="item">
+                    <h3>IT & Optimalizace procesů</h3>
+                    <p>Redukce technologického dluhu, implementace moderních nástrojů (Notion, GTD) a digitalizace firemní agendy pro vyšší efektivitu.</p>
+                </div>
             </div>
-            <div class="data-row">
-                <div class="data-key">Architektura</div>
-                <div class="data-value">Průnik B2B inženýringu a ekonomiky</div>
-            </div>
-            <div class="data-row">
-                <div class="data-key">Provozní doba</div>
-                <div class="data-value">06:00 - 21:30 (Striktní time-blocking)</div>
-            </div>
-        </div>
+        </section>
 
-        <div class="section">
-            <div class="section-header">[02] Instalované moduly</div>
-            <div class="data-row">
-                <div class="data-key">Modul A</div>
-                <div class="data-value">VUT FEKT: Automatizační a měřicí technika</div>
+        <section>
+            <h2>Vybrané projekty</h2>
+            <div class="item">
+                <span class="item-meta">2025</span>
+                <h3>Název Projektu nebo Firmy</h3>
+                <p>Kompletní redesign firemní identity a tvorba nového webu pro strojírenskou společnost. Zvýšení generování poptávek o 40 %.</p>
             </div>
-            <div class="data-row">
-                <div class="data-key">Modul B</div>
-                <div class="data-value">MUNI ESF: Podniková ekonomika a management</div>
+            <div class="item">
+                <span class="item-meta">2024</span>
+                <h3>Název Dalšího Projektu</h3>
+                <p>Implementace nového CRM a marketingové strategie pro lokální startup, nastavení analytiky a optimalizace konverzních cest.</p>
             </div>
-            <div class="data-row">
-                <div class="data-key">Modul C</div>
-                <div class="data-value">Vlastní startup operace & alokace kapitálu</div>
-            </div>
-        </div>
+        </section>
 
-        <div class="section" style="grid-column: 1 / -1;">
-            <div class="section-header">[03] B2B Výkon a aplikace (Nabídka služeb)</div>
-            <div class="data-row">
-                <div class="data-key">Aplikace 1</div>
-                <div class="data-value"><strong>Digitální transformace pro průmysl:</strong> Redesign a modernizace firemních prezentací, převod zastaralých struktur do moderních B2B standardů.</div>
+        <section>
+            <h2>Zkušenosti & Vzdělání</h2>
+            
+            <div class="item">
+                <span class="item-meta">2023 – Současnost</span>
+                <h3>Digital Marketing Specialist & Consultant</h3>
+                <p>Strategické řízení marketingových kampaní, správa digitální komunikace a podpora růstu značky. Zodpovědnost za analytiku a optimalizaci online přítomnosti.</p>
             </div>
-            <div class="data-row">
-                <div class="data-key">Aplikace 2</div>
-                <div class="data-value"><strong>Technická vizuální identita:</strong> Čisté vektorové facelifty, UI/UX návrhy pro strojírenské, automatizační a elektrotechnické společnosti.</div>
-            </div>
-            <div class="data-row">
-                <div class="data-key">Aplikace 3</div>
-                <div class="data-value"><strong>Optimalizace procesů:</strong> GTD implementace, Notion architektura, redukce technologického dluhu.</div>
-            </div>
-        </div>
 
-        <div class="section" style="grid-column: 1 / -1;">
-            <div class="section-header">[04] Komunikační protokoly</div>
-            <div class="data-row">
-                <div class="data-key">Poptávky</div>
-                <div class="data-value" id="secure-email">Načítání...</div>
+            <div class="item">
+                <span class="item-meta">Probíhající (Bc.)</span>
+                <h3>Vysoké učení technické v Brně (VUT)</h3>
+                <p>Fakulta elektrotechniky a komunikačních technologií (FEKT)<br>
+                <strong>Obor:</strong> Automatizační a měřicí technika</p>
+                <span class="badge">Automatizace</span> <span class="badge">IT infrastruktura</span>
             </div>
-            <div class="data-row">
-                <div class="data-key">Sítě</div>
-                <div class="data-value"><a href="https://www.linkedin.com/in/" target="_blank">LinkedIn Profil</a></div>
+
+            <div class="item">
+                <span class="item-meta">Probíhající (Bc.)</span>
+                <h3>Masarykova univerzita v Brně (MUNI)</h3>
+                <p>Ekonomicko-správní fakulta (ESF)<br>
+                <strong>Obor:</strong> Podniková ekonomika a management</p>
+                <span class="badge">Management</span> <span class="badge">B2B Strategie</span>
             </div>
-        </div>
+        </section>
 
-    </div>
+        <section>
+            <h2>Kontakt</h2>
+            <p>Jsem otevřený novým projektům a spolupracím. Napište mi napřímo nebo se propojme na sítích.</p>
+            <p>
+                <strong>Email:</strong> <span id="secure-email">Načítání...</span><br>
+                <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/" target="_blank">linkedin.com/in/stepansynek</a>
+            </p>
+        </section>
+    </main>
 
-    <div class="footer-note">
-        Verze dokumentu: 1.0 | Generováno: 2026 | Optimalizováno pro B2B sektor.
-    </div>
+    <footer>
+        <div>Brno, Česká republika</div>
+        <div>&copy; 2026 Štěpán Synek</div>
+    </footer>
 
     <script>
-        // Inženýrská obrana proti spam botům
+        // Ochrana proti spam botům zůstává
         const user = "s"; 
         const domain = "stepansynek.com";
         const mailLink = document.createElement("a");
