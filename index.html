@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Štěpán Synek | Digital Consultant & B2B Web Designer</title>
+    <title>Štěpán Synek | Management, PR & Tech-Bridge</title>
     <style>
         :root {
             --bg-color: #fcfcfc;
@@ -21,7 +21,6 @@
         }
 
         body {
-            /* Prémiová a čistá systémová typografie */
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
@@ -110,18 +109,19 @@
 
         .hero-image-wrapper {
             flex-shrink: 0;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
+            width: 180px;
+            height: 240px;
+            border-radius: 12px;
             overflow: hidden;
             border: 1px solid var(--border-light);
             background-color: #eeeeee;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
 
         @media (min-width: 768px) {
             .hero-image-wrapper {
-                width: 220px;
-                height: 220px;
+                width: 240px;
+                height: 320px;
             }
         }
 
@@ -129,12 +129,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(100%); /* Technický, profesionální vzhled */
-            transition: filter 0.3s ease;
-        }
-
-        .hero-image-wrapper img:hover {
-            filter: grayscale(0%);
+            object-position: center top;
         }
 
         /* --- GRID LAYOUTS --- */
@@ -150,36 +145,17 @@
             }
         }
 
-        /* --- CASE STUDIES (Transformace) --- */
-        .case-study {
-            border-left: 3px solid var(--border-light);
-            padding-left: 20px;
-            margin-bottom: 3rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .case-study:hover {
-            border-left-color: var(--accent);
-        }
-
-        .cs-metrics {
-            display: flex;
-            gap: 20px;
-            margin-top: 15px;
-            font-weight: 600;
-            color: var(--text-main);
-        }
-
-        .metric-highlight {
-            background: #f0f0f0;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
-
         /* --- ITEMS & BADGES --- */
         .item {
             margin-bottom: 2rem;
+            border-left: 3px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .item:hover {
+            border-left: 3px solid var(--accent);
+            padding-left: 15px;
+            margin-left: -18px;
         }
 
         .meta {
@@ -203,6 +179,7 @@
             margin-right: 5px;
             margin-top: 5px;
             color: var(--text-muted);
+            background: #f9f9f9;
         }
 
         /* --- FOOTER --- */
@@ -232,347 +209,101 @@
         <header class="hero">
             <div class="hero-text">
                 <h1>Štěpán Synek</h1>
-                <div class="hero-subtitle">Digital Image Consultant & B2B Web Designer</div>
-                <p>Navrhuji vizuální identitu a digitální infrastrukturu, která budí respekt. Spojuji inženýrský přístup a analytické myšlení s moderním designem a podnikovou ekonomií. Pomáhám firmám zredukovat technologický dluh a prezentovat se na úrovni, která odpovídá kvalitě jejich produktů.</p>
+                <div class="hero-subtitle">Management, Marketing & Tech-Bridge</div>
+                <p>Spojuji tvrdá data a inženýrský přístup s budováním vztahů a moderním managementem. Jako student dvou vysokých škol (VUT a MUNI) s tříletou praxí v B2B marketingu dokážu efektivně překládat technické problémy do lidské řeči.</p>
+                <p>Můj time-management mi dává prostor nesedět jen u tabulek, ale reálně tvořit komunity a posouvat projekty kupředu.</p>
             </div>
             <div class="hero-image-wrapper">
-                <img src="profilovka.jpg" alt="Štěpán Synek - Portrét" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'220\' height=\'220\' background=\'%23eee\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23f5f5f5\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%23aaa\' text-anchor=\'middle\' dy=\'.3em\'%3EFoto 1:1%3C/text%3E%3C/svg%3E'">
+                <img src="IMG_4883.jpg" alt="Štěpán Synek - Portrét" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'240\' height=\'320\' background=\'%23eee\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23f5f5f5\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%23aaa\' text-anchor=\'middle\' dy=\'.3em\'%3EFoto%3C/text%3E%3C/svg%3E'">
             </div>
         </header>
 
         <main>
-            <section id="vysledky">
-                <h2>Úspěšné transformace</h2>
-                
-                <div class="case-study">
-                    <span class="meta">Průmyslová výroba • 2025</span>
-                    <h3>Redesign digitální prezentace a akvizice</h3>
-                    <p><strong>Výzva:</strong> Zastaralý web neodrážející technologickou úroveň firmy, složitá cesta zákazníka a nízký konverzní poměr z organického vyhledávání.</p>
-                    <p><strong>Řešení:</strong> Kompletní facelift B2B identity, nasazení rychlého statického webu s čistým UI/UX a restrukturalizace nabídky služeb.</p>
-                    <div class="cs-metrics">
-                        <span class="metric-highlight">+ 45 % poptávek B2B</span>
-                        <span class="metric-highlight">Zrychlení načítání o 80 %</span>
-                    </div>
-                </div>
-
-                <div class="case-study">
-                    <span class="meta">Technologický Startup • 2024</span>
-                    <h3>Zavedení řádu do interních procesů a marketingu</h3>
-                    <p><strong>Výzva:</strong> Roztříštěná komunikace, neexistující systém správy úkolů a chaotická digitální stopa, která odrazovala investory.</p>
-                    <p><strong>Řešení:</strong> Návrh nové korporátní identity, sjednocení komunikačních kanálů a plná implementace architektury procesů.</p>
-                    <div class="cs-metrics">
-                        <span class="metric-highlight">Sjednocení brandu</span>
-                        <span class="metric-highlight">Redukce operativy</span>
-                    </div>
-                </div>
-            </section>
-
-            <section id="sluzby">
-                <h2>Kompetence & Služby</h2>
+            <section id="kompetence">
+                <h2>Kompetence & Přidaná hodnota</h2>
                 <div class="grid-2">
                     <div class="item">
-                        <h3>B2B Web Design</h3>
-                        <p>Tvorba čistých, bleskově rychlých a uživatelsky přívětivých webových prezentací. Bez těžkých frameworků. Zaměřeno na čitelnost, perfektní typografii a vysokou konverzi v technických odvětvích.</p>
+                        <h3>Organizace & Systémy</h3>
+                        <p>Řídím komplexní agendy s využitím pokročilé automatizace a GTD metodiky. Architektura mých procesů mi umožňuje udržovat 100% spolehlivost i pod extrémní zátěží dvou prezenčních studií a praxe.</p>
                     </div>
                     <div class="item">
-                        <h3>Digital Image Remake</h3>
-                        <p>Facelift zastaralých vizuálů. Převádím komplikované technické služby do srozumitelného, moderního a důvěryhodného designu, který rezonuje s vedoucími pracovníky a investory.</p>
+                        <h3>B2B Marketing & PR</h3>
+                        <p>Mám 3 roky praxe v klientské komunikaci, správě digitální identity a cíleném copywritingu. Vím, jak oslovit partnery i jak vybudovat důvěru uvnitř týmu.</p>
                     </div>
                     <div class="item">
-                        <h3>Procesní optimalizace & IT</h3>
-                        <p>Návrh a implementace interních struktur pro extrémní efektivitu. Využívám GTD metodiku a buduji škálovatelnou architekturu v nástrojích jako je Notion pro radikální snížení technologického dluhu.</p>
+                        <h3>Most mezi technikou a byznysem</h3>
+                        <p>Díky studiu automatizace chápu myšlení inženýrů a vývojářů. Díky studiu ekonomiky zase vím, jak tyto projekty uřídit v čase, rozpočtu a srozumitelně je odprezentovat managementu.</p>
                     </div>
                     <div class="item">
-                        <h3>Marketingové strategie</h3>
-                        <p>Konzultace pro digitální marketing, přesné cílení kampaní a alokace rozpočtu s ohledem na maximální ROI a strategický růst podniku.</p>
+                        <h3>Angličtina (C2 Proficiency)</h3>
+                        <p>Držitel certifikátu CPE od Cambridge. Jsem plně připraven na plynulou odbornou i neformální komunikaci v mezinárodním firemním prostředí.</p>
                     </div>
                 </div>
             </section>
 
             <section id="zkusenosti">
-                <h2>Zázemí & Zkušenosti</h2>
+                <h2>Zkušenosti & Vzdělání</h2>
                 
                 <div class="item">
-                    <span class="meta">2023 – Současnost</span>
-                    <h3>Digital Marketing Specialist & Consultant</h3>
-                    <p>Řízení a exekuce marketingových strategií s přesahem do tvorby digitální identity a správy IT procesů.</p>
+                    <span class="meta">Září 2021 – Současnost</span>
+                    <h3>B2B Marketing & Communication Specialist</h3>
+                    <p>Nezávislý specialista. Zodpovědnost za dlouhodobé budování vztahů s firemními partnery, každodenní řešení klientských požadavků a kompletní správu digitální prezentace. Samostatné vedení marketingových projektů s důrazem na B2B segment.</p>
                 </div>
 
                 <div class="grid-2">
                     <div class="item">
-                        <span class="meta">Probíhající (Bc.)</span>
-                        <h3>VUT v Brně, FEKT</h3>
-                        <p><strong>Automatizační a měřicí technika.</strong> Tvrdé analytické základy, práce se systémy, inženýrský přístup k řešení problémů a hluboké porozumění technickým oborům.</p>
-                        <span class="badge">Systémové inženýrství</span>
+                        <span class="meta">Září 2025 – Současnost</span>
+                        <h3>Masarykova univerzita (MUNI ECON)</h3>
+                        <p><strong>Podniková ekonomika a management.</strong> Zaměření na rozvoj v oblasti řízení týmů, firemní kultury, podnikových procesů a strategického plánování.</p>
+                        <span class="badge">Management</span> <span class="badge">Ekonomika</span>
                     </div>
 
                     <div class="item">
-                        <span class="meta">Probíhající (Bc.)</span>
-                        <h3>Masarykova univerzita, ESF</h3>
-                        <p><strong>Podniková ekonomika a management.</strong> Strategické plánování, alokace kapitálu a řízení firemních struktur, což umožňuje navrhovat weby a systémy, které dávají ekonomický smysl.</p>
-                        <span class="badge">Management</span> <span class="badge">Ekonomika</span>
+                        <span class="meta">Září 2025 – Současnost</span>
+                        <h3>Vysoké učení technické (VUT FEKT)</h3>
+                        <p><strong>Automatizační a měřicí technika.</strong> Budování tvrdého technického fundamentu pro pochopení komplexních inženýrských projektů a R&D procesů.</p>
+                        <span class="badge">Automatizace</span> <span class="badge">Analytika</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="mindset">
+                <h2>Mindset & Za hranicemi Excelu</h2>
+                <p>Papírové předpoklady a systémy musí být podloženy reálnou odolností. Komplexní mentální zátěž kompenzuji disciplínou v outdooru.</p>
+                <div class="grid-2">
+                    <div class="item">
+                        <h3>Dálková cyklistika</h3>
+                        <p>Za sebou mám expedici přesahující 2400 km do Francie. Je to pro mě nejlepší škola logistického plánování, krizového řízení za pochodu a extrémní vytrvalosti.</p>
+                    </div>
+                    <div class="item">
+                        <h3>Bouldering & Lezení</h3>
+                        <p>Fyzická aplikace risk managementu a systematického překonávání překážek. Schopnost zachovat chladnou hlavu a analyzovat další krok i pod tlakem.</p>
                     </div>
                 </div>
             </section>
 
             <section id="kontakt">
                 <h2>Kontakt</h2>
-                <p>Propojme se. V rámci zachování hluboké práce a time-blockingu řeším komunikaci ve vyhrazených oknech. Očekávejte věcnou a strukturovanou odpověď.</p>
+                <p>Jsem otevřený novým výzvám v oblasti interního PR, koordinace talentů a projektového managementu.</p>
                 <p>
                     <strong>Email:</strong> <span id="secure-email">Načítání...</span><br>
-                    <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/" target="_blank">linkedin.com/in/stepansynek</a>
+                    <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/stepansynek" target="_blank">linkedin.com/in/stepansynek</a>
                 </p>
             </section>
         </main>
 
         <footer>
             <div>Brno, Česká republika</div>
-            <div>&copy; 2026 Štěpán Synek • Optimalizováno pro výkon.</div>
+            <div>&copy; 2026 Štěpán Synek</div>
         </footer>
     </div>
 
     <script>
-        const user = "s"; 
+        const user = "contactme"; 
         const domain = "stepansynek.com";
         const mailLink = document.createElement("a");
-        mailLink.href = "mailto:" + user + "&#64;" + domain;
-        mailLink.innerHTML = user + "&#64;" + domain;
-        
-        const emailDiv = document.getElementById("secure-email");
-        emailDiv.innerHTML = ""; 
-        emailDiv.appendChild(mailLink);
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="cs">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Štěpán Synek | Digital Consultant & Web Designer</title>
-    <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #1a1a1a;
-            --text-muted: #666666;
-            --border-color: #e5e5e5;
-            --accent-color: #000000;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            font-size: 16px;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* Typography */
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            letter-spacing: -0.05em;
-            line-height: 1.1;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
-            margin-top: 50px;
-        }
-
-        h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        p {
-            color: var(--text-muted);
-            margin-bottom: 15px;
-        }
-
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.2s ease;
-        }
-
-        a:hover {
-            border-bottom-color: var(--accent-color);
-        }
-
-        /* Hero Section */
-        header {
-            margin-bottom: 60px;
-        }
-
-        .subtitle {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            font-weight: 400;
-        }
-
-        /* Layout Grids */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-
-        @media (min-width: 600px) {
-            .grid-2 {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        /* Cards / Items */
-        .item {
-            margin-bottom: 25px;
-        }
-
-        .item-meta {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        /* Badge */
-        .badge {
-            display: inline-block;
-            background-color: #f3f4f6;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-right: 5px;
-            margin-bottom: 5px;
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 80px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            display: flex;
-            justify-content: space-between;
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1>Štěpán Synek</h1>
-        <div class="subtitle">Digital Image Consultant, Web Designer & IT Strategist</div>
-    </header>
-
-    <main>
-        <section>
-            <p>Spojuji technický background s byznysovým myšlením. Pomáhám firmám optimalizovat jejich digitální prezentaci, navrhuji moderní weby a nastavuji efektivní procesy. Zkracuji propast mezi B2B inženýringem a moderním marketingem.</p>
-        </section>
-
-        <section>
-            <h2>Služby</h2>
-            <div class="grid-2">
-                <div class="item">
-                    <h3>Digital Company Image Remake</h3>
-                    <p>Komplexní modernizace firemní prezentace. Převod zastaralých struktur a vizuálů do moderních B2B standardů, které budí důvěru a prodávají.</p>
-                </div>
-                <div class="item">
-                    <h3>Web Design & Vývoj</h3>
-                    <p>Návrh a tvorba čistých, bleskově rychlých a uživatelsky přívětivých webů s důrazem na skvělé UI/UX a vysokou konverzi.</p>
-                </div>
-                <div class="item">
-                    <h3>Marketing Consulting</h3>
-                    <p>Strategické řízení digitálního marketingu, optimalizace komunikačních kanálů a budování silného brandu v technických odvětvích.</p>
-                </div>
-                <div class="item">
-                    <h3>IT & Optimalizace procesů</h3>
-                    <p>Redukce technologického dluhu, implementace moderních nástrojů (Notion, GTD) a digitalizace firemní agendy pro vyšší efektivitu.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>Vybrané projekty</h2>
-            <div class="item">
-                <span class="item-meta">2025</span>
-                <h3>Název Projektu nebo Firmy</h3>
-                <p>Kompletní redesign firemní identity a tvorba nového webu pro strojírenskou společnost. Zvýšení generování poptávek o 40 %.</p>
-            </div>
-            <div class="item">
-                <span class="item-meta">2024</span>
-                <h3>Název Dalšího Projektu</h3>
-                <p>Implementace nového CRM a marketingové strategie pro lokální startup, nastavení analytiky a optimalizace konverzních cest.</p>
-            </div>
-        </section>
-
-        <section>
-            <h2>Zkušenosti & Vzdělání</h2>
-            
-            <div class="item">
-                <span class="item-meta">2023 – Současnost</span>
-                <h3>Digital Marketing Specialist & Consultant</h3>
-                <p>Strategické řízení marketingových kampaní, správa digitální komunikace a podpora růstu značky. Zodpovědnost za analytiku a optimalizaci online přítomnosti.</p>
-            </div>
-
-            <div class="item">
-                <span class="item-meta">Probíhající (Bc.)</span>
-                <h3>Vysoké učení technické v Brně (VUT)</h3>
-                <p>Fakulta elektrotechniky a komunikačních technologií (FEKT)<br>
-                <strong>Obor:</strong> Automatizační a měřicí technika</p>
-                <span class="badge">Automatizace</span> <span class="badge">IT infrastruktura</span>
-            </div>
-
-            <div class="item">
-                <span class="item-meta">Probíhající (Bc.)</span>
-                <h3>Masarykova univerzita v Brně (MUNI)</h3>
-                <p>Ekonomicko-správní fakulta (ESF)<br>
-                <strong>Obor:</strong> Podniková ekonomika a management</p>
-                <span class="badge">Management</span> <span class="badge">B2B Strategie</span>
-            </div>
-        </section>
-
-        <section>
-            <h2>Kontakt</h2>
-            <p>Jsem otevřený novým projektům a spolupracím. Napište mi napřímo nebo se propojme na sítích.</p>
-            <p>
-                <strong>Email:</strong> <span id="secure-email">Načítání...</span><br>
-                <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/" target="_blank">linkedin.com/in/stepansynek</a>
-            </p>
-        </section>
-    </main>
-
-    <footer>
-        <div>Brno, Česká republika</div>
-        <div>&copy; 2026 Štěpán Synek</div>
-    </footer>
-
-    <script>
-        // Ochrana proti spam botům zůstává
-        const user = "s"; 
-        const domain = "stepansynek.com";
-        const mailLink = document.createElement("a");
-        mailLink.href = "mailto:" + user + "&#64;" + domain;
-        mailLink.innerHTML = user + "&#64;" + domain;
+        mailLink.href = "mailto:" + user + "@" + domain;
+        mailLink.innerHTML = user + "@" + domain;
         
         const emailDiv = document.getElementById("secure-email");
         emailDiv.innerHTML = ""; 
