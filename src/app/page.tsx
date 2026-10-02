@@ -1,6 +1,6 @@
-import { Header } from "@/components/Header";
 import { About } from "@/components/sections/About";
 import { CallToAction } from "@/components/sections/CallToAction";
+import { Contact } from "@/components/sections/Contact";
 import { Hero } from "@/components/sections/Hero";
 import { Problem } from "@/components/sections/Problem";
 import { Process } from "@/components/sections/Process";
@@ -9,17 +9,15 @@ import { Services } from "@/components/sections/Services";
 
 export default function Home() {
   return (
-    <>
-      <Header />
-      <main id="obsah">
-        <Hero />
-        <Problem />
-        <Services />
-        <Process />
-        <About />
-        <References />
-        <CallToAction />
-      </main>
-    </>
+    <main id="obsah">
+      <Hero />
+      <Problem />
+      <Services />
+      <Process />
+      <About />
+      <References />
+      <CallToAction />
+      <Contact />
+    </main>
   );
 }

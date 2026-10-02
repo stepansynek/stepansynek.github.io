@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
 import { site } from "@/config/site";
 import "./globals.css";
 
@@ -30,7 +32,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Přeskočit na obsah
         </a>
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
