@@ -23,7 +23,15 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="cs" className={inter.variable}>
-      <body>{children}</body>
+      <body>
+        <a
+          href="#obsah"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:font-semibold"
+        >
+          Přeskočit na obsah
+        </a>
+        {children}
+      </body>
     </html>
   );
 }
