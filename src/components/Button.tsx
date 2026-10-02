@@ -1,12 +1,35 @@
 import { cn } from "@/lib/cn";
 
-/** Žluté tlačítko s grafitovým textem. Hover a focus přidají grafitový rámeček. */
-export const buttonClass =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-[3px] bg-accent px-5 py-2.5 text-base font-semibold text-graphite transition-shadow duration-150 hover:shadow-[inset_0_0_0_2px_var(--color-graphite)] disabled:cursor-wait disabled:opacity-70";
+const base =
+  "inline-flex min-h-12 items-center justify-center gap-2 border border-text text-base font-medium text-text transition-colors duration-150 disabled:cursor-wait disabled:opacity-60";
 
-export function ButtonLink({ href, className, children }: { href: string; className?: string; children: React.ReactNode }) {
+/** Výška min. 48 px u obou velikostí; sm má jen menší vodorovný okraj (hlavička). */
+const sizes = { md: "px-6", sm: "px-3 text-[0.9375rem] sm:px-4" };
+
+/**
+ * Primární (žluté) tlačítko jen v heru a v kontaktu.
+ * Sekundární je průhledné s rámečkem, při najetí se vyplní bílou.
+ */
+export const buttonClass = {
+  primary: cn(base, "bg-accent hover:bg-text hover:text-surface"),
+  secondary: cn(base, "bg-transparent hover:bg-surface"),
+};
+
+export function ButtonLink({
+  href,
+  variant = "secondary",
+  size = "md",
+  className,
+  children,
+}: {
+  href: string;
+  variant?: keyof typeof buttonClass;
+  size?: keyof typeof sizes;
+  className?: string;
+  children: React.ReactNode;
+}) {
   return (
-    <a href={href} className={cn(buttonClass, className)}>
+    <a href={href} className={cn(buttonClass[variant], sizes[size], className)}>
       {children}
     </a>
   );
