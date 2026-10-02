@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paleta webu – jiné barvy se nepoužívají. */
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-graphite: #111317;
+  --color-chalk: #f6f4ef;
+  /* Žlutá jen pro uzly, tečky a tlačítka. */
+  --color-accent: #ffc700;
+  /* Sekundární text: 7,6:1 na křídové, 8,3:1 na bílé. */
+  --color-muted: #4b4e56;
+  /* Sekundární text na grafitu: 9,3:1. */
+  --color-muted-dark: #b4b7be;
+  /* Jen dekorativní linky (karty, oddělení položek). */
+  --color-hairline: #d9d6ce;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--color-white);
+    color: var(--color-graphite);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-graphite);
+    color: var(--color-white);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-graphite);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: var(--color-white);
+  }
+
+  [id] {
+    scroll-margin-top: 1.5rem;
+  }
+}
+
+/* Vykreslení linky v hero. Bez animace je linka rovnou celá. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: hero-draw 0.35s ease-in 0.3s forwards;
+  }
+
+  .hero-grow {
+    transform: scaleX(0);
+    transform-box: fill-box;
+    transform-origin: left center;
+    animation: hero-grow 1s linear 0.65s forwards;
+  }
+
+  .hero-draw--end {
+    animation-delay: 1.65s;
+    animation-timing-function: ease-out;
+  }
+
+  .hero-pop {
+    opacity: 0;
+    animation: hero-pop 0.3s ease-out 2s forwards;
+  }
+}
+
+@keyframes hero-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes hero-grow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes hero-pop {
+  to {
+    opacity: 1;
+  }
+}
