@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Fragment } from "react";
-import { site } from "@/config/site";
+import { PRIVACY_PATH, site } from "@/config/site";
 import { Container } from "./Container";
 import { ContactLink } from "./ContactLink";
 
@@ -14,7 +14,7 @@ export function Footer() {
     <span key="ico">IČO {site.ico}</span>,
     <span key="seat">{site.seat}</span>,
     <span key="register">Fyzická osoba zapsaná v živnostenském rejstříku</span>,
-    <Link key="privacy" href="/zasady-ochrany-osobnich-udaju" className={linkClass}>
+    <Link key="privacy" href={PRIVACY_PATH} className={linkClass}>
       Zásady ochrany osobních údajů
     </Link>,
     <ContactLink key="linkedin" type="url" value={site.linkedin} label="LinkedIn" />,

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
-import { FORMSPREE_ID, isPlaceholder } from "@/config/site";
+import { FORMSPREE_ID, isPlaceholder, PRIVACY_PATH } from "@/config/site";
 import { cn } from "@/lib/cn";
 import { buttonClass } from "./Button";
 import { Node } from "./Node";
@@ -123,7 +123,7 @@ export function ContactForm() {
         />
         <label htmlFor={`${id}-consent`} className="text-sm leading-relaxed">
           Souhlasím se zpracováním osobních údajů za účelem vyřízení mé zprávy. Podrobnosti v{" "}
-          <Link href="/zasady-ochrany-osobnich-udaju" className="underline decoration-1 underline-offset-2 hover:decoration-2">
+          <Link href={PRIVACY_PATH} className="underline decoration-1 underline-offset-2 hover:decoration-2">
             zásadách ochrany osobních údajů
           </Link>
           .

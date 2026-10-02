@@ -32,6 +32,8 @@ export const PLAUSIBLE = {
   src: "https://plausible.io/js/script.js",
 } as const;
 
+export const PRIVACY_PATH = "/zasady-ochrany-osobnich-udaju/";
+
 export const nav = [
   { href: "/#sluzby", label: "Služby" },
   { href: "/#jak-pracuji", label: "Jak pracuji" },
