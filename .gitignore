@@ -1,0 +1,13 @@
+# závislosti
+/node_modules
+
+# Next.js
+/.next/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+
+# ostatní
+.DS_Store
+*.log
+.env*.local
