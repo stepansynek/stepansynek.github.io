@@ -2,13 +2,25 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { ContactLink } from "@/components/ContactLink";
 import { SectionDivider } from "@/components/SectionDivider";
-import { PLAUSIBLE, PRIVACY_PATH, site } from "@/config/site";
+import { OG_IMAGE, PLAUSIBLE, PRIVACY_PATH, site } from "@/config/site";
 import { cz } from "@/lib/typography";
 
+const title = "Zásady ochrany osobních údajů | Štěpán Synek";
+const description = "Jak zpracovávám osobní údaje z kontaktního formuláře na webu stepansynek.com.";
+
 export const metadata: Metadata = {
-  title: "Zásady ochrany osobních údajů | Štěpán Synek",
-  description: "Jak zpracovávám osobní údaje z kontaktního formuláře na webu stepansynek.com.",
+  title,
+  description,
   alternates: { canonical: PRIVACY_PATH },
+  openGraph: {
+    type: "website",
+    locale: "cs_CZ",
+    url: PRIVACY_PATH,
+    siteName: site.name,
+    title,
+    description,
+    images: [OG_IMAGE],
+  },
 };
 
 const h2Class = "mt-12 text-xl font-semibold tracking-tight md:text-2xl";

@@ -34,6 +34,14 @@ export const PLAUSIBLE = {
 
 export const PRIVACY_PATH = "/zasady-ochrany-osobnich-udaju/";
 
+/** Obrázek pro sdílení na sociálních sítích (public/og-image.png). */
+export const OG_IMAGE = {
+  url: "/og-image.png",
+  width: 1200,
+  height: 630,
+  alt: "Štěpán Synek – marketing a weby pro firmy, které vyrábějí",
+} as const;
+
 export const nav = [
   { href: "/#sluzby", label: "Služby" },
   { href: "/#jak-pracuji", label: "Jak pracuji" },
