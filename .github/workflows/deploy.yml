@@ -34,8 +34,10 @@ jobs:
         run: npm run typecheck
 
       # Web nejde online, dokud nejsou vyplněné povinné údaje (brief, sekce 2).
+      # DOČASNĚ VYPNUTO na přání Štěpána (web jde online s placeholdery).
+      # Zapnutí: nahradit `false` za `github.event_name != 'pull_request'`.
       - name: Brána před spuštěním
-        if: github.event_name != 'pull_request'
+        if: false
         run: npm run check:launch
 
       # Před buildem se z public/photos/ vygenerují WebP (scripts/images.mjs).
