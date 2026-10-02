@@ -1,3 +1,4 @@
+import { cz } from "@/lib/typography";
 import { Section } from "../Section";
 import { SectionHeading } from "../SectionHeading";
 
@@ -19,7 +20,7 @@ export function Process() {
               <span aria-hidden="true" className="h-[1.5px] flex-1 bg-graphite" />
             </div>
             <h3 className="mt-6 text-2xl font-semibold tracking-tight">{step.title}</h3>
-            <p className="mt-3 text-lg leading-relaxed text-muted">{step.text}</p>
+            <p className="mt-3 text-lg leading-relaxed text-muted">{cz(step.text)}</p>
           </li>
         ))}
       </ol>

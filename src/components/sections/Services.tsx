@@ -1,3 +1,4 @@
+import { cz } from "@/lib/typography";
 import { Node } from "../Node";
 import { Section } from "../Section";
 import { SectionHeading } from "../SectionHeading";
@@ -30,7 +31,7 @@ export function Services() {
           <li key={service.title} className="relative">
             <Node className="absolute top-2 -left-[38.75px] md:-top-[46.75px] md:left-0" />
             <h3 className="text-2xl font-semibold tracking-tight">{service.title}</h3>
-            <p className="mt-3 text-lg leading-relaxed text-muted">{service.text}</p>
+            <p className="mt-3 text-lg leading-relaxed text-muted">{cz(service.text)}</p>
           </li>
         ))}
       </ul>

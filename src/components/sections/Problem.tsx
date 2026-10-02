@@ -1,3 +1,4 @@
+import { cz } from "@/lib/typography";
 import { Node } from "../Node";
 import { Section } from "../Section";
 import { SectionHeading } from "../SectionHeading";
@@ -16,7 +17,7 @@ export function Problem() {
         {problems.map((problem) => (
           <li key={problem} className="flex gap-4">
             <Node className="mt-[0.55em] md:mt-[0.6em]" />
-            <p className="text-xl leading-snug font-medium md:text-2xl md:leading-snug">{problem}</p>
+            <p className="text-xl leading-snug font-medium md:text-2xl md:leading-snug">{cz(problem)}</p>
           </li>
         ))}
       </ul>

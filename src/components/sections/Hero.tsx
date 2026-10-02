@@ -1,3 +1,4 @@
+import { cz } from "@/lib/typography";
 import { ButtonLink } from "../Button";
 import { Container } from "../Container";
 import { HeroLine } from "../HeroLine";
@@ -13,8 +14,9 @@ export function Hero() {
           Marketing a weby pro firmy, které vyrábějí.
         </h1>
         <p className="mt-7 max-w-[60ch] text-lg leading-relaxed text-muted md:text-xl md:leading-relaxed">
-          Jsem Štěpán Synek. Pomáhám malým a středním průmyslovým firmám na jižní Moravě ukázat, co opravdu umí – stroje,
-          technologie a reference. Technice rozumím, protože ji studuji a roky v ní pracuji.
+          {cz(
+            "Jsem Štěpán Synek. Pomáhám malým a středním průmyslovým firmám na jižní Moravě ukázat, co opravdu umí – stroje, technologie a reference. Technice rozumím, protože ji studuji a roky v ní pracuji.",
+          )}
         </p>
         <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
           <ButtonLink href="#kontakt" className="px-6 py-3">
