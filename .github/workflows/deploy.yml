@@ -33,12 +33,15 @@ jobs:
       - name: Kontrola typů
         run: npm run typecheck
 
+      # Web nejde online, dokud nejsou vyplněné povinné údaje (brief, sekce 2).
+      - name: Brána před spuštěním
+        if: github.event_name != 'pull_request'
+        run: npm run check:launch
+
+      # Před buildem se z public/photos/ vygenerují WebP (scripts/images.mjs).
+      # CNAME je v public/, do out/ se zkopíruje sám.
       - name: Build (statický export do out/)
         run: npm run build
-
-      # Vlastní doména: CNAME z kořene repozitáře se zkopíruje do výstupu.
-      - name: Přidat CNAME
-        run: cp CNAME out/CNAME
 
       - uses: actions/upload-pages-artifact@v5
         if: github.event_name != 'pull_request'

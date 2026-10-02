@@ -11,3 +11,6 @@ next-env.d.ts
 .DS_Store
 *.log
 .env*.local
+
+# generované fotky (scripts/images.mjs, spouští se před buildem)
+/public/photos/out/

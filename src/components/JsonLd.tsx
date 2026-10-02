@@ -1,13 +1,14 @@
-import { OG_IMAGE, isPlaceholder, site } from "@/config/site";
+import { config, site } from "@/content/config";
+import { seo } from "@/content/texts";
+import { isFilled } from "@/lib/config";
 
-/** Vrátí { [klíč]: hodnota } jen pro vyplněné údaje – placeholdery do dat nepatří. */
-function ifFilled(key: string, value: string) {
-  return isPlaceholder(value) ? {} : { [key]: value };
-}
-
-/** Strukturovaná data pro vyhledávače: Person + ProfessionalService, oblast Brno. */
+/** Strukturovaná data: Person a ProfessionalService. Nevyplněné údaje se vynechají. */
 export function JsonLd() {
   const personId = `${site.url}/#person`;
+  const contact = {
+    ...(isFilled("EMAIL") ? { email: config.EMAIL } : {}),
+    ...(isFilled("TELEFON") ? { telephone: config.TELEFON } : {}),
+  };
   const data = {
     "@context": "https://schema.org",
     "@graph": [
@@ -16,29 +17,25 @@ export function JsonLd() {
         "@id": personId,
         name: site.name,
         url: `${site.url}/`,
-        jobTitle: site.jobTitle,
-        knowsLanguage: ["cs", "de", "en"],
-        ...ifFilled("email", site.email),
-        ...ifFilled("telephone", site.phone),
-        ...(isPlaceholder(site.linkedin) ? {} : { sameAs: [site.linkedin] }),
+        jobTitle: "Weby a marketing pro technické firmy",
+        knowsLanguage: ["cs", "en"],
+        ...contact,
+        ...(isFilled("LINKEDIN") ? { sameAs: [config.LINKEDIN] } : {}),
       },
       {
         "@type": "ProfessionalService",
-        "@id": `${site.url}/#professional-service`,
-        name: `${site.name} – marketing a weby pro průmyslové firmy`,
+        "@id": `${site.url}/#service`,
+        name: `${site.name} – weby a marketing pro technické firmy`,
         url: `${site.url}/`,
-        description: site.description,
-        image: `${site.url}${OG_IMAGE.url}`,
+        description: seo.description,
+        image: `${site.url}/og.png`,
         founder: { "@id": personId },
-        areaServed: site.locations.map((name) => ({ "@type": "City", name })),
-        address: {
-          "@type": "PostalAddress",
-          addressRegion: "Jihomoravský kraj",
-          addressCountry: "CZ",
-        },
-        availableLanguage: ["cs", "de", "en"],
-        ...ifFilled("email", site.email),
-        ...ifFilled("telephone", site.phone),
+        areaServed: [
+          ...site.locations.map((name) => ({ "@type": "City", name })),
+          { "@type": "AdministrativeArea", name: "Jihomoravský kraj" },
+        ],
+        priceRange: "od 15 000 Kč",
+        ...contact,
       },
     ],
   };

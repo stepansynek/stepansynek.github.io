@@ -1,88 +1,72 @@
 # stepansynek.com
 
-Osobní prezentační web Štěpána Synka: marketing a weby pro průmyslové firmy.
-
+Osobní web Štěpána Synka: weby a marketing pro technické firmy.
 Next.js (App Router, statický export) · TypeScript · Tailwind CSS · GitHub Pages.
+
+> **Zásady ochrany osobních údajů** (`src/content/texts.ts` → `privacy`) jsou návrh.
+> Před spuštěním je Štěpán musí zkontrolovat, hlavně dobu uchování, předání údajů do USA
+> a jestli doplnit poskytovatele e-mailové schránky.
 
 ## Lokální spuštění
 
-Potřebujete Node.js 20.9 nebo novější (doporučeně 22).
+Node.js 20.9 nebo novější (doporučeně 22).
 
 ```bash
 npm install
-npm run dev        # vývojový server na http://localhost:3000
+npm run dev          # http://localhost:3000
+npm run build        # statický export do out/
+npm start            # náhled buildu z out/
+npm run typecheck    # kontrola typů
+npm run check:launch # brána před spuštěním (viz níže)
 ```
-
-Další příkazy:
-
-```bash
-npm run typecheck  # kontrola typů
-npm run build      # statický export do složky out/
-npm start          # náhled hotového buildu z out/ (stáhne balíček serve)
-```
-
-## Nasazení
-
-Web se nasazuje automaticky přes GitHub Actions (`.github/workflows/deploy.yml`) při každém pushi do větve `main`:
-instalace, kontrola typů, build, zkopírování `CNAME` do výstupu a nasazení na GitHub Pages.
-Pull requesty se jen sestaví, nenasazují se.
-
-**Jednorázové nastavení (nutné před prvním nasazením):**
-
-1. V repozitáři otevřete **Settings → Pages**.
-2. V části **Build and deployment → Source** zvolte **GitHub Actions** (místo „Deploy from a branch“).
-3. V poli **Custom domain** ověřte, že je vyplněno `stepansynek.com`, a zapněte **Enforce HTTPS**.
-
-Soubor `CNAME` v kořeni repozitáře zůstává a workflow ho kopíruje do buildu. `basePath` se nepoužívá, web běží
-přímo na vlastní doméně.
 
 ## Kde co upravit
 
-| Co | Kde |
+Všechno je v `src/content/`:
+
+| Soubor | Co v něm je |
 | --- | --- |
-| E-mail, telefon, IČO, sídlo, LinkedIn | `src/config/site.ts` |
-| ID formuláře Formspree | `src/config/site.ts` → `FORMSPREE_ID` |
-| Statistiky Plausible | `src/config/site.ts` → `PLAUSIBLE.enabled` |
-| Texty sekcí | `src/components/sections/*.tsx` |
-| Reference (případové studie) | `src/content/references.ts` |
-| Zásady ochrany osobních údajů | `src/app/zasady-ochrany-osobnich-udaju/page.tsx` |
-| Barvy, písmo, animace | `src/app/globals.css`, `src/app/layout.tsx` |
+| `config.ts` | telefon, e-mail, IČO, sídlo, ceny, Cal.com, Formspree, LinkedIn… |
+| `texts.ts` | texty sekcí, formuláře, patičky, 404 a zásad ochrany osobních údajů |
+| `services.ts` | tři karty služeb |
+| `projects.ts` | projekty v sekci Práce |
+| `faq.ts` | otázky a odpovědi |
 
-Dokud je údaj v hranatých závorkách (např. `[EMAIL]`), zobrazuje se na webu jako prostý text, ne jako odkaz,
-a nepropisuje se do strukturovaných dat pro vyhledávače. Po doplnění se z něj automaticky stane odkaz
-a objeví se i v JSON-LD.
+Hodnota v hranatých závorkách (`"[TELEFON]"`) je placeholder: na webu se ukáže tak, jak je, bez odkazu.
+V textech se `[KLÍČ]` automaticky nahradí hodnotou z `config.ts`. Nezlomitelné mezery doplňuje `cs()`
+v `src/lib/typography.ts`, do textů je psát nemusíte.
 
-### Fotka
+Bez `CAL_LINK` vedou tlačítka „Domluvit konzultaci“ na `#kontakt`.
 
-Uložte fotku jako `public/me.jpg` (ideálně na výšku, poměr 4 : 5). Při dalším buildu se automaticky zobrazí
-v sekci O mně místo placeholderu.
+## Projekty a souhlas
 
-### Formspree
+V `src/content/projects.ts` přidejte položku do pole `projects`:
 
-1. Na [formspree.io](https://formspree.io) vytvořte formulář s cílovým e-mailem.
-2. ID z adresy formuláře (`https://formspree.io/f/ABCD1234` → `ABCD1234`) vložte do `FORMSPREE_ID`.
-3. Ve Formspree můžete omezit odesílání jen z domény `stepansynek.com`.
+- `status: 'inProgress'` – karta „Právě pracuji na…“. Bez souhlasu se ukáže `anonymous`, se souhlasem `client`.
+- `status: 'published'` – karta s fotkami, rozsahem, rokem a citací. Zobrazí se **jen** při `consent: true`.
+- `status: 'placeholder'` – jen ve vývoji (`npm run dev`), v produkci se nezobrazí.
 
-### Plausible
+Po písemném souhlasu klienta přepněte `consent: false` na `true`.
+Když není co ukázat, sekce Práce i položka v menu zmizí a čísla sekcí se přečíslují.
 
-1. Na [plausible.io](https://plausible.io) přidejte web `stepansynek.com`.
-2. V `src/config/site.ts` nastavte `PLAUSIBLE.enabled` na `true`. Pokud Plausible nabídne vlastní adresu
-   skriptu, vložte ji do `PLAUSIBLE.src`.
-3. Do zásad ochrany osobních údajů se pak automaticky přidá odstavec o statistikách.
+## Fotky
 
-### Reference
+1. Uložte fotku do `public/photos/` (JPG nebo PNG), např. `public/photos/me.jpg` pro portrét (poměr 4 : 5).
+2. `npm run images` (spouští se i automaticky před `dev` a `build`) vytvoří WebP v šířkách 640 a 1280 px
+   do `public/photos/out/` (ve gitu se neukládají, generují se při každém buildu).
+3. Fotky projektů zadejte v `projects.ts` jménem souboru bez přípony: `images: [{ src: 'engas-dilna', alt: '…' }]`.
 
-Do pole `references` v `src/content/references.ts` přidejte položku (firma, co potřebovala, co vzniklo,
-volitelně citace a odkaz). Dokud je pole prázdné, web ukazuje „První případová studie se připravuje.“
+Obrázek pro sdílení `public/og.png` a ikony se generují jednou příkazem `npm run og` (potřebuje internet,
+stáhne písma). Po změně H1 nebo cenového řádku ho spusťte znovu a výsledek commitněte.
 
-## Struktura
+## Nasazení
 
-```
-src/
-  app/            stránky, layout, metadata, sitemap, robots, ikony
-  components/     hlavička, patička, formulář, sdílené prvky (uzel, linky)
-    sections/     jednotlivé sekce úvodní stránky
-  config/site.ts  osobní údaje a nastavení na jednom místě
-  content/        reference
-public/           og-image.png (náhled pro sdílení), sem patří me.jpg
-```
+GitHub Actions (`.github/workflows/deploy.yml`) při pushi do `main`: instalace, kontrola typů,
+**brána před spuštěním**, build a nasazení na GitHub Pages. Pull requesty se jen sestaví.
+
+Brána (`scripts/check-launch.mjs`) zastaví nasazení, dokud v `config.ts` nejsou vyplněné `ICO`, `SIDLO`,
+`TELEFON`, `EMAIL` (na @stepansynek.com), `CASY_TELEFON`, `ROZSAH_ZAKLAD`, `CENA_PECE`, `DPH_VETA`
+a dokud chybí `public/photos/me.jpg`. Schválení textů hlídá Štěpán sám.
+
+Jednorázově: **Settings → Pages → Source: GitHub Actions**, Custom domain `stepansynek.com`, Enforce HTTPS.
+Soubor `CNAME` je v `public/` a do buildu se zkopíruje sám.

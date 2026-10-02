@@ -1,21 +1,41 @@
 @import "tailwindcss";
 
-@theme {
-  /* Paleta webu – jiné barvy se nepoužívají. */
+/* Design tokeny (brief, sekce 5). Jen světlý režim. */
+:root {
+  --bg: #f6f4ef;
+  --surface: #ffffff;
+  --text: #111317;
+  /* Drobný a vedlejší text, 4,5 : 1 na obou pozadích. */
+  --text-muted: #6c7077;
+  /* Dekorativní linky mezi sekcemi a v kartách. */
+  --line: #d9d6ce;
+  /* Jen grafika, nikdy text. */
+  --line-strong: #8a9099;
+  /* Jen pozadí primárního tlačítka. */
+  --accent: #ffc700;
+
+  --header-height: 4rem;
+  color-scheme: light;
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --header-height: 4.5rem;
+  }
+}
+
+@theme inline {
   --color-*: initial;
-  --color-white: #ffffff;
-  --color-graphite: #111317;
-  --color-chalk: #f6f4ef;
-  /* Žlutá jen pro uzly, tečky a tlačítka. */
-  --color-accent: #ffc700;
-  /* Sekundární text: 7,6:1 na křídové, 8,3:1 na bílé. */
-  --color-muted: #4b4e56;
-  /* Sekundární text na grafitu: 9,3:1. */
-  --color-muted-dark: #b4b7be;
-  /* Jen dekorativní linky (karty, oddělení položek). */
-  --color-hairline: #d9d6ce;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-mono-jb), ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 }
 
 @layer base {
@@ -23,81 +43,83 @@
     -webkit-text-size-adjust: 100%;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    html {
-      scroll-behavior: smooth;
-    }
-  }
-
   body {
-    background-color: var(--color-white);
-    color: var(--color-graphite);
+    background-color: var(--bg);
+    color: var(--text);
     font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
   }
 
   ::selection {
-    background-color: var(--color-graphite);
-    color: var(--color-white);
+    background-color: var(--text);
+    color: var(--surface);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-graphite);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-
-  .on-dark :focus-visible {
-    outline-color: var(--color-white);
+    outline: 2px solid var(--text);
+    outline-offset: 2px;
   }
 
   [id] {
-    scroll-margin-top: 1.5rem;
+    scroll-margin-top: calc(var(--header-height) + 1rem);
+  }
+
+  summary {
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
   }
 }
 
-/* Vykreslení linky v hero. Bez animace je linka rovnou celá. */
-@media (prefers-reduced-motion: no-preference) {
-  .hero-draw {
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-    animation: hero-draw 0.35s ease-in 0.3s forwards;
+@layer components {
+  .h1 {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
   }
 
-  .hero-grow {
-    transform: scaleX(0);
-    transform-box: fill-box;
-    transform-origin: left center;
-    animation: hero-grow 1s linear 0.65s forwards;
+  .h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
   }
 
-  .hero-draw--end {
-    animation-delay: 1.65s;
-    animation-timing-function: ease-out;
+  /* Drobný monospace štítek. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
   }
 
-  .hero-pop {
-    opacity: 0;
-    animation: hero-pop 0.3s ease-out 2s forwards;
+  /* Cenový řádek. */
+  .price {
+    font-family: var(--font-mono);
+    font-size: 0.9375rem;
+    font-variant-numeric: tabular-nums;
   }
-}
 
-@keyframes hero-draw {
-  to {
-    stroke-dashoffset: 0;
+  .prose-width {
+    max-width: 65ch;
   }
-}
 
-@keyframes hero-grow {
-  to {
-    transform: scaleX(1);
+  .link {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: text-decoration-thickness 150ms ease;
   }
-}
 
-@keyframes hero-pop {
-  to {
-    opacity: 1;
+  .link:hover {
+    text-decoration-thickness: 2px;
   }
 }

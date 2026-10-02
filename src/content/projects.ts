@@ -1,0 +1,31 @@
+export type Project = {
+  slug: string;
+  status: "published" | "inProgress" | "placeholder";
+  client: string; // zobrazí se jen při consent: true
+  anonymous: string; // např. „elektromontážní firma z Brna“
+  scope: string[]; // např. ['web', 'texty', 'foto', 'video']
+  year?: number;
+  summary?: string;
+  images?: { src: string; alt: string }[];
+  quote?: string;
+  quoteAuthor?: string;
+  consent: boolean; // písemný souhlas se zveřejněním jména, obrázků a citace
+};
+
+/**
+ * Projekty v sekci Práce.
+ * - inProgress: karta „Právě pracuji na…“, jméno klienta jen při consent: true.
+ * - published: karta s fotkami, rozsahem, rokem a citací, jen při consent: true.
+ * - placeholder: jen ve vývoji, v produkci se nezobrazí.
+ * images[].src je název souboru v public/photos/ bez přípony, např. „engas-dilna“.
+ */
+export const projects: Project[] = [
+  {
+    slug: "engas",
+    status: "inProgress",
+    client: "Engas",
+    anonymous: "elektromontážní firma z Brna",
+    scope: ["web", "texty", "foto", "video"],
+    consent: false,
+  },
+];

@@ -1,35 +1,38 @@
-import { site } from "@/config/site";
+import { config } from "@/content/config";
+import { contact } from "@/content/texts";
+import { consultationHref } from "@/lib/config";
+import { t } from "@/lib/typography";
+import { ButtonLink } from "../Button";
 import { ContactForm } from "../ContactForm";
 import { ContactLink } from "../ContactLink";
-import { Node } from "../Node";
 import { Section } from "../Section";
-import { SectionHeading } from "../SectionHeading";
 
-export function Contact() {
+export function Contact({ number }: { number: string }) {
   return (
-    <Section id="kontakt" labelledBy="kontakt-nadpis">
-      <SectionHeading id="kontakt-nadpis" title="Kontakt" />
-      <div className="grid gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,38rem)] md:gap-16">
-        <dl className="space-y-8">
-          <div>
-            <dt className="text-sm font-semibold text-muted">E-mail</dt>
-            <dd className="mt-1 text-xl font-medium md:text-2xl">
-              <ContactLink type="email" value={site.email} />
-            </dd>
-          </div>
-          <div>
-            <dt className="text-sm font-semibold text-muted">Telefon</dt>
-            <dd className="mt-1 text-xl font-medium md:text-2xl">
-              <ContactLink type="phone" value={site.phone} />
-            </dd>
-          </div>
-        </dl>
+    <Section id="kontakt" number={number} title={contact.title}>
+      <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16">
+        <div>
+          <dl className="space-y-6">
+            <div>
+              <dt className="label">{contact.phoneLabel}</dt>
+              <dd className="mt-1 text-2xl font-semibold tracking-tight md:text-3xl">
+                <ContactLink type="phone" value={config.TELEFON} className="tabular-nums" />
+              </dd>
+            </div>
+            <div>
+              <dt className="label">{contact.emailLabel}</dt>
+              <dd className="mt-1 text-2xl font-semibold tracking-tight break-all md:text-3xl">
+                <ContactLink type="email" value={config.EMAIL} />
+              </dd>
+            </div>
+          </dl>
+          <p className="prose-width mt-6 text-muted">{t(contact.note)}</p>
+          <ButtonLink href={consultationHref} variant="primary" className="mt-8">
+            {contact.cta}
+          </ButtonLink>
+        </div>
         <ContactForm />
       </div>
-      <p className="mt-12 flex items-center gap-3 text-lg font-medium md:mt-16">
-        <Node size={10} />
-        {site.locations.join(" · ")}
-      </p>
     </Section>
   );
 }
