@@ -1,36 +1,37 @@
 import { cn } from "@/lib/cn";
 
-const base =
-  "inline-flex min-h-12 items-center justify-center gap-2 border border-text text-base font-medium text-text transition-colors duration-150 disabled:cursor-wait disabled:opacity-60";
-
-/** Výška min. 48 px u obou velikostí; sm má jen menší vodorovný okraj (hlavička). */
-const sizes = { md: "px-6", sm: "px-3 text-[0.9375rem] sm:px-4" };
-
-/**
- * Primární (žluté) tlačítko jen v heru a v kontaktu.
- * Sekundární je průhledné s rámečkem, při najetí se vyplní bílou.
- */
+/** Pilulková tlačítka: žluté primární (hero, kontakt), tmavé a průhledné sekundární. */
 export const buttonClass = {
-  primary: cn(base, "bg-accent hover:bg-text hover:text-surface"),
-  secondary: cn(base, "bg-transparent hover:bg-surface"),
+  primary: "btn btn-primary",
+  dark: "btn btn-dark",
+  secondary: "btn btn-ghost",
 };
+
+export function Arrow() {
+  return (
+    <svg aria-hidden="true" focusable="false" className="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
 export function ButtonLink({
   href,
   variant = "secondary",
-  size = "md",
+  arrow = false,
   className,
   children,
 }: {
   href: string;
   variant?: keyof typeof buttonClass;
-  size?: keyof typeof sizes;
+  arrow?: boolean;
   className?: string;
   children: React.ReactNode;
 }) {
   return (
-    <a href={href} className={cn(buttonClass[variant], sizes[size], className)}>
+    <a href={href} className={cn(buttonClass[variant], className)}>
       {children}
+      {arrow ? <Arrow /> : null}
     </a>
   );
 }

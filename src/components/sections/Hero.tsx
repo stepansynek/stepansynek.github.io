@@ -7,44 +7,68 @@ import { ContactLink } from "../ContactLink";
 import { Container } from "../Container";
 import { Photo } from "../Photo";
 
-export function Hero({ number }: { number: string }) {
+const chipPositions = ["float-1 -left-4 top-10 sm:-left-10", "float-2 -right-3 top-1/2 sm:-right-8", "float-3 left-6 -bottom-5"];
+
+export function Hero() {
   return (
-    <section aria-labelledby="hero-nadpis" className="pt-8 pb-16 md:pt-16 md:pb-24">
-      <Container className="grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:items-end lg:gap-16">
+    <section aria-labelledby="hero-nadpis" data-spotlight className="relative -mt-[4.25rem] overflow-hidden pt-[calc(4.25rem+3rem)] pb-16 md:pt-[calc(4.25rem+5rem)] md:pb-24">
+      {/* Pozadí: aurora a tečkovaná mřížka, která se rozsvítí kolem kurzoru. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+        <div className="aurora aurora-1 -top-40 -left-32 size-[34rem] bg-accent" />
+        <div className="aurora aurora-2 top-10 right-[-10rem] size-[30rem] bg-blue opacity-35" />
+        <div className="aurora aurora-3 bottom-[-12rem] left-1/3 size-[28rem] bg-violet opacity-30" />
+        <div className="dot-grid absolute inset-0" />
+        <div className="dot-grid-glow absolute inset-0" />
+      </div>
+
+      <Container className="grid items-center gap-14 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:gap-12">
         <div>
-          <p className="label">
-            <span aria-hidden="true">{number} · </span>
-            {hero.label}
+          <p data-reveal className="eyebrow">
+            {cs(hero.eyebrow)}
           </p>
-          <h1 id="hero-nadpis" className="h1 mt-4 max-w-[18ch] text-balance md:mt-6">
-            {t(hero.title)}
+          <h1 id="hero-nadpis" data-reveal style={{ "--d": 1 } as React.CSSProperties} className="display mt-6">
+            <span className="sr-only">{hero.titleFull}</span>
+            <span aria-hidden="true">
+              {t(hero.titleStart)}{" "}
+              <span className="rotator">
+                {hero.titleWords.map((word) => (
+                  <span key={word} className="grad-text">
+                    {word}
+                  </span>
+                ))}
+              </span>
+            </span>
           </h1>
-          <p className="prose-width mt-5 md:mt-8 md:text-lg">{t(hero.lead)}</p>
-          <p className="price mt-5 md:mt-8">{t(hero.price)}</p>
-          <div className="mt-5 md:mt-8">
-            <ButtonLink href={consultationHref} variant="primary">
+          <p data-reveal style={{ "--d": 2 } as React.CSSProperties} className="prose-width mt-6 text-lg text-muted md:mt-8 md:text-xl">
+            {t(hero.lead)}
+          </p>
+          <div data-reveal style={{ "--d": 3 } as React.CSSProperties} className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-4 md:mt-10">
+            <ButtonLink href={consultationHref} variant="primary" arrow className="min-h-14 px-7 text-[1.0625rem]">
               {hero.cta}
             </ButtonLink>
-            <p className="mt-3 text-[0.9375rem] text-muted">{t(hero.ctaNote)}</p>
-            <p className="mt-2 text-[0.9375rem]">
-              {hero.callPrefix} <ContactLink type="phone" value={config.TELEFON} className="font-mono tabular-nums" />
-            </p>
+            <p className="price text-lg">{t(hero.price)}</p>
           </div>
+          <p data-reveal style={{ "--d": 4 } as React.CSSProperties} className="mt-4 text-[0.9375rem] text-muted">
+            {t(hero.ctaNote)} {hero.callPrefix} <ContactLink type="phone" value={config.TELEFON} className="font-semibold text-text" />
+          </p>
         </div>
 
-        <div className="w-full max-w-[26rem]">
-          <div className="border border-line bg-surface p-2">
-            <Photo
-              name="me"
-              alt={hero.photoAlt}
-              sizes="(min-width: 1024px) 26rem, (min-width: 448px) 26rem, 100vw"
-              eager
-              className="aspect-[4/5] w-full"
-            />
+        <div data-reveal style={{ "--d": 2 } as React.CSSProperties} className="relative mx-auto w-full max-w-[24rem] lg:max-w-[26rem]">
+          <div aria-hidden="true" className="spin-slow absolute -inset-8 rounded-full bg-[conic-gradient(from_0deg,var(--accent),var(--blue),var(--violet),var(--accent))] opacity-25 blur-3xl" />
+          <div className="relative overflow-hidden rounded-[2rem] border border-white bg-surface p-2 shadow-[0_30px_80px_-30px_rgb(14_17_22/0.45)]">
+            <Photo name="me" alt={hero.photoAlt} sizes="(min-width: 1024px) 26rem, 24rem" eager className="aspect-[4/5] w-full rounded-[1.5rem]" />
           </div>
-          <p aria-hidden="true" className="label mt-2">
-            {cs(hero.photoLabel)}
-          </p>
+          {hero.chips.map((chip, index) => (
+            <p
+              key={chip}
+              className={`glass absolute flex items-center gap-2 rounded-full px-4 py-2 text-[0.9375rem] font-semibold whitespace-nowrap ${chipPositions[index]}`}
+            >
+              <span aria-hidden="true" className="grid size-5 place-items-center rounded-full bg-accent text-[0.7rem]">
+                ✓
+              </span>
+              {cs(chip)}
+            </p>
+          ))}
         </div>
       </Container>
     </section>

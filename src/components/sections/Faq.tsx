@@ -3,23 +3,20 @@ import { faq as texts } from "@/content/texts";
 import { t } from "@/lib/typography";
 import { Section } from "../Section";
 
-/** Akordeon z nativních <details>, funguje i bez JavaScriptu. */
-export function Faq({ number }: { number: string }) {
+/** Akordeon z nativních <details>; plynulé rozbalení řeší CSS, funguje i bez JavaScriptu. */
+export function Faq() {
   return (
-    <Section id="faq" number={number} title={texts.title}>
-      <div className="border-t border-line">
-        {faq.map((item) => (
-          <details key={item.question} className="group border-b border-line">
-            <summary className="flex cursor-pointer items-start justify-between gap-6 py-4 text-lg font-medium">
+    <Section id="faq" eyebrow="FAQ" title={texts.title} intro={texts.intro}>
+      <div className="grid gap-3">
+        {faq.map((item, index) => (
+          <details key={item.question} data-reveal style={{ "--d": index % 4 } as React.CSSProperties} className="faq-item card group">
+            <summary className="flex cursor-pointer items-center justify-between gap-6 px-6 py-5 text-lg font-semibold md:px-8">
               {t(item.question)}
-              <span aria-hidden="true" className="font-mono text-muted group-open:hidden">
+              <span aria-hidden="true" className="faq-icon grid size-9 shrink-0 place-items-center rounded-full bg-bg text-xl leading-none">
                 +
               </span>
-              <span aria-hidden="true" className="hidden font-mono text-muted group-open:inline">
-                −
-              </span>
             </summary>
-            <p className="prose-width pb-5">{t(item.answer)}</p>
+            <p className="prose-width px-6 pb-6 text-muted md:px-8">{t(item.answer)}</p>
           </details>
         ))}
       </div>

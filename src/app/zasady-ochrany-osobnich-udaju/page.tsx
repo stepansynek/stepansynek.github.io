@@ -26,7 +26,7 @@ export default function PrivacyPolicy() {
     <main id="obsah" className="py-16 md:py-24">
       <Container>
         <article className="prose-width">
-          <h1 className="h1 text-balance">{privacy.title}</h1>
+          <h1 className="h2 text-balance">{privacy.title}</h1>
           <p className="mt-6">{t(privacy.intro)}</p>
           {privacy.sections.map((section) => (
             <section key={section.heading} className="mt-12 border-t border-line pt-6">

@@ -20,30 +20,62 @@ export const nav = [
 
 export const header = {
   cta: "Domluvit konzultaci",
-  ctaShort: "Konzultace",
+  menu: "Menu",
+  close: "Zavřít",
+  menuContact: "Rovnou se mnou",
+};
+
+/** Krátké popisky k položkám v rolovacím menu. */
+export const navHints: Record<string, string> = {
+  sluzby: "Web na klíč, péče, foto a video",
+  prace: "Na čem právě pracuji",
+  postup: "Od konzultace po spuštění",
+  "o-mne": "Kdo jsem a proč technika",
+  faq: "Cena, termíny, kdo co dělá",
+  kontakt: "Telefon, e-mail, poptávka",
 };
 
 export const hero = {
-  label: "Brno · Vyškov · Rousínov",
-  title: "Weby a marketing pro firmy, které vyrábějí, montují a servisují.",
+  eyebrow: "Weby pro technické firmy z Brna, Vyškova a Rousínova",
+  titleStart: "Weby a marketing pro firmy, které",
+  titleWords: ["vyrábějí.", "montují.", "servisují."],
+  titleFull: "Weby a marketing pro firmy, které vyrábějí, montují a servisují.",
   lead: "Pomáhám technickým firmám ukázat, co opravdu umí. Texty napíšu za vás po jednom rozhovoru, fotky a video zajistíme přímo u vás. Mluvíte přímo se mnou.",
-  price: "Weby od 15 000 Kč · pevná cena předem",
+  price: "Weby od 15 000 Kč, pevná cena předem",
   cta: "Domluvit konzultaci zdarma",
   ctaNote: "20 minut. Ukážu vám tři věci, které bych na vašem webu změnil.",
-  callPrefix: "nebo zavolejte",
-  photoLabel: "Detail A",
+  callPrefix: "Nebo zavolejte",
   photoAlt: "Štěpán Synek",
+  chips: ["Pevná cena předem", "Texty napíšu za vás", "Foto a video přímo u vás"],
+  marquee: ["Výroba", "Montáže", "Servis", "Elektro", "Weby na klíč", "Texty", "Fotky a video", "Newslettery", "Péče o web"],
+};
+
+export const facts = {
+  title: "Na čem se se mnou můžete spolehnout",
+  items: [
+    { value: 15000, display: "15 000", unit: "Kč", text: "Za tolik začíná web na klíč. Pevnou cenu znáte předem, ne až na faktuře.", wide: true },
+    { value: 20, display: "20", unit: "minut", text: "Úvodní konzultace zdarma. Telefonem, online, nebo u vás ve firmě." },
+    { value: 2, display: "2", unit: "dny", text: "Do dvou pracovních dnů po konzultaci pošlu nabídku s cenou a termínem." },
+    { value: 24, display: "24", unit: "hodin", text: "Na zprávu odpovím do 24 hodin v pracovní dny. Telefon beru, a když ne, zavolám zpět týž den.", wide: true },
+    { value: 1, display: "1", unit: "rozhovor", text: "Hodinový rozhovor stačí. Texty pak napíšu já, vy je jen zkontrolujete." },
+    { value: 2, display: "2", unit: "projekty", text: "Za semestr beru nejvýš dva nové projekty, abych se každému věnoval naplno." },
+  ],
+  ownership: {
+    title: "Web patří vám",
+    text: "Doména se registruje na vaši firmu a obsah i kód vám na požádání předám. Měsíční péče je volitelná.",
+  },
 };
 
 export const services = {
   title: "Co pro vás udělám",
+  intro: "Všechno z jedné ruky: web, texty, fotky i video. Nemusíte koordinovat grafika, copywritera a fotografa.",
   newsletter: "Na přání i newsletter pro vaše stávající zákazníky: nové zakázky, technologie a volné kapacity.",
   foundingOffer: "Prvním třem firmám dávám zakládající cenu výměnou za souhlas s uvedením jako reference.",
   vat: "[DPH_VETA]",
 };
 
 export const work = {
-  title: "Práce",
+  title: "Na čem pracuji",
   inProgress: "Právě pracuji na…",
 };
 
@@ -71,7 +103,8 @@ export const process = {
 
 export const about = {
   title: "O mně",
-  intro: "Nejsem velká agentura. Mluvíte přímo se mnou, s člověkem, který rozumí řeči techniků i zákazníků.",
+  heading: "Nejsem velká agentura.",
+  intro: "Mluvíte přímo se mnou, s člověkem, který rozumí řeči techniků i zákazníků.",
   facts: [
     "Od roku [ROK_OD] dělám B2B marketing pro firmu z průmyslové automatizace: newslettery a správu webů.",
     "Studuji automatizaci a měřicí techniku na VUT FEKT a ekonomii na MUNI ECON.",
@@ -84,10 +117,12 @@ export const about = {
 
 export const faq = {
   title: "Časté otázky",
+  intro: "Nenašli jste odpověď? Zavolejte, nebo napište. Odpovím do 24 hodin v pracovní dny.",
 };
 
 export const contact = {
-  title: "Kontakt",
+  titleEyebrow: "Kontakt",
+  title: "Pojďme se podívat na váš web",
   phoneLabel: "Telefon",
   emailLabel: "E-mail",
   note: "Telefon beru [CASY_TELEFON], jinak zavolám zpět týž den. Brno · Vyškov · Rousínov, rád se zastavím u vás ve firmě.",
@@ -95,8 +130,7 @@ export const contact = {
 };
 
 export const form = {
-  title: "Poptávka",
-  sheet: "List 1/1",
+  title: "Napište mi",
   fields: {
     name: { label: "Jméno", error: "Vyplňte prosím jméno." },
     company: { label: "Firma", error: "Vyplňte prosím název firmy." },
@@ -125,22 +159,15 @@ export const form = {
 };
 
 export const footer = {
-  stamp: [
-    ["Název výkresu", "stepansynek.com"],
-    ["Kreslil", "Štěpán Synek"],
-    ["Měřítko", "1:1"],
-    ["Formát", "A∞"],
-    ["List", "1/1"],
-  ],
-  revision: "Revize",
+  revision: "Verze",
   register: "Fyzická osoba zapsaná v živnostenském rejstříku",
   privacy: "Zásady ochrany osobních údajů",
   linkedin: "LinkedIn",
 };
 
 export const notFound = {
-  title: "Výkres nenalezen",
-  text: "List, který hledáte, v tomto výkresu není.",
+  title: "Tahle stránka neexistuje",
+  text: "Odkaz je možná starý nebo v něm je překlep. Všechno podstatné najdete na úvodní stránce.",
   back: "Zpět na úvod",
 };
 

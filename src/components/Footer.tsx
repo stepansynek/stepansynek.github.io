@@ -1,51 +1,70 @@
-import { Fragment } from "react";
 import { config, site } from "@/content/config";
 import { footer } from "@/content/texts";
 import { cs } from "@/lib/typography";
+import { navItems } from "./Header";
 import { ContactLink } from "./ContactLink";
 import { Container } from "./Container";
 
-/** Datum buildu, propisuje se do razítka jako revize. */
+/** Datum buildu, propisuje se do patičky jako revize. */
 const revision = new Date().toISOString().slice(0, 10);
 
 export function Footer() {
-  const stamp = [...footer.stamp, [footer.revision, revision]];
-  const items = [
-    <span key="name">{site.name}</span>,
-    <span key="ico">IČO {config.ICO}</span>,
-    <span key="seat">{cs(config.SIDLO)}</span>,
-    <span key="register">{cs(footer.register)}</span>,
-    <a key="privacy" href={site.privacyPath} className="link">
-      {cs(footer.privacy)}
-    </a>,
-    <ContactLink key="linkedin" type="url" value={config.LINKEDIN} label={footer.linkedin} />,
-    <ContactLink key="phone" type="phone" value={config.TELEFON} />,
-    <ContactLink key="email" type="email" value={config.EMAIL} />,
-  ];
-
   return (
-    <footer className="border-t border-line py-12 md:py-16">
+    <footer className="overflow-hidden pt-16 pb-8 md:pt-24">
       <Container>
-        <table className="w-full border-collapse border border-line-strong font-mono text-[0.8125rem] sm:ml-auto sm:w-auto sm:min-w-[22rem]">
-          <caption className="sr-only">Razítko</caption>
-          <tbody>
-            {stamp.map(([label, value]) => (
-              <tr key={label} className="border-b border-line last:border-b-0">
-                <th scope="row" className="border-r border-line px-3 py-1.5 text-left font-normal tracking-[0.06em] text-muted uppercase">
-                  {label}
-                </th>
-                <td className="px-3 py-1.5 tabular-nums">{value}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <p className="mt-8 flex flex-wrap gap-x-3 gap-y-1 text-[0.9375rem] text-muted">
-          {items.map((item, index) => (
-            <Fragment key={index}>
-              {index > 0 ? <span aria-hidden="true">·</span> : null}
-              {item}
-            </Fragment>
-          ))}
+        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+          <div>
+            <p className="text-xl font-[700] tracking-tight [font-stretch:110%]">{site.name}</p>
+            <p className="mt-2 max-w-[36ch] text-muted">{cs("Weby a marketing pro technické firmy z Brna, Vyškova a Rousínova.")}</p>
+          </div>
+          <nav aria-label="Patička">
+            <ul className="grid gap-2">
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <a href={item.href} className="text-muted transition-colors duration-150 hover:text-text">
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <ul className="grid content-start gap-2">
+            <li>
+              <ContactLink type="phone" value={config.TELEFON} className="font-semibold" />
+            </li>
+            <li>
+              <ContactLink type="email" value={config.EMAIL} className="font-semibold" />
+            </li>
+            <li>
+              <ContactLink type="url" value={config.LINKEDIN} label={footer.linkedin} />
+            </li>
+          </ul>
+        </div>
+
+        <p
+          aria-hidden="true"
+          className="mt-16 text-[clamp(3.5rem,15.5vw,13rem)] leading-[0.8] font-[800] tracking-[-0.06em] whitespace-nowrap select-none [font-stretch:125%] md:mt-24"
+          style={{
+            background: "linear-gradient(180deg, var(--text) 0%, rgb(14 17 22 / 0.08) 100%)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}
+        >
+          Synek
+        </p>
+
+        <p className="mt-6 flex flex-wrap gap-x-4 gap-y-1 border-t border-line pt-6 text-[0.875rem] text-muted">
+          <span>{site.name}</span>
+          <span>IČO {config.ICO}</span>
+          <span>{cs(config.SIDLO)}</span>
+          <span>{cs(footer.register)}</span>
+          <a href={site.privacyPath} className="link">
+            {cs(footer.privacy)}
+          </a>
+          <span className="tabular-nums">
+            {footer.revision} {revision}
+          </span>
         </p>
       </Container>
     </footer>

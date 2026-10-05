@@ -6,7 +6,7 @@ import { form as texts } from "@/content/texts";
 import { isPlaceholder } from "@/lib/config";
 import { cn } from "@/lib/cn";
 import { cs } from "@/lib/typography";
-import { buttonClass } from "./Button";
+import { Arrow, buttonClass } from "./Button";
 import { ContactLink } from "./ContactLink";
 
 type Status = "idle" | "sending" | "success" | "error";
@@ -115,9 +115,12 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div ref={successRef} tabIndex={-1} role="status" className="border border-line bg-surface p-6 md:p-8">
-        <p className="text-xl font-semibold">{cs(texts.success)}</p>
-        <p className="mt-2 text-lg">{texts.successSignature}</p>
+      <div ref={successRef} tabIndex={-1} role="status" className="rounded-[2rem] bg-surface p-8 text-text md:p-10">
+        <span aria-hidden="true" className="grid size-12 place-items-center rounded-full bg-accent text-xl font-bold">
+          ✓
+        </span>
+        <p className="mt-6 text-2xl font-[700] tracking-tight [font-stretch:110%]">{cs(texts.success)}</p>
+        <p className="mt-2 text-lg text-muted">{texts.successSignature}</p>
       </div>
     );
   }
@@ -128,14 +131,9 @@ export function ContactForm() {
       method="POST"
       noValidate={hydrated}
       onSubmit={handleSubmit}
-      className="border border-text bg-surface"
+      className="rounded-[2rem] bg-surface p-6 text-text shadow-[0_40px_80px_-30px_rgb(0_0_0/0.5)] md:p-8"
     >
-      <div className="flex items-center justify-between border-b border-text px-4 py-2 md:px-6">
-        <p className="label text-text">{texts.title}</p>
-        <p className="label" aria-hidden="true">
-          {texts.sheet}
-        </p>
-      </div>
+      <p className="text-xl font-[700] tracking-tight [font-stretch:110%]">{texts.title}</p>
 
       <input type="hidden" name="_subject" value={texts.subject} />
       {/* Past na roboty: lidé pole nevidí ani na něj nedojdou tabulátorem. */}
@@ -144,68 +142,69 @@ export function ContactForm() {
         <input id="pole-gotcha" type="text" name="_gotcha" tabIndex={-1} autoComplete="off" />
       </div>
 
-      {fields.map((field, index) => {
-        const id = `pole-${field.name}`;
-        const error = errors[field.name];
-        const describedBy = cn(error && `${id}-chyba`, field.name === "message" && "pole-zasady") || undefined;
-        const common = {
-          id,
-          name: field.name,
-          required: field.required,
-          autoComplete: field.autoComplete,
-          "aria-invalid": error ? true : undefined,
-          "aria-describedby": describedBy,
-          onInput: () => clearError(field.name),
-          className:
-            "block w-full bg-transparent px-0 py-1 text-base text-text",
-        };
-        return (
-          <div key={field.name} className="border-b border-line px-4 py-3 last:border-b-0 md:px-6">
-            <label htmlFor={id} className="flex items-baseline gap-3">
-              <span className="label" aria-hidden="true">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <span className="text-[0.9375rem] font-medium">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        {fields.map((field) => {
+          const id = `pole-${field.name}`;
+          const error = errors[field.name];
+          const describedBy = cn(error && `${id}-chyba`, field.name === "message" && "pole-zasady") || undefined;
+          const common = {
+            id,
+            name: field.name,
+            required: field.required,
+            autoComplete: field.autoComplete,
+            "aria-invalid": error ? true : undefined,
+            "aria-describedby": describedBy,
+            onInput: () => clearError(field.name),
+            className: cn(
+              "block w-full rounded-2xl border bg-bg px-4 py-3 text-base text-text transition-[border-color,background-color,box-shadow] duration-200 hover:border-line-strong focus:bg-surface focus:shadow-[0_0_0_4px_rgb(255_199_0/0.35)]",
+              error ? "border-text" : "border-line",
+            ),
+          };
+          const wide = field.multiline || field.name === "contact" || field.name === "source";
+          return (
+            <div key={field.name} className={cn(wide && "sm:col-span-2")}>
+              <label htmlFor={id} className="mb-1.5 block text-[0.9375rem] font-semibold">
                 {cs(texts.fields[field.name].label)}
                 {field.required ? null : <span className="font-normal text-muted"> ({texts.optional})</span>}
-              </span>
-            </label>
-            {field.multiline ? (
-              <textarea {...common} rows={5} className={cn(common.className, "resize-y")} />
-            ) : (
-              <input {...common} type={field.name === "web" ? "url" : "text"} inputMode={field.inputMode} />
-            )}
-            {error ? (
-              <p id={`${id}-chyba`} className="mt-1 text-[0.9375rem] font-medium text-text">
-                <span aria-hidden="true">× </span>
-                {cs(error)}
-              </p>
-            ) : null}
-            {field.name === "message" ? (
-              <p id="pole-zasady" className="mt-2 text-[0.9375rem] text-muted">
-                {cs(texts.privacyBefore)}
-                <a href={site.privacyPath} className="link">
-                  {cs(texts.privacyLink)}
-                </a>
-                {texts.privacyAfter}
-              </p>
-            ) : null}
-          </div>
-        );
-      })}
+              </label>
+              {field.multiline ? (
+                <textarea {...common} rows={5} className={cn(common.className, "resize-y")} />
+              ) : (
+                <input {...common} type={field.name === "web" ? "url" : "text"} inputMode={field.inputMode} />
+              )}
+              {error ? (
+                <p id={`${id}-chyba`} className="mt-1.5 text-[0.9375rem] font-medium">
+                  <span aria-hidden="true">× </span>
+                  {cs(error)}
+                </p>
+              ) : null}
+              {field.name === "message" ? (
+                <p id="pole-zasady" className="mt-2 text-[0.9375rem] text-muted">
+                  {cs(texts.privacyBefore)}
+                  <a href={site.privacyPath} className="link">
+                    {cs(texts.privacyLink)}
+                  </a>
+                  {texts.privacyAfter}
+                </p>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
 
-      <div className="border-t border-text px-4 py-4 md:px-6">
+      <div className="mt-6">
         <p aria-live="polite" className="sr-only">
           {status === "error" ? "" : announcement}
         </p>
         {status === "error" ? (
-          <p role="alert" className="mb-4 border-l-2 border-text pl-3">
+          <p role="alert" className="mb-4 rounded-2xl bg-accent/25 px-4 py-3">
             {cs(texts.errorPrefix)} <ContactLink type="email" value={config.EMAIL} /> {texts.errorMiddle}{" "}
             <ContactLink type="phone" value={config.TELEFON} />.
           </p>
         ) : null}
-        <button type="submit" disabled={status === "sending"} className={cn(buttonClass.secondary, "w-full px-6 sm:w-auto")}>
+        <button type="submit" disabled={status === "sending"} className={cn(buttonClass.dark, "w-full disabled:cursor-wait disabled:opacity-60 sm:w-auto")}>
           {status === "sending" ? texts.sending : texts.submit}
+          <Arrow />
         </button>
         <noscript>
           <p className="mt-4 text-[0.9375rem]">
