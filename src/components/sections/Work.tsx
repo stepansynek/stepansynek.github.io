@@ -24,7 +24,6 @@ function ProjectCard({ project }: { project: Project }) {
   if (project.status !== "published") {
     return (
       <article className="card relative overflow-hidden p-6 md:p-10">
-        <div aria-hidden="true" className="aurora aurora-1 -right-20 -bottom-24 size-72 bg-accent opacity-40" />
         <div className="relative">
           <p className="flex items-center gap-2.5 text-[0.9375rem] font-semibold">
             <span className="live-dot" aria-hidden="true" />

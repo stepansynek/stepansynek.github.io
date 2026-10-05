@@ -22,7 +22,8 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "engas",
-    status: "inProgress",
+    // Do spuštění hotového webu se souhlasem klienta je jen ve vývoji. Pak: status "published", consent: true.
+    status: "placeholder",
     client: "Engas",
     anonymous: "Elektromontážní firma z Brna",
     scope: ["web", "texty", "foto", "video"],

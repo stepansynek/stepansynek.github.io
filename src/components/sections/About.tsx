@@ -18,7 +18,6 @@ export function About() {
           ))}
         </ul>
         <div data-reveal className="card relative flex flex-col justify-between gap-10 overflow-hidden bg-text p-6 text-white md:p-8">
-          <div aria-hidden="true" className="aurora aurora-3 -top-24 -right-24 size-72 bg-blue opacity-50" />
           <p className="relative text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.15] font-[680] tracking-[-0.02em] [font-stretch:110%]">
             {t(about.capacity)}
           </p>

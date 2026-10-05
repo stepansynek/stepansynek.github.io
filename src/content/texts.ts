@@ -47,12 +47,12 @@ export const hero = {
   ctaNote: "20 minut. Ukážu vám tři věci, které bych na vašem webu změnil.",
   callPrefix: "Nebo zavolejte",
   photoAlt: "Štěpán Synek",
-  chips: ["Pevná cena předem", "Texty napíšu za vás", "Foto a video přímo u vás"],
+  photoCaption: "Brno a okolí",
   marquee: ["Výroba", "Montáže", "Servis", "Elektro", "Weby na klíč", "Texty", "Fotky a video", "Newslettery", "Péče o web"],
 };
 
 export const facts = {
-  title: "Na čem se se mnou můžete spolehnout",
+  title: "Na co se u mě můžete spolehnout",
   items: [
     { value: 15000, display: "15 000", unit: "Kč", text: "Za tolik začíná web na klíč. Pevnou cenu znáte předem, ne až na faktuře.", wide: true },
     { value: 20, display: "20", unit: "minut", text: "Úvodní konzultace zdarma. Telefonem, online, nebo u vás ve firmě." },
@@ -70,6 +70,7 @@ export const facts = {
 export const services = {
   title: "Co pro vás udělám",
   intro: "Všechno z jedné ruky: web, texty, fotky i video. Nemusíte koordinovat grafika, copywritera a fotografa.",
+  photo: "Fotky a video z vašeho provozu, strojů a zakázek zajistím za příplatek s fotografkou, se kterou spolupracuji. Cenu řeknu předem.",
   newsletter: "Na přání i newsletter pro vaše stávající zákazníky: nové zakázky, technologie a volné kapacity.",
   foundingOffer: "Prvním třem firmám dávám zakládající cenu výměnou za souhlas s uvedením jako reference.",
   vat: "{[DPH_VETA]}",
@@ -104,10 +105,11 @@ export const process = {
 
 export const about = {
   title: "O mně",
-  heading: "Nejsem velká agentura.",
-  intro: "Mluvíte přímo se mnou, s člověkem, který rozumí řeči techniků i zákazníků.",
+  heading: "Rozumím řeči techniků.",
+  intro:
+    "{Od roku [ROK_OD] dělám|Dělám} marketing pro firmu z průmyslové automatizace a studuji automatizaci na VUT. Když mluvíte o rozvaděčích nebo servisních smlouvách, nemusíte mi nic překládat. A mluvíte přímo se mnou.",
   facts: [
-    "{Od roku [ROK_OD] dělám|Dělám} B2B marketing pro firmu z průmyslové automatizace: newslettery a správu webů.",
+    "Pro firmu z průmyslové automatizace připravuji newslettery a spravuji weby.",
     "Studuji automatizaci a měřicí techniku na VUT FEKT a ekonomii na MUNI ECON.",
     "Mluvím česky a anglicky.",
     "Rád se zastavím přímo u vás ve firmě.",

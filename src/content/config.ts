@@ -26,9 +26,9 @@ export const config = {
   /** BRÁNA. Sídlo podle živnostenského rejstříku. */
   SIDLO: "[SIDLO]",
   /** BRÁNA. Co obsahuje web za 15 000 Kč, např. „až 5 sekcí, texty, poptávkový formulář, česká verze“. */
-  ROZSAH_ZAKLAD: "[ROZSAH_ZAKLAD]",
+  ROZSAH_ZAKLAD: "jednostránkový web do 6 sekcí, texty po rozhovoru, poptávkový formulář, základní SEO a 2 kola připomínek",
   /** BRÁNA. Měsíční paušál za péči (nejnižší cena, upravuje se podle rozsahu), jen číslo, např. „1 500“. */
-  CENA_PECE: "900",
+  CENA_PECE: "1 500",
   /** Do kolika pracovních dnů udělám úpravu, např. „2“. */
   ODEZVA_PECE: "[ODEZVA_PECE]",
   /** Obvyklá délka projektu v týdnech, např. „4–6“. */

@@ -116,8 +116,6 @@ export function HeaderShell({
           open ? "opacity-100 [clip-path:inset(0_0_0_0_round_2rem)]" : "pointer-events-none opacity-0 [clip-path:inset(0_0_100%_0_round_2rem)]",
         )}
       >
-        <div aria-hidden="true" className="aurora aurora-1 -top-24 -right-24 size-80 bg-accent" />
-        <div aria-hidden="true" className="aurora aurora-2 -bottom-32 left-1/3 size-80 bg-blue opacity-30" />
         <div className="relative grid gap-8 p-5 sm:p-8 lg:grid-cols-[1.6fr_1fr] lg:gap-12 lg:p-10">
           <nav aria-label="Menu">
             <ul>

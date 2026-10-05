@@ -27,7 +27,6 @@ export function Facts() {
           </li>
         ))}
         <li data-reveal className="card relative overflow-hidden bg-text p-6 text-white sm:col-span-2 md:p-7 lg:col-span-4">
-          <div aria-hidden="true" className="aurora aurora-2 -top-20 right-0 size-72 bg-accent opacity-40" />
           <div className="relative grid gap-4 md:grid-cols-[1fr_1.4fr] md:items-end">
             <p className="text-[clamp(2rem,4vw,3rem)] leading-none font-[740] tracking-[-0.04em] [font-stretch:115%]">{cs(facts.ownership.title)}</p>
             <p className="max-w-[56ch] text-lg text-white/80">{t(facts.ownership.text)}</p>

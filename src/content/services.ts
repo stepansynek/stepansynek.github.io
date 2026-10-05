@@ -17,12 +17,7 @@ export const services: Service[] = [
   {
     title: "Péče",
     text: "Web pod dohledem: nové reference, pracovní nabídky, drobné úpravy, hosting a zálohy. Vy se staráte o firmu, já o web.",
-    includes: "Cenu upravíme podle rozsahu péče, kterou potřebujete.",
+    includes: "Obsahuje hosting, zálohy a do 1 hodiny úprav měsíčně. Práce navíc 500 Kč za hodinu.",
     price: "{od [CENA_PECE] Kč měsíčně|měsíční paušál} · volitelná",
-  },
-  {
-    title: "Foto a video",
-    text: "Fotky strojů, lidí a zakázek přímo u vás. Fotí a natáčí moje sestra, takže máte všechno z jedné ruky.",
-    price: "za příplatek, cenu řeknu předem",
   },
 ];

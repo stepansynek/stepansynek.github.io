@@ -51,11 +51,6 @@ export function Contact() {
   return (
     <section id="kontakt" aria-labelledby="kontakt-nadpis" className="px-3 py-8 sm:px-5 md:py-12">
       <div data-spotlight className="relative mx-auto max-w-[1340px] overflow-hidden rounded-[2.5rem] bg-text py-16 text-white md:py-24">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          <div className="aurora aurora-1 -top-40 -left-20 size-[30rem] bg-accent opacity-25" />
-          <div className="aurora aurora-2 right-[-8rem] bottom-[-10rem] size-[30rem] bg-blue opacity-45" />
-          <div className="aurora aurora-3 top-1/3 left-1/2 size-[20rem] bg-violet opacity-30" />
-        </div>
         <Container className={cn("relative grid gap-12 lg:gap-16", showForm && "lg:grid-cols-[1fr_1.05fr]")}>
           <div data-reveal>
             <p className="eyebrow border-white/15 bg-white/10 text-white">{cs(contact.titleEyebrow)}</p>

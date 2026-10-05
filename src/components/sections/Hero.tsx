@@ -1,3 +1,4 @@
+import { site } from "@/content/config";
 import { hero } from "@/content/texts";
 import { consultationHref, isShown } from "@/lib/config";
 import { cs, t } from "@/lib/typography";
@@ -6,14 +7,10 @@ import { Container } from "../Container";
 import { Phone } from "../Phone";
 import { Photo } from "../Photo";
 
-const chipPositions = ["float-1 -left-4 top-10 sm:-left-10", "float-2 -right-3 top-1/2 sm:-right-8", "float-3 left-6 -bottom-5"];
-
 /** Náhrada portrétu, dokud chybí public/photos/me.jpg: tmavý panel s iniciálami. */
 function Monogram() {
   return (
     <div role="img" aria-label={hero.photoAlt} className="relative flex aspect-[4/5] w-full items-end overflow-hidden rounded-[1.5rem] bg-text p-7 pb-12">
-      <div aria-hidden="true" className="aurora aurora-1 -top-16 -left-16 size-64 bg-accent opacity-50" />
-      <div aria-hidden="true" className="aurora aurora-2 -right-20 -bottom-20 size-72 bg-blue opacity-60" />
       <span aria-hidden="true" className="relative text-[clamp(5rem,9vw,7rem)] leading-none font-[800] tracking-[-0.06em] text-white [font-stretch:125%]">
         ŠS
       </span>
@@ -24,11 +21,7 @@ function Monogram() {
 export function Hero() {
   return (
     <section aria-labelledby="hero-nadpis" data-spotlight className="relative -mt-[4.25rem] overflow-hidden pt-[calc(4.25rem+3rem)] pb-16 md:pt-[calc(4.25rem+5rem)] md:pb-24">
-      {/* Pozadí: aurora a tečkovaná mřížka, která se rozsvítí kolem kurzoru. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-        <div className="aurora aurora-1 -top-40 -left-32 size-[34rem] bg-accent" />
-        <div className="aurora aurora-2 top-10 right-[-10rem] size-[30rem] bg-blue opacity-35" />
-        <div className="aurora aurora-3 bottom-[-12rem] left-1/3 size-[28rem] bg-violet opacity-30" />
         <div className="dot-grid absolute inset-0" />
         <div className="dot-grid-glow absolute inset-0" />
       </div>
@@ -72,8 +65,7 @@ export function Hero() {
         </div>
 
         <div data-reveal style={{ "--d": 2 } as React.CSSProperties} className="relative mx-auto w-full max-w-[24rem] lg:max-w-[26rem]">
-          <div aria-hidden="true" className="spin-slow absolute -inset-8 rounded-full bg-[conic-gradient(from_0deg,var(--accent),var(--blue),var(--violet),var(--accent))] opacity-25 blur-3xl" />
-          <div className="relative overflow-hidden rounded-[2rem] border border-white bg-surface p-2 shadow-[0_30px_80px_-30px_rgb(14_17_22/0.45)]">
+          <div className="relative overflow-hidden rounded-[1.75rem] border border-line bg-surface p-2 shadow-[0_24px_60px_-32px_rgb(14_17_22/0.35)]">
             <Photo
               name="me"
               alt={hero.photoAlt}
@@ -83,17 +75,10 @@ export function Hero() {
               fallback={<Monogram />}
             />
           </div>
-          {hero.chips.map((chip, index) => (
-            <p
-              key={chip}
-              className={`glass absolute flex items-center gap-2 rounded-full px-4 py-2 text-[0.9375rem] font-semibold whitespace-nowrap ${chipPositions[index]}`}
-            >
-              <span aria-hidden="true" className="grid size-5 place-items-center rounded-full bg-accent text-[0.7rem]">
-                ✓
-              </span>
-              {cs(chip)}
-            </p>
-          ))}
+          <p className="mt-3 flex items-center justify-between gap-4 px-2 text-[0.9375rem]">
+            <span className="font-semibold">{site.name}</span>
+            <span className="text-muted">{cs(hero.photoCaption)}</span>
+          </p>
         </div>
       </Container>
     </section>
