@@ -32,16 +32,16 @@ export function Services() {
     <Section id="sluzby" eyebrow="Služby" title={texts.title} intro={texts.intro}>
       <ul className="grid gap-4 md:grid-cols-2">
         {services.map((service, index) => (
-          <li key={service.title} data-reveal style={{ "--d": index } as React.CSSProperties} className="card card-lift flex flex-col p-6 md:p-8">
-            <div className="mb-8 aspect-[2/1] rounded-2xl bg-bg p-6">{graphics[index]}</div>
+          <li key={service.title} data-reveal style={{ "--d": index } as React.CSSProperties} className="card card-lift flex flex-col p-5 md:p-8">
+            <div aria-hidden="true" className="mb-8 hidden aspect-[2/1] rounded-2xl bg-bg p-6 md:block">{graphics[index]}</div>
             <h3 className="h3">{t(service.title)}</h3>
             <p className="mt-3 flex-1 text-muted">{t(service.text)}</p>
             {service.includes && t(service.includes) ? <p className="mt-3 text-[0.9375rem]">{t(service.includes)}</p> : null}
-            <p className="price mt-6 inline-flex self-start rounded-[1.25rem] bg-bg px-4 py-2">{t(service.price)}</p>
+            <p className="price mt-4 inline-flex md:mt-6 self-start rounded-[1.25rem] bg-bg px-4 py-2">{t(service.price)}</p>
           </li>
         ))}
       </ul>
-      <div data-reveal className="mt-8 grid gap-3">
+      <div data-reveal className="mt-6 grid gap-3 md:mt-8">
         <p className="prose-width">{t(texts.photo)}</p>
         <p className="prose-width">{t(texts.newsletter)}</p>
         {config.ZAKLADAJICI_NABIDKA ? <p className="prose-width">{t(texts.foundingOffer)}</p> : null}

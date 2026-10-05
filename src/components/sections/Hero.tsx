@@ -20,13 +20,13 @@ function Monogram() {
 
 export function Hero() {
   return (
-    <section aria-labelledby="hero-nadpis" data-spotlight className="relative -mt-[4.25rem] overflow-hidden pt-[calc(4.25rem+3rem)] pb-16 md:pt-[calc(4.25rem+5rem)] md:pb-24">
+    <section aria-labelledby="hero-nadpis" data-spotlight className="relative -mt-[4.25rem] overflow-hidden pt-[calc(4.25rem+2rem)] pb-10 md:pt-[calc(4.25rem+5rem)] md:pb-24">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div className="dot-grid absolute inset-0" />
         <div className="dot-grid-glow absolute inset-0" />
       </div>
 
-      <Container className="grid items-center gap-14 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:gap-12">
+      <Container className="grid items-center gap-8 md:gap-14 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:gap-12">
         <div>
           <p data-reveal className="eyebrow">
             {cs(hero.eyebrow)}
@@ -64,12 +64,12 @@ export function Hero() {
           </p>
         </div>
 
-        <div data-reveal style={{ "--d": 2 } as React.CSSProperties} className="relative mx-auto w-full max-w-[24rem] lg:max-w-[26rem]">
+        <div data-reveal style={{ "--d": 2 } as React.CSSProperties} className="relative mx-auto w-full max-w-[17rem] sm:max-w-[24rem] lg:max-w-[26rem]">
           <div className="relative overflow-hidden rounded-[1.75rem] border border-line bg-surface p-2 shadow-[0_24px_60px_-32px_rgb(14_17_22/0.35)]">
             <Photo
               name="me"
               alt={hero.photoAlt}
-              sizes="(min-width: 1024px) 26rem, 24rem"
+              sizes="(min-width: 1024px) 26rem, (min-width: 640px) 24rem, 17rem"
               eager
               className="aspect-[4/5] w-full rounded-[1.5rem]"
               fallback={<Monogram />}

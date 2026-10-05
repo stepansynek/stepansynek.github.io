@@ -50,7 +50,7 @@ export function Contact() {
 
   return (
     <section id="kontakt" aria-labelledby="kontakt-nadpis" className="px-3 py-8 sm:px-5 md:py-12">
-      <div data-spotlight className="relative mx-auto max-w-[1340px] overflow-hidden rounded-[2.5rem] bg-text py-16 text-white md:py-24">
+      <div data-spotlight className="relative mx-auto max-w-[1340px] overflow-hidden rounded-[2rem] bg-text py-10 text-white md:rounded-[2.5rem] md:py-24">
         <Container className={cn("relative grid gap-12 lg:gap-16", showForm && "lg:grid-cols-[1fr_1.05fr]")}>
           <div data-reveal>
             <p className="eyebrow border-white/15 bg-white/10 text-white">{cs(contact.titleEyebrow)}</p>
@@ -58,7 +58,7 @@ export function Contact() {
               {cs(contact.title)}
             </h2>
             {showPhone || showEmail ? (
-              <dl className="mt-10 space-y-6">
+              <dl className="mt-6 space-y-4 md:mt-10 md:space-y-6">
                 {showPhone ? (
                   <div>
                     <dt className="text-[0.9375rem] text-white/85">{contact.phoneLabel}</dt>

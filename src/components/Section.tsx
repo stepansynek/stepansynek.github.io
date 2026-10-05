@@ -20,16 +20,16 @@ export function Section({
 }) {
   const headingId = `${id}-nadpis`;
   return (
-    <section id={id} aria-labelledby={headingId} className={cn("py-20 md:py-32", className)}>
+    <section id={id} aria-labelledby={headingId} className={cn("py-12 md:py-32", className)}>
       <Container>
-        <div data-reveal className="mb-12 grid gap-6 md:mb-16 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+        <div data-reveal className="mb-8 grid gap-4 md:mb-16 md:gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-end">
           <div>
             <p className="eyebrow">{cs(eyebrow)}</p>
-            <h2 id={headingId} className="h2 mt-5 max-w-[16ch] text-balance">
+            <h2 id={headingId} className="h2 mt-4 md:mt-5 max-w-[16ch] text-balance">
               {cs(title)}
             </h2>
           </div>
-          {intro ? <p className="prose-width text-lg text-muted lg:pb-2">{t(intro)}</p> : null}
+          {intro ? <p className="prose-width text-muted md:text-lg lg:pb-2">{t(intro)}</p> : null}
         </div>
         {children}
       </Container>

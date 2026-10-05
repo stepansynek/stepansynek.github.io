@@ -9,15 +9,15 @@ export function About() {
   return (
     <Section id="o-mne" eyebrow={about.title} title={about.heading} intro={about.intro}>
       <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
-        <ul className="card divide-y divide-line px-6 md:px-8">
+        <ul className="card divide-y divide-line px-5 md:px-8">
           {about.facts.map((fact, index) => (
-            <li key={index} data-reveal style={{ "--d": index } as React.CSSProperties} className="flex gap-4 py-5 text-lg">
+            <li key={index} data-reveal style={{ "--d": index } as React.CSSProperties} className="flex gap-4 py-4 md:py-5 md:text-lg">
               <span aria-hidden="true" className="mt-2.5 size-2 shrink-0 rotate-45 bg-accent" />
               {t(fact)}
             </li>
           ))}
         </ul>
-        <div data-reveal className="card relative flex flex-col justify-between gap-10 overflow-hidden bg-text p-6 text-white md:p-8">
+        <div data-reveal className="card relative flex flex-col justify-between gap-6 overflow-hidden bg-text p-5 text-white md:gap-10 md:p-8">
           <p className="relative text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.15] font-[680] tracking-[-0.02em] [font-stretch:110%]">
             {t(about.capacity)}
           </p>

@@ -9,7 +9,7 @@ import { Section } from "../Section";
 export function Process() {
   return (
     <Section id="postup" eyebrow="Postup" title={process.title}>
-      <ol data-progress className="relative grid gap-10 pl-10 lg:grid-cols-4 lg:gap-6 lg:pt-12 lg:pl-0">
+      <ol data-progress className="relative grid gap-6 pl-10 md:gap-10 lg:grid-cols-4 lg:gap-6 lg:pt-12 lg:pl-0">
         <span aria-hidden="true" className="absolute top-2 bottom-2 left-[15px] w-0.5 rounded-full bg-line lg:top-[15px] lg:right-0 lg:bottom-auto lg:left-0 lg:h-0.5 lg:w-auto" />
         <span
           aria-hidden="true"
