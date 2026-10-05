@@ -1,4 +1,4 @@
-import { isPlaceholder } from "@/lib/config";
+import { isPlaceholder, showPlaceholders } from "@/lib/config";
 import { cs } from "@/lib/typography";
 import { cn } from "@/lib/cn";
 
@@ -6,7 +6,8 @@ const prefixes = { email: "mailto:", phone: "tel:", url: "" } as const;
 
 /**
  * Odkaz na e-mail, telefon nebo web. Dokud je hodnota placeholder („[EMAIL]“),
- * zobrazí se jen jako text, aby na webu nebyl nefunkční odkaz.
+ * zobrazí se ve vývoji jen jako text a v produkci vůbec, aby na webu nebyl nefunkční odkaz.
+ * Okolní text (popisek, „Nebo zavolejte“) skryje volající podle isShown().
  */
 export function ContactLink({
   type,
@@ -20,7 +21,7 @@ export function ContactLink({
   className?: string;
 }) {
   if (isPlaceholder(value)) {
-    return <span className={className}>{value}</span>;
+    return showPlaceholders ? <span className={className}>{value}</span> : null;
   }
   const href = prefixes[type] + (type === "phone" ? value.replace(/[^\d+]/g, "") : value);
   return (

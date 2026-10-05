@@ -22,8 +22,9 @@ export function HeaderShell({
   name: string;
   items: (Link & { hint: string })[];
   cta: Link;
-  phone: Link;
-  email: Link;
+  /** Telefon chráněný proti sběru (Phone), vykreslený na serveru. */
+  phone: React.ReactNode;
+  email: Link | null;
   texts: { menu: string; close: string; contact: string };
 }) {
   const [open, setOpen] = useState(false);
@@ -141,12 +142,12 @@ export function HeaderShell({
           </nav>
           <div className="flex flex-col justify-end gap-3 rounded-3xl bg-text p-6 text-white">
             <p className="text-[0.9375rem] text-white/80">{texts.contact}</p>
-            <a href={phone.href} className="text-2xl font-[680] tracking-tight [font-stretch:110%] tabular-nums">
-              {phone.label}
-            </a>
-            <a href={email.href} className="break-all text-lg text-white/90">
-              {email.label}
-            </a>
+            {phone}
+            {email ? (
+              <a href={email.href} className="break-all text-lg text-white/90">
+                {email.label}
+              </a>
+            ) : null}
             <a href={cta.href} onClick={() => setOpen(false)} className="btn btn-primary mt-3 self-start">
               {cta.label}
               <Arrow />

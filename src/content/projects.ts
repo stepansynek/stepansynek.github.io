@@ -2,7 +2,7 @@ export type Project = {
   slug: string;
   status: "published" | "inProgress" | "placeholder";
   client: string; // zobrazí se jen při consent: true
-  anonymous: string; // např. „elektromontážní firma z Brna“
+  anonymous: string; // nadpis karty, např. „Elektromontážní firma z Brna“
   scope: string[]; // např. ['web', 'texty', 'foto', 'video']
   year?: number;
   summary?: string;
@@ -24,7 +24,7 @@ export const projects: Project[] = [
     slug: "engas",
     status: "inProgress",
     client: "Engas",
-    anonymous: "elektromontážní firma z Brna",
+    anonymous: "Elektromontážní firma z Brna",
     scope: ["web", "texty", "foto", "video"],
     consent: false,
   },

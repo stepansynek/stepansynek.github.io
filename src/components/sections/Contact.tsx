@@ -1,14 +1,53 @@
-import { config } from "@/content/config";
-import { contact } from "@/content/texts";
-import { consultationHref } from "@/lib/config";
+import { config, site } from "@/content/config";
+import { contact, form } from "@/content/texts";
+import { consultationHref, isFilled, isShown } from "@/lib/config";
+import { cn } from "@/lib/cn";
 import { cs, t } from "@/lib/typography";
 import { ButtonLink } from "../Button";
 import { ContactForm } from "../ContactForm";
 import { ContactLink } from "../ContactLink";
+import { Phone } from "../Phone";
 import { Container } from "../Container";
 
-/** Tmavý kontaktní panel: velký telefon a e-mail, konzultace a formulář. */
+/** Hláška při chybě odeslání formuláře: nabídne jen ty kontakty, které jsou vyplněné. */
+function SendError() {
+  const email = isShown("EMAIL");
+  const phone = isShown("TELEFON");
+  return (
+    <p role="alert" className="mb-4 rounded-2xl bg-accent/25 px-4 py-3">
+      {cs(form.error)}{" "}
+      {email ? (
+        <>
+          {cs(form.errorEmail)} <ContactLink type="email" value={config.EMAIL} />
+          {phone ? (
+            <>
+              {" "}
+              {form.errorEmailPhone} <Phone />
+            </>
+          ) : null}
+          .
+        </>
+      ) : phone ? (
+        <>
+          {cs(form.errorPhone)} <Phone />.
+        </>
+      ) : (
+        cs(form.errorRetry)
+      )}
+    </p>
+  );
+}
+
+/**
+ * Tmavý kontaktní panel: velký telefon a e-mail, konzultace a formulář.
+ * V produkci se skryje, co nemá vyplněný údaj: formulář bez Formspree by zprávu neodeslal
+ * a tlačítko konzultace bez Cal.com by vedlo samo na sebe (#kontakt).
+ */
 export function Contact() {
+  const showForm = isShown("FORMSPREE_ID");
+  const showPhone = isShown("TELEFON");
+  const showEmail = isShown("EMAIL");
+
   return (
     <section id="kontakt" aria-labelledby="kontakt-nadpis" className="px-3 py-8 sm:px-5 md:py-12">
       <div data-spotlight className="relative mx-auto max-w-[1340px] overflow-hidden rounded-[2.5rem] bg-text py-16 text-white md:py-24">
@@ -17,34 +56,58 @@ export function Contact() {
           <div className="aurora aurora-2 right-[-8rem] bottom-[-10rem] size-[30rem] bg-blue opacity-45" />
           <div className="aurora aurora-3 top-1/3 left-1/2 size-[20rem] bg-violet opacity-30" />
         </div>
-        <Container className="relative grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+        <Container className={cn("relative grid gap-12 lg:gap-16", showForm && "lg:grid-cols-[1fr_1.05fr]")}>
           <div data-reveal>
             <p className="eyebrow border-white/15 bg-white/10 text-white">{cs(contact.titleEyebrow)}</p>
             <h2 id="kontakt-nadpis" className="h2 mt-5 max-w-[14ch] text-balance">
               {cs(contact.title)}
             </h2>
-            <dl className="mt-10 space-y-6">
-              <div>
-                <dt className="text-[0.9375rem] text-white/85">{contact.phoneLabel}</dt>
-                <dd className="mt-1 text-[clamp(1.75rem,4vw,2.75rem)] leading-tight font-[720] tracking-[-0.03em] [font-stretch:112%]">
-                  <ContactLink type="phone" value={config.TELEFON} className="tabular-nums" />
-                </dd>
-              </div>
-              <div>
-                <dt className="text-[0.9375rem] text-white/85">{contact.emailLabel}</dt>
-                <dd className="mt-1 text-[clamp(1.4rem,3vw,2rem)] leading-tight font-[650] tracking-[-0.02em] break-all">
-                  <ContactLink type="email" value={config.EMAIL} />
-                </dd>
-              </div>
-            </dl>
-            <p className="prose-width mt-6 text-white/75">{t(contact.note)}</p>
-            <ButtonLink href={consultationHref} variant="primary" arrow className="mt-8 min-h-14 px-7">
-              {contact.cta}
-            </ButtonLink>
+            {showPhone || showEmail ? (
+              <dl className="mt-10 space-y-6">
+                {showPhone ? (
+                  <div>
+                    <dt className="text-[0.9375rem] text-white/85">{contact.phoneLabel}</dt>
+                    <dd className="mt-1 text-[clamp(1.75rem,4vw,2.75rem)] leading-tight font-[720] tracking-[-0.03em] [font-stretch:112%]">
+                      <Phone />
+                    </dd>
+                  </div>
+                ) : null}
+                {showEmail ? (
+                  <div>
+                    <dt className="text-[0.9375rem] text-white/85">{contact.emailLabel}</dt>
+                    <dd className="mt-1 text-[clamp(1.4rem,3vw,2rem)] leading-tight font-[650] tracking-[-0.02em] break-all">
+                      <ContactLink type="email" value={config.EMAIL} />
+                    </dd>
+                  </div>
+                ) : null}
+              </dl>
+            ) : null}
+            <p className="prose-width mt-6 text-white/75">
+              {showPhone ? `${t(contact.phoneNote)} ` : null}
+              {t(contact.note)}
+            </p>
+            {isShown("CAL_LINK") ? (
+              <ButtonLink href={consultationHref} variant="primary" arrow className="mt-8 min-h-14 px-7">
+                {contact.cta}
+              </ButtonLink>
+            ) : null}
           </div>
-          <div data-reveal style={{ "--d": 1 } as React.CSSProperties}>
-            <ContactForm />
-          </div>
+          {showForm ? (
+            <div data-reveal style={{ "--d": 1 } as React.CSSProperties}>
+              <ContactForm
+                endpoint={isFilled("FORMSPREE_ID") ? `https://formspree.io/f/${config.FORMSPREE_ID}` : ""}
+                privacyHref={site.privacyPath}
+                sendError={<SendError />}
+                noscript={
+                  isShown("EMAIL") ? (
+                    <>
+                      {cs(form.noscript)} <ContactLink type="email" value={config.EMAIL} />.
+                    </>
+                  ) : null
+                }
+              />
+            </div>
+          ) : null}
         </Container>
       </div>
     </section>

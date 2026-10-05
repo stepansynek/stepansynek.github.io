@@ -5,10 +5,8 @@ import { isFilled } from "@/lib/config";
 /** Strukturovaná data: Person a ProfessionalService. Nevyplněné údaje se vynechají. */
 export function JsonLd() {
   const personId = `${site.url}/#person`;
-  const contact = {
-    ...(isFilled("EMAIL") ? { email: config.EMAIL } : {}),
-    ...(isFilled("TELEFON") ? { telephone: config.TELEFON } : {}),
-  };
+  // Telefon tu záměrně není: strukturovaná data čtou hlavně roboti (viz PhoneReveal).
+  const contact = isFilled("EMAIL") ? { email: config.EMAIL } : {};
   const data = {
     "@context": "https://schema.org",
     "@graph": [

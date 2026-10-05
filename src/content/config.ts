@@ -6,12 +6,15 @@
  * Klíče označené „BRÁNA“ musí být vyplněné před spuštěním (brief, sekce 2).
  */
 export const config = {
-  /** BRÁNA. Telefon ve tvaru pro zobrazení, např. „+420 777 123 456“. Pro tel: se mezery odstraní. */
-  TELEFON: "[TELEFON]",
+  /**
+   * BRÁNA. Telefon ZAKÓDOVANÝ proti sběru čísel (repozitář je veřejný):
+   * npm run telefon -- "+420 777 123 456" a výstup vložit sem. Na webu se ukáže až po kliknutí.
+   */
+  TELEFON: "NDk5IDE2MyA0MDYgMDI0Kw==",
   /** BRÁNA. Kdy beru telefon, např. „Po–Pá 7–9 a 15–18“. */
   CASY_TELEFON: "[CASY_TELEFON]",
   /** BRÁNA. E-mail na doméně stepansynek.com. */
-  EMAIL: "[EMAIL]",
+  EMAIL: "contact@stepansynek.com",
   /** URL profilu na LinkedInu. */
   LINKEDIN: "[LINKEDIN]",
   /** Odkaz na 20min událost v Cal.com. Prázdný řetězec = tlačítka vedou na #kontakt. */
@@ -24,8 +27,8 @@ export const config = {
   SIDLO: "[SIDLO]",
   /** BRÁNA. Co obsahuje web za 15 000 Kč, např. „až 5 sekcí, texty, poptávkový formulář, česká verze“. */
   ROZSAH_ZAKLAD: "[ROZSAH_ZAKLAD]",
-  /** BRÁNA. Měsíční paušál za péči, jen číslo, např. „1 500“. */
-  CENA_PECE: "[CENA_PECE]",
+  /** BRÁNA. Měsíční paušál za péči (nejnižší cena, upravuje se podle rozsahu), jen číslo, např. „1 500“. */
+  CENA_PECE: "900",
   /** Do kolika pracovních dnů udělám úpravu, např. „2“. */
   ODEZVA_PECE: "[ODEZVA_PECE]",
   /** Obvyklá délka projektu v týdnech, např. „4–6“. */

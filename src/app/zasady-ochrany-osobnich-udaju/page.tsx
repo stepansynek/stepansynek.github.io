@@ -31,19 +31,24 @@ export default function PrivacyPolicy() {
           {privacy.sections.map((section) => (
             <section key={section.heading} className="mt-12 border-t border-line pt-6">
               <h2 className="text-xl font-semibold tracking-tight">{t(section.heading)}</h2>
-              {section.blocks.map((block, index) =>
-                typeof block === "string" ? (
+              {section.blocks.map((block, index) => {
+                if (typeof block !== "string") {
+                  return (
+                    <ul key={index} className="mt-4 list-disc space-y-1 pl-6 marker:text-muted">
+                      {block.map((item) => (
+                        <li key={item}>{t(item)}</li>
+                      ))}
+                    </ul>
+                  );
+                }
+                // Odstavec, ze kterého zbyla jen vynechaná volitelná část, se nevykreslí.
+                const text = t(block);
+                return text ? (
                   <p key={index} className="mt-4">
-                    {t(block)}
+                    {text}
                   </p>
-                ) : (
-                  <ul key={index} className="mt-4 list-disc space-y-1 pl-6 marker:text-muted">
-                    {block.map((item) => (
-                      <li key={item}>{t(item)}</li>
-                    ))}
-                  </ul>
-                ),
-              )}
+                ) : null;
+              })}
             </section>
           ))}
         </article>

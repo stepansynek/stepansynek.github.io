@@ -1,19 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { config, site } from "@/content/config";
 import { form as texts } from "@/content/texts";
-import { isPlaceholder } from "@/lib/config";
 import { cn } from "@/lib/cn";
-import { cs } from "@/lib/typography";
+import { cs } from "@/lib/cs";
 import { Arrow, buttonClass } from "./Button";
-import { ContactLink } from "./ContactLink";
 
 type Status = "idle" | "sending" | "success" | "error";
 type FieldName = keyof typeof texts.fields;
 type Errors = Partial<Record<FieldName, string>>;
-
-const endpoint = `https://formspree.io/f/${config.FORMSPREE_ID}`;
 
 const fields: { name: FieldName; required: boolean; multiline?: boolean; autoComplete?: string; inputMode?: "url" }[] = [
   { name: "name", required: true, autoComplete: "name" },
@@ -47,8 +42,24 @@ function validate(data: FormData): Errors {
  * Poptávkový formulář jako jednoduchý objednávkový list.
  * S JavaScriptem: vlastní validace s hláškami u polí a odeslání přes fetch na Formspree.
  * Bez JavaScriptu: nativní validace a klasické odeslání na Formspree, plus odkaz na e-mail.
+ *
+ * Údaje z config.ts sem přicházejí jako props ze serveru (Contact.tsx): klientská komponenta
+ * nesmí importovat config, jinak by se celý dostal do JavaScriptu v prohlížeči, i s telefonem.
  */
-export function ContactForm() {
+export function ContactForm({
+  endpoint,
+  privacyHref,
+  sendError,
+  noscript,
+}: {
+  /** URL Formspree; prázdná, dokud chybí FORMSPREE_ID (to nastane jen ve vývoji, v produkci se formulář skryje). */
+  endpoint: string;
+  privacyHref: string;
+  /** Hláška při chybě odeslání s kontakty, vykreslená na serveru. */
+  sendError: React.ReactNode;
+  /** Obsah <noscript> s e-mailem, nebo null. */
+  noscript: React.ReactNode;
+}) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Errors>({});
   const [announcement, setAnnouncement] = useState("");
@@ -81,9 +92,9 @@ export function ContactForm() {
       return;
     }
 
-    if (isPlaceholder(config.FORMSPREE_ID)) {
+    if (!endpoint) {
       setStatus("error");
-      setAnnouncement(texts.errorPrefix);
+      setAnnouncement(texts.error);
       return;
     }
 
@@ -104,7 +115,7 @@ export function ContactForm() {
       setAnnouncement("");
     } catch {
       setStatus("error");
-      setAnnouncement(texts.errorPrefix);
+      setAnnouncement(texts.error);
     }
   }
 
@@ -127,7 +138,7 @@ export function ContactForm() {
 
   return (
     <form
-      action={endpoint}
+      action={endpoint || undefined}
       method="POST"
       noValidate={hydrated}
       onSubmit={handleSubmit}
@@ -181,7 +192,7 @@ export function ContactForm() {
               {field.name === "message" ? (
                 <p id="pole-zasady" className="mt-2 text-[0.9375rem] text-muted">
                   {cs(texts.privacyBefore)}
-                  <a href={site.privacyPath} className="link">
+                  <a href={privacyHref} className="link">
                     {cs(texts.privacyLink)}
                   </a>
                   {texts.privacyAfter}
@@ -196,21 +207,16 @@ export function ContactForm() {
         <p aria-live="polite" className="sr-only">
           {status === "error" ? "" : announcement}
         </p>
-        {status === "error" ? (
-          <p role="alert" className="mb-4 rounded-2xl bg-accent/25 px-4 py-3">
-            {cs(texts.errorPrefix)} <ContactLink type="email" value={config.EMAIL} /> {texts.errorMiddle}{" "}
-            <ContactLink type="phone" value={config.TELEFON} />.
-          </p>
-        ) : null}
+        {status === "error" ? sendError : null}
         <button type="submit" disabled={status === "sending"} className={cn(buttonClass.dark, "w-full disabled:cursor-wait disabled:opacity-60 sm:w-auto")}>
           {status === "sending" ? texts.sending : texts.submit}
           <Arrow />
         </button>
-        <noscript>
-          <p className="mt-4 text-[0.9375rem]">
-            {cs(texts.noscript)} <ContactLink type="email" value={config.EMAIL} />.
-          </p>
-        </noscript>
+        {noscript ? (
+          <noscript>
+            <p className="mt-4 text-[0.9375rem]">{noscript}</p>
+          </noscript>
+        ) : null}
       </div>
     </form>
   );

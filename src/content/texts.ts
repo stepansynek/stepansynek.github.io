@@ -1,6 +1,7 @@
 /**
  * Texty webu. Hranaté závorky jsou klíče z config.ts, doplní se automaticky.
  * České uvozovky „…“ a pomlčky – piš rovnou sem, nezlomitelné mezery doplní cs().
+ * {…} je volitelná část: když v ní chybí údaj, na webu se vynechá; {…|jinak} ji nahradí textem za svislítkem.
  */
 
 export const seo = {
@@ -71,7 +72,7 @@ export const services = {
   intro: "Všechno z jedné ruky: web, texty, fotky i video. Nemusíte koordinovat grafika, copywritera a fotografa.",
   newsletter: "Na přání i newsletter pro vaše stávající zákazníky: nové zakázky, technologie a volné kapacity.",
   foundingOffer: "Prvním třem firmám dávám zakládající cenu výměnou za souhlas s uvedením jako reference.",
-  vat: "[DPH_VETA]",
+  vat: "{[DPH_VETA]}",
 };
 
 export const work = {
@@ -88,11 +89,11 @@ export const process = {
     },
     {
       title: "Nabídka",
-      text: "Do dvou pracovních dnů pošlu pevnou cenu a termín. Platby: [PLATBY].",
+      text: "Do dvou pracovních dnů pošlu pevnou cenu a termín.{ Platby: [PLATBY].}",
     },
     {
       title: "Web na klíč",
-      text: "Rozhovor, texty, fotky, návrh a spuštění. Obvykle [DELKA_PROJEKTU] týdnů.",
+      text: "Rozhovor, texty, fotky, návrh a spuštění.{ Obvykle [DELKA_PROJEKTU] týdnů.}",
     },
     {
       title: "Péče",
@@ -106,7 +107,7 @@ export const about = {
   heading: "Nejsem velká agentura.",
   intro: "Mluvíte přímo se mnou, s člověkem, který rozumí řeči techniků i zákazníků.",
   facts: [
-    "Od roku [ROK_OD] dělám B2B marketing pro firmu z průmyslové automatizace: newslettery a správu webů.",
+    "{Od roku [ROK_OD] dělám|Dělám} B2B marketing pro firmu z průmyslové automatizace: newslettery a správu webů.",
     "Studuji automatizaci a měřicí techniku na VUT FEKT a ekonomii na MUNI ECON.",
     "Mluvím česky a anglicky.",
     "Rád se zastavím přímo u vás ve firmě.",
@@ -125,7 +126,9 @@ export const contact = {
   title: "Pojďme se podívat na váš web",
   phoneLabel: "Telefon",
   emailLabel: "E-mail",
-  note: "Telefon beru [CASY_TELEFON], jinak zavolám zpět týž den. Brno · Vyškov · Rousínov, rád se zastavím u vás ve firmě.",
+  /** Ukáže se jen s vyplněným telefonem. */
+  phoneNote: "{Telefon beru [CASY_TELEFON], jinak|Když telefon neberu,} zavolám zpět týž den.",
+  note: "Brno · Vyškov · Rousínov, rád se zastavím u vás ve firmě.",
   cta: "Domluvit konzultaci zdarma",
 };
 
@@ -152,8 +155,11 @@ export const form = {
   successSignature: "Štěpán",
   errorSummary: (count: number) =>
     count === 1 ? "Formulář obsahuje 1 chybu." : count < 5 ? `Formulář obsahuje ${count} chyby.` : `Formulář obsahuje ${count} chyb.`,
-  errorPrefix: "Zprávu se nepodařilo odeslat. Napište mi prosím na",
-  errorMiddle: "nebo zavolejte",
+  error: "Zprávu se nepodařilo odeslat.",
+  errorEmail: "Napište mi prosím na",
+  errorEmailPhone: "nebo zavolejte",
+  errorPhone: "Zavolejte mi prosím na číslo",
+  errorRetry: "Zkuste to prosím za chvíli znovu.",
   noscript: "Bez JavaScriptu formulář neodešlete. Napište mi prosím přímo na",
   subject: "Poptávka z webu stepansynek.com",
 };
@@ -186,7 +192,7 @@ export const privacy = {
     {
       heading: "Správce osobních údajů",
       blocks: [
-        "Štěpán Synek, IČO [ICO], se sídlem [SIDLO], fyzická osoba zapsaná v živnostenském rejstříku. E-mail: [EMAIL].",
+        "Štěpán Synek{, IČO [ICO]}{, se sídlem [SIDLO]}, fyzická osoba zapsaná v živnostenském rejstříku.{ E-mail: [EMAIL].}",
       ],
     },
     {
@@ -210,7 +216,7 @@ export const privacy = {
     {
       heading: "Doba uchování",
       blocks: [
-        "Údaje uchovávám [DOBA_UCHOVANI]. Pokud spolu uzavřeme smlouvu, řídí se doba uchování smlouvou a zákonnými povinnostmi, například účetními a daňovými předpisy.",
+        "{Údaje uchovávám [DOBA_UCHOVANI]. }Pokud spolu uzavřeme smlouvu, řídí se doba uchování smlouvou a zákonnými povinnostmi, například účetními a daňovými předpisy.",
       ],
     },
     {
@@ -222,7 +228,7 @@ export const privacy = {
           "Cal.com, Inc. (USA) – rezervace termínu konzultace,",
           "GitHub, Inc. (USA) – hosting webu na GitHub Pages; při návštěvě webu zpracovává technické logy včetně IP adres.",
         ],
-        "Tyto služby sídlí mimo Evropskou unii. Předání údajů do USA probíhá na základě: [PRAVNI_ZAKLAD_PREDANI].",
+        "Tyto služby sídlí mimo Evropskou unii.{ Předání údajů do USA probíhá na základě: [PRAVNI_ZAKLAD_PREDANI].}",
       ],
     },
     {
@@ -241,7 +247,7 @@ export const privacy = {
           "na přenositelnost údajů,",
           "vznést námitku proti zpracování založenému na oprávněném zájmu.",
         ],
-        "Stačí mi napsat na [EMAIL].",
+        "{Stačí mi napsat na [EMAIL].}",
         "Pokud máte za to, že s údaji nakládám v rozporu s předpisy, můžete podat stížnost u Úřadu pro ochranu osobních údajů, Pplk. Sochora 27, 170 00 Praha 7, www.uoou.gov.cz.",
       ],
     },

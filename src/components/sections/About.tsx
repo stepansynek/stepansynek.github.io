@@ -1,5 +1,6 @@
 import { config } from "@/content/config";
 import { about } from "@/content/texts";
+import { isShown } from "@/lib/config";
 import { t } from "@/lib/typography";
 import { ContactLink } from "../ContactLink";
 import { Section } from "../Section";
@@ -10,7 +11,7 @@ export function About() {
       <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
         <ul className="card divide-y divide-line px-6 md:px-8">
           {about.facts.map((fact, index) => (
-            <li key={fact} data-reveal style={{ "--d": index } as React.CSSProperties} className="flex gap-4 py-5 text-lg">
+            <li key={index} data-reveal style={{ "--d": index } as React.CSSProperties} className="flex gap-4 py-5 text-lg">
               <span aria-hidden="true" className="mt-2.5 size-2 shrink-0 rotate-45 bg-accent" />
               {t(fact)}
             </li>
@@ -21,9 +22,11 @@ export function About() {
           <p className="relative text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.15] font-[680] tracking-[-0.02em] [font-stretch:110%]">
             {t(about.capacity)}
           </p>
-          <p className="relative">
-            <ContactLink type="url" value={config.LINKEDIN} label={about.linkedin} className="font-semibold text-white" />
-          </p>
+          {isShown("LINKEDIN") ? (
+            <p className="relative">
+              <ContactLink type="url" value={config.LINKEDIN} label={about.linkedin} className="font-semibold text-white" />
+            </p>
+          ) : null}
         </div>
       </div>
     </Section>

@@ -32,11 +32,21 @@ Všechno je v `src/content/`:
 | `projects.ts` | projekty v sekci Práce |
 | `faq.ts` | otázky a odpovědi |
 
-Hodnota v hranatých závorkách (`"[TELEFON]"`) je placeholder: na webu se ukáže tak, jak je, bez odkazu.
-V textech se `[KLÍČ]` automaticky nahradí hodnotou z `config.ts`. Nezlomitelné mezery doplňuje `cs()`
+Hodnota v hranatých závorkách (`"[TELEFON]"`) je placeholder. Při `npm run dev` se ukáže tak, jak je
+(bez odkazu), ať je vidět, co chybí. V produkčním buildu se skryje: telefon, e-mail, LinkedIn, IČO a sídlo
+zmizí, formulář bez `FORMSPREE_ID` se nezobrazí a chybějící portrét nahradí panel s iniciálami.
+
+V textech se `[KLÍČ]` automaticky nahradí hodnotou z `config.ts`. Část textu, která bez údaje nedává smysl,
+dejte do složených závorek: `{Obsahuje: [ROZSAH_ZAKLAD]}` se v produkci bez údaje vynechá,
+`{Od roku [ROK_OD] dělám|Dělám} B2B marketing` použije text za svislítkem. `[KLÍČ]` mimo závorky
+by se v produkci ukázal i s hranatými závorkami. Nezlomitelné mezery doplňuje `cs()`
 v `src/lib/typography.ts`, do textů je psát nemusíte.
 
-Bez `CAL_LINK` vedou tlačítka „Domluvit konzultaci“ na `#kontakt`.
+**Telefon** je v `config.ts` zakódovaný, protože repozitář je veřejný. Nové číslo zakódujete příkazem
+`npm run telefon -- "+420 777 123 456"` a výstup vložíte do `TELEFON`. Na webu se číslo ukáže až po kliknutí
+na „zobrazit“ (`src/components/PhoneReveal.tsx`). V HTML ani ve strukturovaných datech v čitelné podobě není.
+
+Bez `CAL_LINK` vedou tlačítka „Domluvit konzultaci“ na `#kontakt` a tlačítko přímo v sekci Kontakt se skryje.
 
 ## Projekty a souhlas
 
@@ -57,7 +67,7 @@ Když není co ukázat, sekce Práce i položka v menu zmizí a čísla sekcí s
 3. Fotky projektů zadejte v `projects.ts` jménem souboru bez přípony: `images: [{ src: 'engas-dilna', alt: '…' }]`.
 
 Obrázek pro sdílení `public/og.png` a ikony se generují jednou příkazem `npm run og` (potřebuje internet,
-stáhne písma). Po změně H1 nebo cenového řádku ho spusťte znovu a výsledek commitněte.
+stáhne písmo Archivo). Po změně H1 nebo cenového řádku ho spusťte znovu a výsledek commitněte.
 
 ## Nasazení
 

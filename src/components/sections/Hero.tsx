@@ -1,13 +1,25 @@
-import { config } from "@/content/config";
 import { hero } from "@/content/texts";
-import { consultationHref } from "@/lib/config";
+import { consultationHref, isShown } from "@/lib/config";
 import { cs, t } from "@/lib/typography";
 import { ButtonLink } from "../Button";
-import { ContactLink } from "../ContactLink";
 import { Container } from "../Container";
+import { Phone } from "../Phone";
 import { Photo } from "../Photo";
 
 const chipPositions = ["float-1 -left-4 top-10 sm:-left-10", "float-2 -right-3 top-1/2 sm:-right-8", "float-3 left-6 -bottom-5"];
+
+/** Náhrada portrétu, dokud chybí public/photos/me.jpg: tmavý panel s iniciálami. */
+function Monogram() {
+  return (
+    <div role="img" aria-label={hero.photoAlt} className="relative flex aspect-[4/5] w-full items-end overflow-hidden rounded-[1.5rem] bg-text p-7 pb-12">
+      <div aria-hidden="true" className="aurora aurora-1 -top-16 -left-16 size-64 bg-accent opacity-50" />
+      <div aria-hidden="true" className="aurora aurora-2 -right-20 -bottom-20 size-72 bg-blue opacity-60" />
+      <span aria-hidden="true" className="relative text-[clamp(5rem,9vw,7rem)] leading-none font-[800] tracking-[-0.06em] text-white [font-stretch:125%]">
+        ŠS
+      </span>
+    </div>
+  );
+}
 
 export function Hero() {
   return (
@@ -49,14 +61,27 @@ export function Hero() {
             <p className="price text-lg">{t(hero.price)}</p>
           </div>
           <p data-reveal style={{ "--d": 4 } as React.CSSProperties} className="mt-4 text-[0.9375rem] text-muted">
-            {t(hero.ctaNote)} {hero.callPrefix} <ContactLink type="phone" value={config.TELEFON} className="font-semibold text-text" />
+            {t(hero.ctaNote)}
+            {isShown("TELEFON") ? (
+              <>
+                {" "}
+                {hero.callPrefix} <Phone className="font-semibold text-text" />
+              </>
+            ) : null}
           </p>
         </div>
 
         <div data-reveal style={{ "--d": 2 } as React.CSSProperties} className="relative mx-auto w-full max-w-[24rem] lg:max-w-[26rem]">
           <div aria-hidden="true" className="spin-slow absolute -inset-8 rounded-full bg-[conic-gradient(from_0deg,var(--accent),var(--blue),var(--violet),var(--accent))] opacity-25 blur-3xl" />
           <div className="relative overflow-hidden rounded-[2rem] border border-white bg-surface p-2 shadow-[0_30px_80px_-30px_rgb(14_17_22/0.45)]">
-            <Photo name="me" alt={hero.photoAlt} sizes="(min-width: 1024px) 26rem, 24rem" eager className="aspect-[4/5] w-full rounded-[1.5rem]" />
+            <Photo
+              name="me"
+              alt={hero.photoAlt}
+              sizes="(min-width: 1024px) 26rem, 24rem"
+              eager
+              className="aspect-[4/5] w-full rounded-[1.5rem]"
+              fallback={<Monogram />}
+            />
           </div>
           {hero.chips.map((chip, index) => (
             <p

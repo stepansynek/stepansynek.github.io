@@ -60,15 +60,15 @@ export function Services() {
             <div className="mb-8 aspect-[3/2] rounded-2xl bg-bg p-6">{graphics[index]}</div>
             <h3 className="h3">{t(service.title)}</h3>
             <p className="mt-3 flex-1 text-muted">{t(service.text)}</p>
-            {service.includes ? <p className="mt-3 text-[0.9375rem]">{t(service.includes)}</p> : null}
-            <p className="price mt-6 inline-flex self-start rounded-full bg-bg px-4 py-2">{t(service.price)}</p>
+            {service.includes && t(service.includes) ? <p className="mt-3 text-[0.9375rem]">{t(service.includes)}</p> : null}
+            <p className="price mt-6 inline-flex self-start rounded-[1.25rem] bg-bg px-4 py-2">{t(service.price)}</p>
           </li>
         ))}
       </ul>
       <div data-reveal className="mt-8 grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
         <p className="prose-width">{t(texts.newsletter)}</p>
         {config.ZAKLADAJICI_NABIDKA ? <p className="prose-width">{t(texts.foundingOffer)}</p> : null}
-        <p className="text-[0.9375rem] text-muted">{t(texts.vat)}</p>
+        {t(texts.vat) ? <p className="text-[0.9375rem] text-muted">{t(texts.vat)}</p> : null}
       </div>
     </Section>
   );

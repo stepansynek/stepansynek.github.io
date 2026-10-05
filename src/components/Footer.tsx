@@ -1,9 +1,11 @@
 import { config, site } from "@/content/config";
 import { footer } from "@/content/texts";
+import { isShown } from "@/lib/config";
 import { cs } from "@/lib/typography";
 import { navItems } from "./Header";
 import { ContactLink } from "./ContactLink";
 import { Container } from "./Container";
+import { Phone } from "./Phone";
 
 /** Datum buildu, propisuje se do patičky jako revize. */
 const revision = new Date().toISOString().slice(0, 10);
@@ -29,15 +31,21 @@ export function Footer() {
             </ul>
           </nav>
           <ul className="grid content-start gap-2">
-            <li>
-              <ContactLink type="phone" value={config.TELEFON} className="font-semibold" />
-            </li>
-            <li>
-              <ContactLink type="email" value={config.EMAIL} className="font-semibold" />
-            </li>
-            <li>
-              <ContactLink type="url" value={config.LINKEDIN} label={footer.linkedin} />
-            </li>
+            {isShown("TELEFON") ? (
+              <li>
+                <Phone className="font-semibold" />
+              </li>
+            ) : null}
+            {isShown("EMAIL") ? (
+              <li>
+                <ContactLink type="email" value={config.EMAIL} className="font-semibold" />
+              </li>
+            ) : null}
+            {isShown("LINKEDIN") ? (
+              <li>
+                <ContactLink type="url" value={config.LINKEDIN} label={footer.linkedin} />
+              </li>
+            ) : null}
           </ul>
         </div>
 
@@ -56,8 +64,8 @@ export function Footer() {
 
         <p className="mt-6 flex flex-wrap gap-x-4 gap-y-1 border-t border-line pt-6 text-[0.875rem] text-muted">
           <span>{site.name}</span>
-          <span>IČO {config.ICO}</span>
-          <span>{cs(config.SIDLO)}</span>
+          {isShown("ICO") ? <span>IČO {config.ICO}</span> : null}
+          {isShown("SIDLO") ? <span>{cs(config.SIDLO)}</span> : null}
           <span>{cs(footer.register)}</span>
           <a href={site.privacyPath} className="link">
             {cs(footer.privacy)}

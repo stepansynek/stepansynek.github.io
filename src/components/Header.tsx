@@ -1,9 +1,10 @@
 import { config, site } from "@/content/config";
 import { header, nav, navHints } from "@/content/texts";
-import { consultationHref, isFilled, telHref } from "@/lib/config";
+import { consultationHref, isFilled, isShown, mailHref } from "@/lib/config";
 import { visibleProjects } from "@/lib/projects";
 import { cs } from "@/lib/typography";
 import { HeaderShell } from "./HeaderShell";
+import { Phone } from "./Phone";
 
 /** Položky menu; Práce zmizí, když není co ukázat. */
 export const navItems = nav
@@ -16,8 +17,8 @@ export function Header() {
       name={site.name}
       items={navItems}
       cta={{ href: consultationHref, label: header.cta }}
-      phone={{ href: isFilled("TELEFON") ? telHref : "/#kontakt", label: cs(config.TELEFON) }}
-      email={{ href: isFilled("EMAIL") ? `mailto:${config.EMAIL}` : "/#kontakt", label: config.EMAIL }}
+      phone={isShown("TELEFON") ? <Phone className="text-2xl font-[680] tracking-tight [font-stretch:110%]" /> : null}
+      email={isShown("EMAIL") ? { href: isFilled("EMAIL") ? mailHref : "/#kontakt", label: config.EMAIL } : null}
       texts={{ menu: header.menu, close: header.close, contact: header.menuContact }}
     />
   );

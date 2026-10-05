@@ -1,15 +1,15 @@
 export type FaqItem = { question: string; answer: string };
 
-/** Hranaté závorky jsou klíče z config.ts. */
+/** Hranaté závorky jsou klíče z config.ts, {…} je volitelná část (viz fill v src/lib/config.ts). */
 export const faq: FaqItem[] = [
   {
     question: "Kolik stojí web?",
     answer:
-      "Od 15 000 Kč. Základ obsahuje [ROZSAH_ZAKLAD]. Pevnou cenu dostanete předem, do dvou pracovních dnů po konzultaci. [DPH_VETA]",
+      "Od 15 000 Kč.{ Základ obsahuje [ROZSAH_ZAKLAD].} Pevnou cenu dostanete předem, do dvou pracovních dnů po konzultaci.{ [DPH_VETA]}",
   },
   {
     question: "Jak dlouho to trvá?",
-    answer: "Obvykle [DELKA_PROJEKTU] týdnů od úvodního rozhovoru.",
+    answer: "{Obvykle [DELKA_PROJEKTU] týdnů od úvodního rozhovoru.|Podle rozsahu. Termín dostanete v nabídce spolu s cenou.}",
   },
   {
     question: "Kolik mi to vezme času?",
@@ -26,12 +26,12 @@ export const faq: FaqItem[] = [
   },
   {
     question: "Musím platit měsíční péči?",
-    answer: "Ne, péče je volitelná. Bez ní vám web předám a úpravy můžete objednávat jednotlivě.",
+    answer: "Ne, péče je volitelná{ (od [CENA_PECE] Kč měsíčně, podle rozsahu)}. Bez ní vám web předám a úpravy můžete objednávat jednotlivě.",
   },
   {
     question: "Můžu si web upravovat sám?",
     answer:
-      "V rámci péče úpravy dělám já, obvykle do [ODEZVA_PECE] pracovních dnů. Na přání za příplatek zprovozním jednoduchý editor.",
+      "V rámci péče úpravy dělám já{, obvykle do [ODEZVA_PECE] pracovních dnů}. Na přání za příplatek zprovozním jednoduchý editor.",
   },
   {
     question: "Co když budete mít zkouškové?",

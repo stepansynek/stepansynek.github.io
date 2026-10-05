@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { cn } from "@/lib/cn";
+import { showPlaceholders } from "@/lib/config";
 
 type Source = { src: string; width: number; height: number };
 
@@ -22,7 +23,8 @@ export function hasPhoto(name: string): boolean {
 
 /**
  * Fotka z public/photos/<name>.jpg ve WebP se srcset.
- * Když fotka chybí, vykreslí viditelný placeholder se stejným poměrem stran.
+ * Když fotka chybí, vykreslí ve vývoji viditelný placeholder se stejným poměrem stran,
+ * v produkci náhradu z `fallback` (nebo nic).
  */
 export function Photo({
   name,
@@ -30,16 +32,19 @@ export function Photo({
   sizes,
   eager = false,
   className,
+  fallback = null,
 }: {
   name: string;
   alt: string;
   sizes: string;
   eager?: boolean;
   className?: string;
+  fallback?: React.ReactNode;
 }) {
   const sources = manifest[name];
 
   if (!sources?.length) {
+    if (!showPlaceholders) return fallback;
     return (
       <div className={cn("flex items-center justify-center bg-surface", className)}>
         <span className="label">[{name}.jpg]</span>
