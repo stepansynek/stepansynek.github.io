@@ -47,6 +47,9 @@ v `src/lib/typography.ts`, do textů je psát nemusíte.
 na „zobrazit“ (`src/components/PhoneReveal.tsx`). V HTML ani ve strukturovaných datech v čitelné podobě není.
 
 Bez `CAL_LINK` vedou tlačítka „Domluvit konzultaci“ na `#kontakt` a tlačítko přímo v sekci Kontakt se skryje.
+Hlavní akcí v sekci Kontakt je pak „Napsat e-mail“ s předvyplněným předmětem a osnovou zprávy (`contact.emailBody`).
+Bez formuláře (`FORMSPREE_ID`) stojí vedle kontaktů panel „Co bude následovat“ (`contact.next`).
+Formspree a Cal.com se v zásadách ochrany osobních údajů uvádějí, jen když jsou v `config.ts` vyplněné.
 
 ## Projekty a souhlas
 

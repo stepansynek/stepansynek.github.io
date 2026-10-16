@@ -7,8 +7,8 @@ import { ContactLink } from "./ContactLink";
 import { Container } from "./Container";
 import { Phone } from "./Phone";
 
-/** Datum buildu, propisuje se do patičky jako revize. */
-const revision = new Date().toISOString().slice(0, 10);
+/** Rok buildu pro copyright v patičce. */
+const year = new Date().getFullYear();
 
 export function Footer() {
   return (
@@ -17,7 +17,7 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 md:grid-cols-[1.4fr_1fr_1fr] md:gap-10">
           <div className="col-span-2 md:col-span-1">
             <p className="text-xl font-[700] tracking-tight [font-stretch:110%]">{site.name}</p>
-            <p className="mt-2 max-w-[36ch] text-muted">{cs("Weby a marketing pro technické firmy z Brna, Vyškova a Rousínova.")}</p>
+            <p className="mt-2 max-w-[36ch] text-muted">{cs(footer.tagline)}</p>
           </div>
           <nav aria-label="Patička" className="col-span-2 md:col-span-1">
             <ul className="flex flex-wrap gap-x-5 gap-y-2 md:grid">
@@ -63,16 +63,15 @@ export function Footer() {
         </p>
 
         <p className="mt-6 flex flex-wrap gap-x-4 gap-y-1 border-t border-line pt-6 text-[0.875rem] text-muted">
-          <span>{site.name}</span>
+          <span>
+            © {year} {site.name}
+          </span>
           {isShown("ICO") ? <span>IČO {config.ICO}</span> : null}
           {isShown("SIDLO") ? <span>{cs(config.SIDLO)}</span> : null}
           <span>{cs(footer.register)}</span>
           <a href={site.privacyPath} className="link">
             {cs(footer.privacy)}
           </a>
-          <span className="tabular-nums">
-            {footer.revision} {revision}
-          </span>
         </p>
       </Container>
     </footer>

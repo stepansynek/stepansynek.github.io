@@ -58,7 +58,10 @@ export function Hero() {
             {isShown("TELEFON") ? (
               <>
                 {" "}
-                {hero.callPrefix} <Phone className="font-semibold text-text" />
+                {/* Výzva k hovoru se nezalomí uprostřed, případně celá skočí na další řádek. */}
+                <span className="whitespace-nowrap">
+                  {hero.callPrefix} <Phone className="font-semibold text-text" />
+                </span>
               </>
             ) : null}
           </p>

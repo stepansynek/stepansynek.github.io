@@ -13,7 +13,10 @@ export default function NotFound() {
   return (
     <main id="obsah" className="relative overflow-hidden py-24 md:py-36">
       <Container>
-        <p className="grad-text text-[clamp(6rem,20vw,12rem)] leading-none font-[800] tracking-[-0.06em] [font-stretch:125%]">404</p>
+        <p className="text-[clamp(6rem,20vw,12rem)] leading-none font-[800] tracking-[-0.06em] [font-stretch:125%]">
+          {/* Zvýraznění na řádkovém prvku, aby žlutý pruh nebyl přes celou šířku. */}
+          <span className="grad-text">404</span>
+        </p>
         <h1 className="h2 mt-4">{cs(notFound.title)}</h1>
         <p className="prose-width mt-5 text-lg text-muted">{t(notFound.text)}</p>
         <ButtonLink href="/" variant="dark" arrow className="mt-10">

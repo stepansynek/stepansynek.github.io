@@ -35,8 +35,9 @@ async function archivo(stretch, weight) {
 const [display, text, textBold] = await Promise.all([archivo(118, 760), archivo(100, 400), archivo(108, 600)]);
 
 // Barvy z src/app/globals.css.
-const c = { bg: "#f5f6f8", text: "#0e1116", muted: "#525866", line: "rgba(14,17,22,0.09)", accent: "#ffc700", blue: "#2b59ff", violet: "#7b5cff" };
-const grad = "linear-gradient(100deg, #2b59ff 0%, #6a3dff 55%, #b03ad8 100%)";
+const c = { bg: "#f5f6f8", text: "#0e1116", muted: "#525866", line: "rgba(14,17,22,0.09)", accent: "#ffc700" };
+// Zvýraznění klíčového slova žlutým pruhem jako .grad-text na webu.
+const highlight = `linear-gradient(transparent 58%, ${c.accent} 58%, ${c.accent} 90%, transparent 90%)`;
 
 const og = h(
   "div",
@@ -51,12 +52,6 @@ const og = h(
       fontFamily: "Text",
       color: c.text,
       backgroundColor: c.bg,
-      // Aurora jako v hero: žlutá vlevo nahoře, modrá vpravo, fialová dole.
-      backgroundImage: [
-        "radial-gradient(circle at 0% 0%, rgba(255,199,0,0.55) 0%, rgba(255,199,0,0) 45%)",
-        "radial-gradient(circle at 100% 20%, rgba(43,89,255,0.28) 0%, rgba(43,89,255,0) 45%)",
-        "radial-gradient(circle at 60% 120%, rgba(123,92,255,0.25) 0%, rgba(123,92,255,0) 45%)",
-      ].join(", "),
     },
   },
   h(
@@ -72,12 +67,12 @@ const og = h(
           padding: "8px 18px 8px 12px",
           borderRadius: 999,
           border: `1px solid ${c.line}`,
-          backgroundColor: "rgba(255,255,255,0.7)",
+          backgroundColor: "#ffffff",
           fontSize: 22,
         },
       },
-      h("div", { style: { width: 12, height: 12, borderRadius: 999, backgroundImage: grad } }),
-      "Weby pro technické firmy z Brna, Vyškova a Rousínova",
+      h("div", { style: { width: 11, height: 11, backgroundColor: c.accent, transform: "rotate(45deg)" } }),
+      "Weby pro technické firmy z Brna, Vyškova a okolí",
     ),
     h(
       "div",
@@ -94,7 +89,7 @@ const og = h(
       },
       h("div", null, "Weby a marketing pro firmy,"),
       h("div", null, "které vyrábějí, montují"),
-      h("div", { style: { backgroundImage: grad, backgroundClip: "text", color: "transparent", paddingBottom: 8 } }, "a servisují."),
+      h("div", { style: { display: "flex" } }, h("div", { style: { backgroundImage: highlight, paddingBottom: 6 } }, "a servisují.")),
     ),
   ),
   h(

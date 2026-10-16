@@ -12,31 +12,31 @@ export const faq: FaqItem[] = [
     answer: "{Obvykle [DELKA_PROJEKTU] týdnů od úvodního rozhovoru.|Podle rozsahu. Termín dostanete v nabídce spolu s cenou.}",
   },
   {
-    question: "Kolik mi to vezme času?",
+    question: "Kolik času to zabere nám?",
     answer:
-      "Hlavně jeden hodinový rozhovor na začátku, klidně u vás ve firmě, a kontrola textů. Zbytek je na mně.",
+      "Hlavně hodinový rozhovor na začátku, ideálně přímo u vás ve firmě, a kontrola textů. Zbytek zajistím já.",
   },
   {
-    question: "Kdo napíše texty a udělá fotky?",
-    answer: "Texty píšu já podle rozhovoru s vámi. Fotky a video za příplatek pořídí přímo u vás fotografka, se kterou spolupracuji.",
+    question: "Kdo napíše texty a pořídí fotky?",
+    answer: "Texty píšu já podle rozhovoru s vámi. Fotky a video za příplatek pořídíme přímo u vás se spolupracující fotografkou.",
   },
   {
-    question: "Komu web patří?",
-    answer: "Vám. Doména se registruje na vaši firmu a obsah i kód vám na požádání předám. Doménu platíte přímo registrátorovi, hosting je v ceně péče.",
+    question: "Komu bude web patřit?",
+    answer: "Vám. Doména se registruje na vaši firmu a obsah i kód vám na požádání předám. Doménu platíte přímo registrátorovi, hosting je součástí péče.",
   },
   {
-    question: "Musím platit měsíční péči?",
+    question: "Je měsíční péče povinná?",
     answer: "Ne, péče je volitelná{ (od [CENA_PECE] Kč měsíčně: hosting, zálohy a do hodiny úprav měsíčně)}. Bez ní vám web předám a úpravy můžete objednávat jednotlivě.",
   },
   {
-    question: "Můžu si web upravovat sám?",
+    question: "Můžeme si web upravovat sami?",
     answer:
-      "V rámci péče úpravy dělám já{, obvykle do [ODEZVA_PECE] pracovních dnů}. Na přání za příplatek zprovozním jednoduchý editor.",
+      "V rámci péče úpravy dělám já{, obvykle do [ODEZVA_PECE] pracovních dnů}. Na přání za příplatek zprovozním jednoduchý editor pro vlastní úpravy.",
   },
   {
-    question: "Co když budete mít zkouškové?",
+    question: "Stihnete to v termínu?",
     answer:
-      "Termíny plánuju podle semestru a beru jen dva projekty za semestr. Domluvené termíny platí i ve zkouškovém.",
+      "Beru nejvýš dva nové projekty za půl roku, takže na každý mám vyhrazený čas. Termín dostanete v nabídce, a jakmile ho odsouhlasíme, platí.",
   },
   {
     question: "Uvedete nás jako referenci?",
@@ -44,6 +44,6 @@ export const faq: FaqItem[] = [
   },
   {
     question: "V jakých jazycích web připravíte?",
-    answer: "Česky, anglickou verzi na přání.",
+    answer: "V češtině, anglickou verzi připravím na přání.",
   },
 ];

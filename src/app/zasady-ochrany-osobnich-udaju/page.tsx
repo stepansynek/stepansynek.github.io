@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { site } from "@/content/config";
 import { privacy } from "@/content/texts";
+import { isShown } from "@/lib/config";
 import { t } from "@/lib/typography";
 
 const title = `${privacy.title} | ${site.name}`;
@@ -33,9 +34,11 @@ export default function PrivacyPolicy() {
               <h2 className="text-xl font-semibold tracking-tight">{t(section.heading)}</h2>
               {section.blocks.map((block, index) => {
                 if (typeof block !== "string") {
+                  // Služby, které web zatím nepoužívá (nevyplněný údaj v config.ts), se v produkci neuvádějí.
+                  const items = block.flatMap((item) => (typeof item === "string" ? [item] : isShown(item.when) ? [item.text] : []));
                   return (
                     <ul key={index} className="mt-4 list-disc space-y-1 pl-6 marker:text-muted">
-                      {block.map((item) => (
+                      {items.map((item) => (
                         <li key={item}>{t(item)}</li>
                       ))}
                     </ul>

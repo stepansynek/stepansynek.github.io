@@ -1,7 +1,7 @@
 import { config } from "@/content/config";
 import { services } from "@/content/services";
 import { services as texts } from "@/content/texts";
-import { t } from "@/lib/typography";
+import { cs, t } from "@/lib/typography";
 import { Section } from "../Section";
 
 /** Abstraktní grafiky ke kartám: okno prohlížeče, cyklus péče. */
@@ -41,11 +41,28 @@ export function Services() {
           </li>
         ))}
       </ul>
-      <div data-reveal className="mt-6 grid gap-3 md:mt-8">
-        <p className="prose-width">{t(texts.photo)}</p>
-        <p className="prose-width">{t(texts.newsletter)}</p>
-        {config.ZAKLADAJICI_NABIDKA ? <p className="prose-width">{t(texts.foundingOffer)}</p> : null}
-        {t(texts.vat) ? <p className="text-[0.9375rem] text-muted">{t(texts.vat)}</p> : null}
+
+      <div className="mt-10 md:mt-14">
+        <h3 data-reveal className="text-[0.9375rem] font-semibold text-muted">
+          {cs(texts.extrasTitle)}
+        </h3>
+        <ul className="mt-4 grid gap-4 md:grid-cols-2">
+          {texts.extras.map((extra, index) => (
+            <li key={extra.title} data-reveal style={{ "--d": index } as React.CSSProperties} className="card flex gap-4 p-5 md:gap-5 md:p-7">
+              <span aria-hidden="true" className="mt-2 size-2.5 shrink-0 rotate-45 bg-accent" />
+              <div>
+                <h4 className="text-lg leading-snug font-[650] tracking-tight [font-stretch:108%]">{cs(extra.title)}</h4>
+                <p className="mt-1.5 text-muted">{t(extra.text)}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        {config.ZAKLADAJICI_NABIDKA ? (
+          <p data-reveal className="prose-width mt-6">
+            {t(texts.foundingOffer)}
+          </p>
+        ) : null}
+        {t(texts.vat) ? <p className="mt-4 text-[0.9375rem] text-muted">{t(texts.vat)}</p> : null}
       </div>
     </Section>
   );

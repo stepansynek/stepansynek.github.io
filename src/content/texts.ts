@@ -1,3 +1,5 @@
+import type { ConfigKey } from "./config";
+
 /**
  * Texty webu. Hranaté závorky jsou klíče z config.ts, doplní se automaticky.
  * České uvozovky „…“ a pomlčky – piš rovnou sem, nezlomitelné mezery doplní cs().
@@ -7,7 +9,7 @@
 export const seo = {
   title: "Štěpán Synek | Weby a marketing pro technické firmy, Brno",
   description:
-    "Weby a marketing pro technické firmy z Brna a okolí. Texty, fotky a video z jedné ruky, pevná cena předem. Weby od 15 000 Kč.",
+    "Weby a marketing pro výrobní, montážní a servisní firmy z Brna a okolí. Web, texty, fotky a video z jedné ruky, pevná cena předem. Weby od 15 000 Kč.",
 };
 
 export const nav = [
@@ -23,28 +25,28 @@ export const header = {
   cta: "Domluvit konzultaci",
   menu: "Menu",
   close: "Zavřít",
-  menuContact: "Rovnou se mnou",
+  menuContact: "Přímý kontakt",
 };
 
 /** Krátké popisky k položkám v rolovacím menu. */
 export const navHints: Record<string, string> = {
-  sluzby: "Web na klíč, péče, foto a video",
-  prace: "Na čem právě pracuji",
+  sluzby: "Web na klíč, péče o web, foto a video",
+  prace: "Aktuální projekty",
   postup: "Od konzultace po spuštění",
-  "o-mne": "Kdo jsem a proč technika",
+  "o-mne": "Kdo jsem a proč technické firmy",
   faq: "Cena, termíny, kdo co dělá",
   kontakt: "Telefon, e-mail, poptávka",
 };
 
 export const hero = {
-  eyebrow: "Weby pro technické firmy z Brna, Vyškova a Rousínova",
+  eyebrow: "Weby pro technické firmy z Brna, Vyškova a okolí",
   titleStart: "Weby a marketing pro firmy, které",
   titleWords: ["vyrábějí.", "montují.", "servisují."],
   titleFull: "Weby a marketing pro firmy, které vyrábějí, montují a servisují.",
-  lead: "Pomáhám technickým firmám ukázat, co opravdu umí. Texty napíšu za vás po jednom rozhovoru, fotky a video zajistíme přímo u vás. Mluvíte přímo se mnou.",
+  lead: "Pomáhám technickým firmám ukázat, co opravdu umí, a získávat z webu poptávky. Texty napíšu po jednom rozhovoru s vámi, fotky a video pořídíme přímo ve vašem provozu. Jednáte přímo se mnou.",
   price: "Weby od 15 000 Kč, pevná cena předem",
   cta: "Domluvit konzultaci zdarma",
-  ctaNote: "20 minut. Ukážu vám tři věci, které bych na vašem webu změnil.",
+  ctaNote: "20 minut, nezávazně. Ukážu vám tři konkrétní věci, které bych na vašem webu zlepšil.",
   callPrefix: "Nebo zavolejte",
   photoAlt: "Štěpán Synek",
   photoCaption: "Brno a okolí",
@@ -55,11 +57,11 @@ export const facts = {
   title: "Na co se u mě můžete spolehnout",
   items: [
     { value: 15000, display: "15 000", unit: "Kč", text: "Za tolik začíná web na klíč. Pevnou cenu znáte předem, ne až na faktuře.", wide: true },
-    { value: 20, display: "20", unit: "minut", text: "Úvodní konzultace zdarma. Telefonem, online, nebo u vás ve firmě." },
-    { value: 2, display: "2", unit: "dny", text: "Do dvou pracovních dnů po konzultaci pošlu nabídku s cenou a termínem." },
-    { value: 24, display: "24", unit: "hodin", text: "Na zprávu odpovím do 24 hodin v pracovní dny. Telefon beru, a když ne, zavolám zpět týž den.", wide: true },
-    { value: 1, display: "1", unit: "rozhovor", text: "Hodinový rozhovor stačí. Texty pak napíšu já, vy je jen zkontrolujete." },
-    { value: 2, display: "2", unit: "projekty", text: "Za semestr beru nejvýš dva nové projekty, abych se každému věnoval naplno." },
+    { value: 20, display: "20", unit: "minut", text: "Úvodní konzultace zdarma. Telefonicky, online, nebo osobně u vás ve firmě." },
+    { value: 2, display: "2", unit: "dny", text: "Do dvou pracovních dnů po konzultaci máte na stole nabídku s pevnou cenou a termínem." },
+    { value: 24, display: "24", unit: "hodin", text: "Na zprávu odpovím do 24 hodin v pracovní dny. Když hovor nestihnu, zavolám zpět ještě týž den.", wide: true },
+    { value: 1, display: "1", unit: "rozhovor", text: "Stačí jeden hodinový rozhovor. Texty pak napíšu já, vy je jen schválíte." },
+    { value: 2, display: "2", unit: "projekty", text: "Nejvýš dva nové projekty za půl roku. Každý vedu osobně od začátku do konce." },
   ],
   ownership: {
     title: "Web patří vám",
@@ -69,9 +71,18 @@ export const facts = {
 
 export const services = {
   title: "Co pro vás udělám",
-  intro: "Všechno z jedné ruky: web, texty, fotky i video. Nemusíte koordinovat grafika, copywritera a fotografa.",
-  photo: "Fotky a video z vašeho provozu, strojů a zakázek zajistím za příplatek s fotografkou, se kterou spolupracuji. Cenu řeknu předem.",
-  newsletter: "Na přání i newsletter pro vaše stávající zákazníky: nové zakázky, technologie a volné kapacity.",
+  intro: "Vše z jedné ruky: web, texty, fotky i video. Nemusíte koordinovat grafika, copywritera a fotografa.",
+  extrasTitle: "Na přání také",
+  extras: [
+    {
+      title: "Fotky a video z provozu",
+      text: "Vaše dílna, stroje a hotové zakázky. Fotíme a natáčíme přímo u vás se spolupracující fotografkou. Za příplatek, cenu znáte předem.",
+    },
+    {
+      title: "Newsletter pro zákazníky",
+      text: "Pravidelný e-mail stávajícím zákazníkům: nové zakázky, technologie a volné kapacity. Připomenete se dřív, než zavolají konkurenci.",
+    },
+  ],
   foundingOffer: "Prvním třem firmám dávám zakládající cenu výměnou za souhlas s uvedením jako reference.",
   vat: "{[DPH_VETA]}",
 };
@@ -86,19 +97,19 @@ export const process = {
   steps: [
     {
       title: "Konzultace",
-      text: "20 minut zdarma, telefonem, online nebo u vás. Projdeme váš web a cíle.",
+      text: "20 minut zdarma: telefonicky, online, nebo u vás. Projdeme váš současný web a cíle.",
     },
     {
       title: "Nabídka",
       text: "Do dvou pracovních dnů pošlu pevnou cenu a termín.{ Platby: [PLATBY].}",
     },
     {
-      title: "Web na klíč",
-      text: "Rozhovor, texty, fotky, návrh a spuštění.{ Obvykle [DELKA_PROJEKTU] týdnů.}",
+      title: "Realizace",
+      text: "Rozhovor, texty, fotky, návrh, vaše připomínky a spuštění.{ Obvykle [DELKA_PROJEKTU] týdnů.}",
     },
     {
-      title: "Péče",
-      text: "Pokud chcete, starám se o web i dál.",
+      title: "Péče o web",
+      text: "Volitelně se o web starám i po spuštění: úpravy, hosting a zálohy.",
     },
   ],
 };
@@ -107,20 +118,21 @@ export const about = {
   title: "O mně",
   heading: "Rozumím řeči techniků.",
   intro:
-    "{Od roku [ROK_OD] dělám|Dělám} marketing pro firmu z průmyslové automatizace a studuji automatizaci na VUT. Když mluvíte o rozvaděčích nebo servisních smlouvách, nemusíte mi nic překládat. A mluvíte přímo se mnou.",
+    "{Od roku [ROK_OD] dělám|Dělám} marketing pro firmu z průmyslové automatizace a studuji automatizaci na VUT. Když mluvíte o rozvaděčích nebo servisních smlouvách, nemusíte mi nic překládat. Zakázku vedu osobně od prvního rozhovoru po spuštění.",
   facts: [
-    "Pro firmu z průmyslové automatizace připravuji newslettery a spravuji weby.",
+    "Pro firmu z průmyslové automatizace spravuji weby a připravuji newslettery.",
     "Studuji automatizaci a měřicí techniku na VUT FEKT a ekonomii na MUNI ECON.",
-    "Mluvím česky a anglicky.",
-    "Rád se zastavím přímo u vás ve firmě.",
+    "Komunikuji česky i anglicky.",
+    "Rád za vámi přijedu do firmy. Provoz je nejlepší vidět na vlastní oči.",
   ],
-  capacity: "Beru nejvýš dva nové projekty za semestr, abych se každému věnoval naplno.",
+  capacity: "Beru nejvýš dva nové projekty za půl roku. Každému se věnuji naplno.",
+  cta: "Domluvit konzultaci",
   linkedin: "Profil na LinkedInu",
 };
 
 export const faq = {
   title: "Časté otázky",
-  intro: "Nenašli jste odpověď? Zavolejte, nebo napište. Odpovím do 24 hodin v pracovní dny.",
+  intro: "Nenašli jste odpověď? Zavolejte nebo napište, odpovím do 24 hodin v pracovní dny.",
 };
 
 export const contact = {
@@ -129,9 +141,22 @@ export const contact = {
   phoneLabel: "Telefon",
   emailLabel: "E-mail",
   /** Ukáže se jen s vyplněným telefonem. */
-  phoneNote: "{Telefon beru [CASY_TELEFON], jinak|Když telefon neberu,} zavolám zpět týž den.",
-  note: "Brno · Vyškov · Rousínov, rád se zastavím u vás ve firmě.",
+  phoneNote: "{Telefon beru [CASY_TELEFON], jinak|Když hovor nestihnu,} zavolám zpět ještě týž den.",
+  note: "Působím v Brně, Vyškově, Rousínově a okolí. Rád za vámi přijedu do firmy.",
   cta: "Domluvit konzultaci zdarma",
+  /** Tlačítko na e-mail s předvyplněným předmětem a osnovou zprávy. */
+  emailCta: "Napsat e-mail",
+  emailBody: "Dobrý den,\n\nfirma:\nweb:\ns čím potřebujeme pomoct:\n\n",
+  /** Panel vedle kontaktů, když není formulář. */
+  next: {
+    title: "Co bude následovat",
+    steps: [
+      "Napíšete nebo zavoláte. Do 24 hodin v pracovní dny se ozvu a domluvíme termín.",
+      "Za 20 minut projdeme váš web a cíle. Ukážu vám tři konkrétní věci, které bych zlepšil.",
+      "Do dvou pracovních dnů dostanete nabídku s pevnou cenou a termínem.",
+    ],
+    note: "Konzultace je zdarma a nezávazná.",
+  },
 };
 
 export const form = {
@@ -141,20 +166,20 @@ export const form = {
     company: { label: "Firma", error: "Vyplňte prosím název firmy." },
     contact: {
       label: "E-mail nebo telefon",
-      error: "Vyplňte prosím e-mail nebo telefon, ať se vám můžu ozvat.",
+      error: "Vyplňte prosím e-mail nebo telefon, abych se vám mohl ozvat.",
     },
     web: { label: "Web firmy", error: "" },
-    message: { label: "Zpráva", error: "Napište prosím, s čím vám můžu pomoct." },
+    message: { label: "Zpráva", error: "Napište prosím, s čím vám mohu pomoci." },
     source: { label: "Odkud o mně víte?", error: "" },
   },
   optional: "nepovinné",
-  privacyBefore: "Údaje použiju jen k odpovědi na vaši zprávu. Více v ",
+  privacyBefore: "Údaje použiji jen k odpovědi na vaši zprávu. Více v ",
   privacyLink: "zásadách ochrany osobních údajů",
   privacyAfter: ".",
   submit: "Odeslat zprávu",
   sending: "Odesílám…",
-  success: "Díky, ozvu se do 24 hodin v pracovní dny.",
-  successSignature: "Štěpán",
+  success: "Děkuji, zpráva dorazila. Ozvu se do 24 hodin v pracovní dny.",
+  successSignature: "Štěpán Synek",
   errorSummary: (count: number) =>
     count === 1 ? "Formulář obsahuje 1 chybu." : count < 5 ? `Formulář obsahuje ${count} chyby.` : `Formulář obsahuje ${count} chyb.`,
   error: "Zprávu se nepodařilo odeslat.",
@@ -167,19 +192,22 @@ export const form = {
 };
 
 export const footer = {
-  revision: "Verze",
+  tagline: "Weby a marketing pro technické firmy z Brna, Vyškova a okolí.",
   register: "Fyzická osoba zapsaná v živnostenském rejstříku",
   privacy: "Zásady ochrany osobních údajů",
   linkedin: "LinkedIn",
 };
 
 export const notFound = {
-  title: "Tahle stránka neexistuje",
-  text: "Odkaz je možná starý nebo v něm je překlep. Všechno podstatné najdete na úvodní stránce.",
+  title: "Tato stránka neexistuje",
+  text: "Odkaz je zřejmě zastaralý, nebo obsahuje překlep. Vše podstatné najdete na úvodní stránce.",
   back: "Zpět na úvod",
 };
 
 export const skipLink = "Přeskočit na obsah";
+
+/** Položka seznamu, která se ukáže jen s vyplněným údajem z config.ts (služba se opravdu používá). */
+type PrivacyItem = string | { text: string; when: ConfigKey };
 
 /**
  * Zásady ochrany osobních údajů. NÁVRH – před spuštěním zkontroluje Štěpán (viz README).
@@ -187,7 +215,7 @@ export const skipLink = "Přeskočit na obsah";
  */
 export const privacy = {
   title: "Zásady ochrany osobních údajů",
-  description: "Jak zpracovávám osobní údaje z kontaktního formuláře, rezervací, e-mailu a telefonu.",
+  description: "Jak zpracovávám osobní údaje, které mi pošlete přes web, e-mailem nebo telefonicky.",
   intro:
     "Na této stránce vysvětluji, jak nakládám s osobními údaji, které mi pošlete přes web stepansynek.com, e-mailem nebo po telefonu.",
   sections: [
@@ -202,8 +230,11 @@ export const privacy = {
       blocks: [
         "Jen ty, které mi sami pošlete:",
         [
-          "z kontaktního formuláře: jméno, firmu, e-mail nebo telefon, web firmy, text zprávy a odpověď na otázku, odkud o mně víte,",
-          "z rezervace konzultace v Cal.com: jméno, e-mail, zvolený termín a případnou poznámku,",
+          {
+            text: "z kontaktního formuláře: jméno, firmu, e-mail nebo telefon, web firmy, text zprávy a odpověď na otázku, odkud o mně víte,",
+            when: "FORMSPREE_ID",
+          },
+          { text: "z rezervace konzultace v Cal.com: jméno, e-mail, zvolený termín a případnou poznámku,", when: "CAL_LINK" },
           "z e-mailu a telefonu: kontaktní údaje a obsah komunikace.",
         ],
       ],
@@ -224,13 +255,13 @@ export const privacy = {
     {
       heading: "Příjemci a zpracovatelé",
       blocks: [
-        "Údaje neprodávám ani nepředávám dalším osobám. Pracuji s těmito službami:",
+        "Údaje neprodávám ani nepředávám dalším osobám. Pro provoz webu a komunikaci využívám tyto služby:",
         [
-          "Formspree, Inc. (USA) – odeslání kontaktního formuláře,",
-          "Cal.com, Inc. (USA) – rezervace termínu konzultace,",
+          { text: "Formspree, Inc. (USA) – odeslání kontaktního formuláře,", when: "FORMSPREE_ID" },
+          { text: "Cal.com, Inc. (USA) – rezervace termínu konzultace,", when: "CAL_LINK" },
           "GitHub, Inc. (USA) – hosting webu na GitHub Pages; při návštěvě webu zpracovává technické logy včetně IP adres.",
         ],
-        "Tyto služby sídlí mimo Evropskou unii.{ Předání údajů do USA probíhá na základě: [PRAVNI_ZAKLAD_PREDANI].}",
+        "Uvedené služby sídlí v USA, tedy mimo Evropskou unii.{ Předání údajů do USA probíhá na základě: [PRAVNI_ZAKLAD_PREDANI].}",
       ],
     },
     {
@@ -253,5 +284,5 @@ export const privacy = {
         "Pokud máte za to, že s údaji nakládám v rozporu s předpisy, můžete podat stížnost u Úřadu pro ochranu osobních údajů, Pplk. Sochora 27, 170 00 Praha 7, www.uoou.gov.cz.",
       ],
     },
-  ] as { heading: string; blocks: (string | string[])[] }[],
+  ] as { heading: string; blocks: (string | PrivacyItem[])[] }[],
 };

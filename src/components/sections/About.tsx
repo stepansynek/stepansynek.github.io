@@ -1,7 +1,8 @@
 import { config } from "@/content/config";
 import { about } from "@/content/texts";
-import { isShown } from "@/lib/config";
+import { consultationHref, isShown } from "@/lib/config";
 import { t } from "@/lib/typography";
+import { ButtonLink } from "../Button";
 import { ContactLink } from "../ContactLink";
 import { Section } from "../Section";
 
@@ -21,11 +22,14 @@ export function About() {
           <p className="relative text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.15] font-[680] tracking-[-0.02em] [font-stretch:110%]">
             {t(about.capacity)}
           </p>
-          {isShown("LINKEDIN") ? (
-            <p className="relative">
+          <div className="relative flex flex-wrap items-center gap-x-6 gap-y-3">
+            <ButtonLink href={consultationHref} variant="primary" arrow>
+              {about.cta}
+            </ButtonLink>
+            {isShown("LINKEDIN") ? (
               <ContactLink type="url" value={config.LINKEDIN} label={about.linkedin} className="font-semibold text-white" />
-            </p>
-          ) : null}
+            ) : null}
+          </div>
         </div>
       </div>
     </Section>
