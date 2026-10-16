@@ -5,6 +5,8 @@ export type Service = {
   includes?: string;
   /** Cenový řádek v pilulce pod kartou. */
   price: string;
+  /** Malý štítek vedle nadpisu, např. „volitelná“. */
+  badge?: string;
 };
 
 export const services: Service[] = [
@@ -18,6 +20,7 @@ export const services: Service[] = [
     title: "Péče o web",
     text: "Web pod dohledem: nové reference, pracovní nabídky, drobné úpravy, hosting a zálohy. Vy se staráte o firmu, já o web.",
     includes: "Obsahuje hosting, zálohy a do 1 hodiny úprav měsíčně. Práce navíc 500 Kč za hodinu.",
-    price: "{od [CENA_PECE] Kč měsíčně|měsíční paušál} · volitelná",
+    price: "{od [CENA_PECE] Kč měsíčně|měsíční paušál}",
+    badge: "volitelná",
   },
 ];

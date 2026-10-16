@@ -34,7 +34,12 @@ export function Services() {
         {services.map((service, index) => (
           <li key={service.title} data-reveal style={{ "--d": index } as React.CSSProperties} className="card card-lift flex flex-col p-5 md:p-8">
             <div aria-hidden="true" className="mb-8 hidden aspect-[2/1] rounded-2xl bg-bg p-6 md:block">{graphics[index]}</div>
-            <h3 className="h3">{t(service.title)}</h3>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <h3 className="h3">{t(service.title)}</h3>
+              {service.badge ? (
+                <span className="rounded-full border border-line-strong px-2.5 py-0.5 text-[0.8125rem] font-medium text-muted">{service.badge}</span>
+              ) : null}
+            </div>
             <p className="mt-3 flex-1 text-muted">{t(service.text)}</p>
             {service.includes && t(service.includes) ? <p className="mt-3 text-[0.9375rem]">{t(service.includes)}</p> : null}
             <p className="price mt-4 inline-flex md:mt-6 self-start rounded-[1.25rem] bg-bg px-4 py-2">{t(service.price)}</p>

@@ -41,11 +41,11 @@ function SendError() {
 /** Co se stane po prvním kontaktu. Stojí vedle kontaktů, když na webu není formulář. */
 function NextSteps() {
   return (
-    <div data-reveal style={{ "--d": 1 } as React.CSSProperties} className="self-end rounded-[1.75rem] border border-white/15 bg-white/[0.06] p-6 md:p-8">
+    <div data-reveal style={{ "--d": 1 } as React.CSSProperties} className="self-end rounded-[1.5rem] border border-white/15 bg-white/[0.06] p-5 sm:p-6 md:rounded-[1.75rem] md:p-8">
       <h3 className="text-xl font-[700] tracking-tight [font-stretch:110%] md:text-2xl">{cs(contact.next.title)}</h3>
-      <ol className="mt-6 space-y-5">
+      <ol className="mt-5 space-y-4 md:mt-6 md:space-y-5">
         {contact.next.steps.map((step, index) => (
-          <li key={step} className="flex gap-4">
+          <li key={step} className="flex gap-3.5 md:gap-4">
             <span aria-hidden="true" className="grid size-8 shrink-0 place-items-center rounded-full bg-accent text-sm font-bold text-text tabular-nums">
               {index + 1}
             </span>
@@ -53,7 +53,7 @@ function NextSteps() {
           </li>
         ))}
       </ol>
-      <p className="mt-6 border-t border-white/15 pt-5 text-[0.9375rem] text-white/75">{t(contact.next.note)}</p>
+      <p className="mt-5 border-t border-white/15 pt-4 text-[0.9375rem] text-white/75 md:mt-6 md:pt-5">{t(contact.next.note)}</p>
     </div>
   );
 }

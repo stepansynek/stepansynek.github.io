@@ -39,7 +39,7 @@ export const navHints: Record<string, string> = {
 };
 
 export const hero = {
-  eyebrow: "Weby pro technické firmy z Brna, Vyškova a okolí",
+  eyebrow: "Technické firmy z Brna, Vyškova a okolí",
   titleStart: "Weby a marketing pro firmy, které",
   titleWords: ["vyrábějí.", "montují.", "servisují."],
   titleFull: "Weby a marketing pro firmy, které vyrábějí, montují a servisují.",
@@ -57,11 +57,11 @@ export const facts = {
   title: "Na co se u mě můžete spolehnout",
   items: [
     { value: 15000, display: "15 000", unit: "Kč", text: "Za tolik začíná web na klíč. Pevnou cenu znáte předem, ne až na faktuře.", wide: true },
-    { value: 20, display: "20", unit: "minut", text: "Úvodní konzultace zdarma. Telefonicky, online, nebo osobně u vás ve firmě." },
-    { value: 2, display: "2", unit: "dny", text: "Do dvou pracovních dnů po konzultaci máte na stole nabídku s pevnou cenou a termínem." },
+    { value: 20, display: "20", unit: "minut", text: "Úvodní konzultace zdarma. Telefonicky, online, nebo u vás." },
+    { value: 2, display: "2", unit: "dny", text: "Nabídka s pevnou cenou a termínem do dvou pracovních dnů po konzultaci." },
     { value: 24, display: "24", unit: "hodin", text: "Na zprávu odpovím do 24 hodin v pracovní dny. Když hovor nestihnu, zavolám zpět ještě týž den.", wide: true },
-    { value: 1, display: "1", unit: "rozhovor", text: "Stačí jeden hodinový rozhovor. Texty pak napíšu já, vy je jen schválíte." },
-    { value: 2, display: "2", unit: "projekty", text: "Nejvýš dva nové projekty za půl roku. Každý vedu osobně od začátku do konce." },
+    { value: 1, display: "1", unit: "rozhovor", text: "Hodinový rozhovor stačí. Texty napíšu já, vy je jen schválíte." },
+    { value: 2, display: "2", unit: "projekty", text: "Nejvýš dva nové projekty za půl roku. Každý vedu osobně." },
   ],
   ownership: {
     title: "Web patří vám",

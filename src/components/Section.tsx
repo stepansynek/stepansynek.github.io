@@ -20,7 +20,7 @@ export function Section({
 }) {
   const headingId = `${id}-nadpis`;
   return (
-    <section id={id} aria-labelledby={headingId} className={cn("py-12 md:py-24", className)}>
+    <section id={id} aria-labelledby={headingId} className={cn("py-12 md:py-20 lg:py-24", className)}>
       <Container>
         <div data-reveal className="mb-8 grid gap-4 md:mb-16 md:gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-end">
           <div>
