@@ -22,15 +22,15 @@ export const demos: Demo[] = [
   {
     slug: "setina",
     name: "SETINA přesné obrábění",
-    kind: "Smyšlená strojírna z Rousínova: CNC soustružení, frézování a broušení.",
+    kind: "Smyšlená strojírna z Rousínova: CNC soustružení, frézování, broušení a svařování.",
     summary:
-      "Zákazník si na úvodní stránce otočí 3D model hřídele, na stránce Stroje si ověří, jestli se jeho díl vejde do strojového parku, a rovnou nahraje výkres k nacenění.",
+      "Na úvodní stránce leží hřídel čerpadla s hodnotami z měřicího protokolu a otočíte jí tažením. Rozměr dílu zadaný jednou web ukáže u každého stroje a výkres jde přetáhnout z úvodu rovnou do poptávky.",
     url: "https://stepansynek.com/setina-web/",
     repo: "https://github.com/stepansynek/setina-web",
     facts: [
-      { label: "Stránky", value: "8 a stránka 404" },
-      { label: "Na webu", value: "3D díly, kontrola rozměru dílu, galerie s filtrem" },
-      { label: "Poptávka", value: "3 kroky s nahráním výkresu" },
+      { label: "Stránky", value: "7 a stránka 404" },
+      { label: "Na webu", value: "3D díly, měřicí protokol, kontrola rozměru dílu" },
+      { label: "Poptávka", value: "3 kroky, výkres jde přetáhnout už na úvodu" },
       { label: "Písma a 3D knihovna", value: "na vlastním serveru, bez cookie lišty" },
     ],
     shots: { desktop: "ukazka-setina", mobile: "ukazka-setina-mobil" },
