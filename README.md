@@ -29,7 +29,8 @@ Všechno je v `src/content/`:
 | `config.ts` | telefon, e-mail, IČO, sídlo, ceny, Cal.com, Formspree, LinkedIn… |
 | `texts.ts` | texty sekcí, formuláře, patičky, 404 a zásad ochrany osobních údajů |
 | `services.ts` | tři karty služeb |
-| `projects.ts` | projekty v sekci Práce |
+| `projects.ts` | skutečné zakázky v sekci Práce (jen se souhlasem klienta) |
+| `demos.ts` | ukázkové weby SETINA a HRANOL v sekci Ukázky |
 | `faq.ts` | otázky a odpovědi |
 
 Hodnota v hranatých závorkách (`"[TELEFON]"`) je placeholder. Při `npm run dev` se ukáže tak, jak je
@@ -62,15 +63,31 @@ V `src/content/projects.ts` přidejte položku do pole `projects`:
 Po písemném souhlasu klienta přepněte `consent: false` na `true`.
 Když není co ukázat, sekce Práce i položka v menu zmizí a čísla sekcí se přečíslují.
 
+## Vzhled
+
+Web je dvoubarevný „exportní prospekt“: bílý papír, modrá `#1f3c9e` (text, linky, fotky) a oranžová `#ff5a14`
+(jen plné desky a rastry). Kde modrá leží přes oranžovou (`mix-blend-mode: multiply`), vznikne skoro černý přetisk.
+Písmo je jen Special Gothic (`next/font/google`, stahuje se při buildu a běží z vlastní domény): titulky tučně
+na 75 % šířky, text v plné šířce. Tokeny jsou nahoře v `src/app/globals.css`, podrobně v `DESIGN.md`.
+
+Jediný pohyb bez akce návštěvníka je tisk obálky při načtení (oranžová deska, pak modrá do soutisku)
+a snímky ukázek, které při scrollu projedou rámem. Obojí se vypne při `prefers-reduced-motion`.
+
 ## Fotky
 
 1. Uložte fotku do `public/photos/` (JPG nebo PNG), např. `public/photos/me.jpg` pro portrét (poměr 4 : 5).
 2. `npm run images` (spouští se i automaticky před `dev` a `build`) vytvoří WebP v šířkách 640 a 1280 px
-   do `public/photos/out/` (ve gitu se neukládají, generují se při každém buildu).
+   do `public/photos/out/` (ve gitu se neukládají, generují se při každém buildu). Portrét dostane navíc
+   duotón `me-duo` (jen modrá barva na bílém), který v úvodu leží v přetisku na oranžové desce.
 3. Fotky projektů zadejte v `projects.ts` jménem souboru bez přípony: `images: [{ src: 'engas-dilna', alt: '…' }]`.
 
+**Snímky ukázek** (`public/photos/ukazka-*.jpg`) jsou screenshoty celé úvodní stránky: počítač 1440 px
+a telefon 390 px (2×). Po změně ukázkového webu je nafoťte znovu ve stejných názvech. Tlačítko
+„Spustit živou ukázku“ načte skutečný web v iframe až po kliknutí.
+
 Obrázek pro sdílení `public/og.png` a ikony se generují jednou příkazem `npm run og` (potřebuje internet,
-stáhne písmo Archivo). Po změně H1 nebo cenového řádku ho spusťte znovu a výsledek commitněte.
+stáhne písmo Special Gothic, a nejdřív `npm run images` kvůli duotónu). Po změně H1 nebo technických údajů
+ho spusťte znovu a výsledek commitněte.
 
 ## Nasazení
 

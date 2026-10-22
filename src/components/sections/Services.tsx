@@ -4,71 +4,61 @@ import { services as texts } from "@/content/texts";
 import { cs, t } from "@/lib/typography";
 import { Section } from "../Section";
 
-/** Abstraktní grafiky ke kartám: okno prohlížeče, cyklus péče. */
-const graphics = [
-  <svg key="web" viewBox="0 0 120 80" className="h-full w-full" fill="none">
-    <rect x="1" y="1" width="118" height="78" rx="10" className="fill-white stroke-line-strong" />
-    <circle cx="11" cy="10" r="2.5" className="fill-accent" />
-    <circle cx="19" cy="10" r="2.5" className="fill-line-strong" />
-    <path d="M1 19h118" className="stroke-line" />
-    <rect x="10" y="28" width="56" height="8" rx="4" className="fill-text" />
-    <rect x="10" y="41" width="40" height="5" rx="2.5" className="fill-line-strong" />
-    <rect x="10" y="54" width="30" height="12" rx="6" className="fill-accent" />
-    <rect x="76" y="28" width="34" height="40" rx="6" className="fill-text" />
-    <circle cx="93" cy="48" r="7" className="fill-accent" />
-  </svg>,
-  <svg key="care" viewBox="0 0 120 80" className="h-full w-full" fill="none">
-    <circle cx="60" cy="40" r="30" className="stroke-line-strong" strokeDasharray="4 6" />
-    <circle cx="60" cy="40" r="18" className="fill-accent" />
-    <circle cx="60" cy="10" r="5" className="fill-accent stroke-text" />
-    <circle cx="90" cy="40" r="5" className="fill-white stroke-text" />
-    <circle cx="60" cy="70" r="5" className="fill-white stroke-text" />
-    <circle cx="30" cy="40" r="5" className="fill-white stroke-text" />
-  </svg>,
-];
+type Row = { title: string; badge?: string; text: string; includes?: string; price: string; major?: boolean };
 
-export function Services() {
+/** Řádek ceníku: název, popis, cena. Hlavní položka má cenu velkým zúženým řezem. */
+function PriceRow({ row }: { row: Row }) {
+  const includes = row.includes ? t(row.includes) : "";
   return (
-    <Section id="sluzby" eyebrow="Služby" title={texts.title} intro={texts.intro}>
-      <ul className="grid gap-4 md:grid-cols-2">
-        {services.map((service, index) => (
-          <li key={service.title} data-reveal style={{ "--d": index } as React.CSSProperties} className="card card-lift flex flex-col p-5 md:p-8">
-            <div aria-hidden="true" className="mb-8 hidden aspect-[2/1] rounded-2xl bg-bg p-6 md:block">{graphics[index]}</div>
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-              <h3 className="h3">{t(service.title)}</h3>
-              {service.badge ? (
-                <span className="rounded-full border border-line-strong px-2.5 py-0.5 text-[0.8125rem] font-medium text-muted">{service.badge}</span>
-              ) : null}
-            </div>
-            <p className="mt-3 flex-1 text-muted">{t(service.text)}</p>
-            {service.includes && t(service.includes) ? <p className="mt-3 text-[0.9375rem]">{t(service.includes)}</p> : null}
-            <p className="price mt-4 inline-flex md:mt-6 self-start rounded-[1.25rem] bg-bg px-4 py-2">{t(service.price)}</p>
-          </li>
+    <li className="grid gap-x-6 gap-y-3 border-t-[length:var(--rule)] border-ink py-6 md:py-8 lg:grid-cols-12">
+      <h3 className={row.major ? "h2 lg:col-span-4" : "h3 lg:col-span-4"}>{t(row.title)}</h3>
+      <div className="lg:col-span-5">
+        <p className="measure">{t(row.text)}</p>
+        {includes ? <p className="small measure mt-2 text-ink-soft">{includes}</p> : null}
+      </div>
+      <div className="lg:col-span-3 lg:text-right">
+        <p
+          className={
+            row.major
+              ? "text-[clamp(2.25rem,4.4vw,3.75rem)] leading-[0.95] font-bold [font-stretch:75%]"
+              : "text-xl leading-tight font-bold [font-stretch:87%]"
+          }
+        >
+          {t(row.price)}
+        </p>
+        {row.badge ? <p className="small mt-1 text-ink-soft">{cs(row.badge)}</p> : null}
+      </div>
+    </li>
+  );
+}
+
+/** Nabídka jako ceník prospektu: základní provedení, volitelná péče, na přání. Pod tím oranžová deska o vlastnictví. */
+export function Services() {
+  const [main, ...rest] = services;
+  const vat = t(texts.vat);
+  return (
+    <Section id="sluzby" title={texts.title} intro={texts.intro}>
+      <ul>
+        <PriceRow row={{ ...main, major: true }} />
+        {rest.map((service) => (
+          <PriceRow key={service.title} row={service} />
         ))}
       </ul>
 
-      <div className="mt-10 md:mt-14">
-        <h3 data-reveal className="text-[0.9375rem] font-semibold text-muted">
-          {cs(texts.extrasTitle)}
-        </h3>
-        <ul className="mt-4 grid gap-4 md:grid-cols-2">
-          {texts.extras.map((extra, index) => (
-            <li key={extra.title} data-reveal style={{ "--d": index } as React.CSSProperties} className="card flex gap-4 p-5 md:gap-5 md:p-7">
-              <span aria-hidden="true" className="mt-2 size-2.5 shrink-0 rotate-45 bg-accent" />
-              <div>
-                <h4 className="text-lg leading-snug font-[650] tracking-tight [font-stretch:108%]">{cs(extra.title)}</h4>
-                <p className="mt-1.5 text-muted">{t(extra.text)}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-        {config.ZAKLADAJICI_NABIDKA ? (
-          <p data-reveal className="prose-width mt-6">
-            {t(texts.foundingOffer)}
-          </p>
-        ) : null}
-        {t(texts.vat) ? <p className="mt-4 text-[0.9375rem] text-muted">{t(texts.vat)}</p> : null}
+      <h3 className="h3 mt-12 md:mt-16">{cs(texts.extrasTitle)}</h3>
+      <ul className="mt-4">
+        {texts.extras.map((extra) => (
+          <PriceRow key={extra.title} row={extra} />
+        ))}
+      </ul>
+
+      <div className="mt-10 grid gap-3 bg-orange p-6 text-overprint md:mt-14 md:p-10 lg:grid-cols-12 lg:items-end lg:gap-6">
+        <p className="h2 lg:col-span-5">{cs(texts.ownership.title)}</p>
+        <p className="measure text-lg lg:col-span-7">{t(texts.ownership.text)}</p>
       </div>
+
+      {config.ZAKLADAJICI_NABIDKA ? <p className="measure mt-6">{t(texts.foundingOffer)}</p> : null}
+      {vat ? <p className="small mt-4 text-ink-soft">{vat}</p> : null}
     </Section>
   );
 }

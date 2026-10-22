@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
-import { Arrow } from "./Button";
+import { Signet } from "./Signet";
 
 type Link = { href: string; label: string };
 
 /**
- * Plovoucí skleněná hlavička. Při scrollu se zúží.
- * Tlačítko Menu roluje dolů panel přes celou šířku s velkými odkazy a kontakty.
+ * Bílá hlavička přes celou šířku. Po odrolování dostane spodní linku.
+ * Odkaz na sekci, která je právě na obrazovce, je podtržený oranžovou.
+ * Pod lg místo menu tlačítko, které rozbalí panel s velkými odkazy a kontakty.
  * Panel zavírá Esc, klik na odkaz i klik mimo něj.
  */
 export function HeaderShell({
@@ -20,24 +21,43 @@ export function HeaderShell({
   texts,
 }: {
   name: string;
-  items: (Link & { hint: string })[];
+  items: Link[];
   cta: Link;
   /** Telefon chráněný proti sběru (Phone), vykreslený na serveru. */
   phone: React.ReactNode;
   email: Link | null;
-  texts: { menu: string; close: string; contact: string };
+  texts: { menu: string; close: string; contact: string; home: string };
 }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Sekce, jejíž horní část prošla pásem pod hlavičkou, je aktivní.
+  useEffect(() => {
+    const sections = items
+      .map((item) => document.getElementById(item.href.split("#")[1] ?? ""))
+      .filter((section): section is HTMLElement => Boolean(section));
+    if (!sections.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        }
+      },
+      { rootMargin: "-20% 0px -75% 0px" },
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [items]);
 
   useEffect(() => {
     if (!open) return;
@@ -60,35 +80,42 @@ export function HeaderShell({
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 px-3 pt-3 sm:px-5">
-      <div
-        className={cn(
-          "glass relative mx-auto flex h-14 max-w-[1180px] items-center gap-3 rounded-full pr-1.5 pl-5 transition-[max-width,height] duration-500 ease-[var(--ease-out)]",
-          scrolled && "max-w-[980px]",
-        )}
-      >
-        <a href="/" className="mr-auto flex items-center gap-2.5 font-[650] tracking-tight [font-stretch:110%]">
-          <span aria-hidden="true" className="grid size-6 place-items-center rounded-md bg-text">
-            <span className="size-2 rounded-full bg-accent" />
-          </span>
-          {name}
+    <header
+      className={cn(
+        "sticky top-0 z-50 bg-paper transition-[box-shadow] duration-200",
+        scrolled || open ? "shadow-[0_var(--rule)_0_0_var(--ink)]" : "shadow-[0_var(--rule)_0_0_transparent]",
+      )}
+    >
+      <div className="mx-auto flex h-[var(--header-height)] w-full max-w-[calc(1312px+2rem)] items-center gap-6 px-4 sm:max-w-[calc(1312px+4rem)] sm:px-8">
+        <a href="/" aria-label={texts.home} className="mr-auto flex items-center gap-3">
+          <Signet className="size-7" />
+          <span className="text-[1.625rem] leading-none font-bold [font-stretch:75%]">{name}</span>
         </a>
 
-        <nav aria-label="Hlavní menu" className="hidden xl:block">
-          <ul className="flex items-center">
-            {items.map((item) => (
-              <li key={item.href}>
-                <a href={item.href} className="rounded-full px-3 py-2 text-[0.9375rem] text-muted transition-colors duration-150 hover:bg-text/5 hover:text-text">
-                  {item.label}
-                </a>
-              </li>
-            ))}
+        <nav aria-label="Hlavní menu" className="hidden lg:block">
+          <ul className="flex items-center gap-1">
+            {items.map((item) => {
+              const isActive = active !== null && item.href.endsWith(`#${active}`);
+              return (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    aria-current={isActive ? "location" : undefined}
+                    className={cn(
+                      "block px-2.5 py-2 text-[1.0625rem] font-medium underline decoration-[3px] underline-offset-[0.45em] transition-[text-decoration-color] duration-150 xl:px-3",
+                      isActive ? "decoration-orange" : "decoration-transparent hover:decoration-ink",
+                    )}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
-        <a href={cta.href} className="btn btn-dark hidden min-h-11 px-5 text-[0.9375rem] sm:inline-flex">
+        <a href={cta.href} className="btn btn-ink hidden min-h-11 px-5 sm:inline-flex">
           {cta.label}
-          <Arrow />
         </a>
 
         <button
@@ -97,11 +124,11 @@ export function HeaderShell({
           aria-expanded={open}
           aria-controls="rolovaci-menu"
           onClick={() => setOpen((value) => !value)}
-          className="btn btn-ghost min-h-11 gap-2.5 px-4 text-[0.9375rem]"
+          className="btn btn-line min-h-11 gap-3 px-4 lg:hidden"
         >
           <span className="relative block h-3 w-4" aria-hidden="true">
-            <span className={cn("absolute left-0 h-[1.5px] w-4 bg-current transition-all duration-300", open ? "top-[5px] rotate-45" : "top-0")} />
-            <span className={cn("absolute left-0 h-[1.5px] w-4 bg-current transition-all duration-300", open ? "top-[5px] -rotate-45" : "top-[10px]")} />
+            <span className={cn("absolute left-0 h-[2px] w-4 bg-current transition-all duration-300", open ? "top-[5px] rotate-45" : "top-0")} />
+            <span className={cn("absolute left-0 h-[2px] w-4 bg-current transition-all duration-300", open ? "top-[5px] -rotate-45" : "top-[10px]")} />
           </span>
           {open ? texts.close : texts.menu}
         </button>
@@ -112,43 +139,36 @@ export function HeaderShell({
         id="rolovaci-menu"
         inert={!open}
         className={cn(
-          "glass absolute inset-x-3 top-[calc(100%+0.5rem)] mx-auto max-w-[1180px] overflow-hidden rounded-[2rem] transition-[clip-path,opacity] duration-600 ease-[var(--ease-out)] sm:inset-x-5",
-          open ? "opacity-100 [clip-path:inset(0_0_0_0_round_2rem)]" : "pointer-events-none opacity-0 [clip-path:inset(0_0_100%_0_round_2rem)]",
+          "absolute inset-x-0 top-full bg-paper shadow-[0_var(--rule)_0_0_var(--ink)] transition-[clip-path,visibility] duration-500 ease-[var(--ease-out)] lg:hidden",
+          open ? "visible [clip-path:inset(0_0_-2px_0)]" : "invisible [clip-path:inset(0_0_100%_0)]",
         )}
       >
-        <div className="relative grid gap-8 p-5 sm:p-8 lg:grid-cols-[1.6fr_1fr] lg:gap-12 lg:p-10">
+        <div className="mx-auto grid max-w-[calc(1312px+4rem)] gap-8 px-4 pt-4 pb-6 sm:grid-cols-[1.4fr_1fr] sm:px-8 sm:pb-8">
           <nav aria-label="Menu">
             <ul>
-              {items.map((item, index) => (
-                <li
-                  key={item.href}
-                  style={{ transitionDelay: open ? `${80 + index * 50}ms` : "0ms" }}
-                  className={cn(
-                    "border-b border-line transition-[opacity,transform] duration-500 ease-[var(--ease-out)] last:border-b-0",
-                    open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
-                  )}
-                >
-                  <a href={item.href} onClick={() => setOpen(false)} className="group flex items-baseline justify-between gap-4 py-3 sm:py-4">
-                    <span className="text-[clamp(1.6rem,4vw,2.6rem)] leading-none font-[720] tracking-[-0.03em] [font-stretch:115%] transition-transform duration-300 group-hover:translate-x-2">
-                      {item.label}
-                    </span>
-                    <span className="hidden text-right text-[0.9375rem] text-muted sm:block">{item.hint}</span>
+              {items.map((item) => (
+                <li key={item.href} className="border-b-[length:var(--rule)] border-ink last:border-b-0">
+                  <a
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="block py-2.5 text-[clamp(2rem,8vw,2.75rem)] leading-none font-bold [font-stretch:75%]"
+                  >
+                    {item.label}
                   </a>
                 </li>
               ))}
             </ul>
           </nav>
-          <div className="flex flex-col justify-end gap-3 rounded-3xl bg-text p-6 text-white">
-            <p className="text-[0.9375rem] text-white/80">{texts.contact}</p>
+          <div className="flex flex-col justify-end gap-3 bg-ink p-5 text-white sm:p-6">
+            <p className="small text-white/80">{texts.contact}</p>
             {phone}
             {email ? (
-              <a href={email.href} className="break-all text-lg text-white/90">
+              <a href={email.href} className="link text-lg break-all">
                 {email.label}
               </a>
             ) : null}
-            <a href={cta.href} onClick={() => setOpen(false)} className="btn btn-primary mt-3 self-start">
+            <a href={cta.href} onClick={() => setOpen(false)} className="btn btn-orange mt-3 self-start">
               {cta.label}
-              <Arrow />
             </a>
           </div>
         </div>

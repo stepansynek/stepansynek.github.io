@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { form as texts } from "@/content/texts";
 import { cn } from "@/lib/cn";
 import { cs } from "@/lib/cs";
-import { Arrow, buttonClass } from "./Button";
+import { buttonClass } from "./Button";
 
 type Status = "idle" | "sending" | "success" | "error";
 type FieldName = keyof typeof texts.fields;
@@ -126,12 +126,12 @@ export function ContactForm({
 
   if (status === "success") {
     return (
-      <div ref={successRef} tabIndex={-1} role="status" className="rounded-[2rem] bg-surface p-8 text-text md:p-10">
-        <span aria-hidden="true" className="grid size-12 place-items-center rounded-full bg-accent text-xl font-bold">
-          ✓
-        </span>
-        <p className="mt-6 text-2xl font-[700] tracking-tight [font-stretch:110%]">{cs(texts.success)}</p>
-        <p className="mt-2 text-lg text-muted">{texts.successSignature}</p>
+      <div ref={successRef} tabIndex={-1} role="status" className="bg-paper p-6 text-ink md:p-8">
+        <svg aria-hidden="true" viewBox="0 0 24 24" className="size-10">
+          <path d="M3 12.5l6 6L21 6" fill="none" stroke="currentColor" strokeWidth="3" />
+        </svg>
+        <p className="h3 mt-5">{cs(texts.success)}</p>
+        <p className="mt-2 text-lg">{texts.successSignature}</p>
       </div>
     );
   }
@@ -142,9 +142,9 @@ export function ContactForm({
       method="POST"
       noValidate={hydrated}
       onSubmit={handleSubmit}
-      className="rounded-[2rem] bg-surface p-6 text-text shadow-[0_40px_80px_-30px_rgb(0_0_0/0.5)] md:p-8"
+      className="bg-paper p-5 text-ink md:p-8"
     >
-      <p className="text-xl font-[700] tracking-tight [font-stretch:110%]">{texts.title}</p>
+      <p className="h3">{texts.title}</p>
 
       <input type="hidden" name="_subject" value={texts.subject} />
       {/* Past na roboty: lidé pole nevidí ani na něj nedojdou tabulátorem. */}
@@ -167,16 +167,16 @@ export function ContactForm({
             "aria-describedby": describedBy,
             onInput: () => clearError(field.name),
             className: cn(
-              "block w-full rounded-2xl border bg-bg px-4 py-3 text-base text-text transition-[border-color,background-color,box-shadow] duration-200 hover:border-line-strong focus:bg-surface focus:shadow-[0_0_0_4px_rgb(255_199_0/0.35)]",
-              error ? "border-text" : "border-line",
+              "block w-full border-[length:var(--rule)] bg-paper px-3.5 py-3 text-base text-ink transition-[border-color,background-color] duration-150 hover:bg-ink-tint focus:bg-paper",
+              error ? "border-orange" : "border-ink",
             ),
           };
           const wide = field.multiline || field.name === "contact" || field.name === "source";
           return (
             <div key={field.name} className={cn(wide && "sm:col-span-2")}>
-              <label htmlFor={id} className="mb-1.5 block text-[0.9375rem] font-semibold">
+              <label htmlFor={id} className="mb-1.5 block font-bold">
                 {cs(texts.fields[field.name].label)}
-                {field.required ? null : <span className="font-normal text-muted"> ({texts.optional})</span>}
+                {field.required ? null : <span className="font-normal text-ink-soft"> ({texts.optional})</span>}
               </label>
               {field.multiline ? (
                 <textarea {...common} rows={5} className={cn(common.className, "resize-y")} />
@@ -184,13 +184,12 @@ export function ContactForm({
                 <input {...common} type={field.name === "web" ? "url" : "text"} inputMode={field.inputMode} />
               )}
               {error ? (
-                <p id={`${id}-chyba`} className="mt-1.5 text-[0.9375rem] font-medium">
-                  <span aria-hidden="true">× </span>
+                <p id={`${id}-chyba`} className="small mt-1.5 bg-orange-tint px-2 py-1 font-medium">
                   {cs(error)}
                 </p>
               ) : null}
               {field.name === "message" ? (
-                <p id="pole-zasady" className="mt-2 text-[0.9375rem] text-muted">
+                <p id="pole-zasady" className="small mt-2 text-ink-soft">
                   {cs(texts.privacyBefore)}
                   <a href={privacyHref} className="link">
                     {cs(texts.privacyLink)}
@@ -208,13 +207,12 @@ export function ContactForm({
           {status === "error" ? "" : announcement}
         </p>
         {status === "error" ? sendError : null}
-        <button type="submit" disabled={status === "sending"} className={cn(buttonClass.dark, "w-full disabled:cursor-wait disabled:opacity-60 sm:w-auto")}>
+        <button type="submit" disabled={status === "sending"} className={cn(buttonClass.ink, "w-full disabled:cursor-wait disabled:opacity-60 sm:w-auto")}>
           {status === "sending" ? texts.sending : texts.submit}
-          <Arrow />
         </button>
         {noscript ? (
           <noscript>
-            <p className="mt-4 text-[0.9375rem]">{noscript}</p>
+            <p className="small mt-4">{noscript}</p>
           </noscript>
         ) : null}
       </div>

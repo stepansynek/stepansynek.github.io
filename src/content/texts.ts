@@ -7,17 +7,18 @@ import type { ConfigKey } from "./config";
  */
 
 export const seo = {
-  title: "Štěpán Synek | Weby a marketing pro technické firmy, Brno",
+  title: "Štěpán Synek | Weby pro technické firmy z Brna a okolí",
   description:
-    "Weby a marketing pro výrobní, montážní a servisní firmy z Brna a okolí. Web, texty, fotky a video z jedné ruky, pevná cena předem. Weby od 15 000 Kč.",
+    "Weby pro výrobní, montážní a servisní firmy z Brna, Vyškova a okolí. Texty po jednom rozhovoru, fotky z vašeho provozu, pevná cena do dvou pracovních dnů. Weby od 15 000 Kč.",
 };
 
 export const nav = [
   { id: "sluzby", label: "Služby" },
+  { id: "ukazky", label: "Ukázky" },
   { id: "prace", label: "Práce" },
   { id: "postup", label: "Postup" },
   { id: "o-mne", label: "O mně" },
-  { id: "faq", label: "FAQ" },
+  { id: "faq", label: "Otázky" },
   { id: "kontakt", label: "Kontakt" },
 ] as const;
 
@@ -26,69 +27,70 @@ export const header = {
   menu: "Menu",
   close: "Zavřít",
   menuContact: "Přímý kontakt",
-};
-
-/** Krátké popisky k položkám v rolovacím menu. */
-export const navHints: Record<string, string> = {
-  sluzby: "Web na klíč, péče o web, foto a video",
-  prace: "Aktuální projekty",
-  postup: "Od konzultace po spuštění",
-  "o-mne": "Kdo jsem a proč technické firmy",
-  faq: "Cena, termíny, kdo co dělá",
-  kontakt: "Telefon, e-mail, poptávka",
+  home: "Štěpán Synek, úvodní stránka",
 };
 
 export const hero = {
-  eyebrow: "Technické firmy z Brna, Vyškova a okolí",
-  titleStart: "Weby a marketing pro firmy, které",
-  titleWords: ["vyrábějí.", "montují.", "servisují."],
-  titleFull: "Weby a marketing pro firmy, které vyrábějí, montují a servisují.",
-  lead: "Pomáhám technickým firmám ukázat, co opravdu umí, a získávat z webu poptávky. Texty napíšu po jednom rozhovoru s vámi, fotky a video pořídíme přímo ve vašem provozu. Jednáte přímo se mnou.",
-  price: "Weby od 15 000 Kč, pevná cena předem",
+  /** Titulek po řádcích; na webu se zalamuje přesně takhle. */
+  titleLines: ["Weby pro firmy,", "které vyrábějí,", "montují a servisují"],
+  lead: "Pomáhám technickým firmám ukázat, co opravdu umí, a získávat z webu poptávky. Texty napíšu po jednom rozhovoru s vámi, fotky pořídíme přímo ve vašem provozu. Jednáte přímo se mnou.",
   cta: "Domluvit konzultaci zdarma",
-  ctaNote: "20 minut, nezávazně. Ukážu vám tři konkrétní věci, které bych na vašem webu zlepšil.",
+  ctaNote: "Na konzultaci vám ukážu tři konkrétní věci, které bych na vašem webu zlepšil.",
   callPrefix: "Nebo zavolejte",
   photoAlt: "Štěpán Synek",
-  photoCaption: "Brno a okolí",
-  marquee: ["Výroba", "Montáže", "Servis", "Elektro", "Weby na klíč", "Texty", "Fotky a video", "Newslettery", "Péče o web"],
+  photoCaption: "Štěpán Synek, Brno",
+  specTitle: "Technické údaje",
+  spec: [
+    { label: "Web na klíč", value: "od 15 000 Kč" },
+    { label: "Nabídka s pevnou cenou", value: "do 2 pracovních dnů" },
+    { label: "Úvodní konzultace", value: "20 minut zdarma" },
+    { label: "Nové projekty", value: "nejvýš 2 za půl roku" },
+  ],
 };
 
-export const facts = {
-  title: "Na co se u mě můžete spolehnout",
-  items: [
-    { value: 15000, display: "15 000", unit: "Kč", text: "Za tolik začíná web na klíč. Pevnou cenu znáte předem, ne až na faktuře.", wide: true },
-    { value: 20, display: "20", unit: "minut", text: "Úvodní konzultace zdarma. Telefonicky, online, nebo u vás." },
-    { value: 2, display: "2", unit: "dny", text: "Nabídka s pevnou cenou a termínem do dvou pracovních dnů po konzultaci." },
-    { value: 24, display: "24", unit: "hodin", text: "Na zprávu odpovím do 24 hodin v pracovní dny. Když hovor nestihnu, zavolám zpět ještě týž den.", wide: true },
-    { value: 1, display: "1", unit: "rozhovor", text: "Hodinový rozhovor stačí. Texty napíšu já, vy je jen schválíte." },
-    { value: 2, display: "2", unit: "projekty", text: "Nejvýš dva nové projekty za půl roku. Každý vedu osobně." },
+export const services = {
+  title: "Web, texty a fotky z jedné ruky",
+  intro: "Nemusíte shánět grafika, copywritera a fotografa. Cenu i termín znáte předem.",
+  extrasTitle: "Na přání",
+  extras: [
+    {
+      title: "Fotky a video z provozu",
+      text: "Vaše dílna, stroje a hotové zakázky. Fotíme a natáčíme přímo u vás se spolupracující fotografkou.",
+      price: "za příplatek, cena předem",
+    },
+    {
+      title: "Newsletter pro zákazníky",
+      text: "Pravidelný e-mail stávajícím zákazníkům: nové zakázky, technologie a volné kapacity. Připomenete se dřív, než zavolají konkurenci.",
+      price: "podle rozsahu",
+    },
   ],
   ownership: {
     title: "Web patří vám",
     text: "Doména se registruje na vaši firmu a obsah i kód vám na požádání předám. Měsíční péče je volitelná.",
   },
-};
-
-export const services = {
-  title: "Co pro vás udělám",
-  intro: "Vše z jedné ruky: web, texty, fotky i video. Nemusíte koordinovat grafika, copywritera a fotografa.",
-  extrasTitle: "Na přání také",
-  extras: [
-    {
-      title: "Fotky a video z provozu",
-      text: "Vaše dílna, stroje a hotové zakázky. Fotíme a natáčíme přímo u vás se spolupracující fotografkou. Za příplatek, cenu znáte předem.",
-    },
-    {
-      title: "Newsletter pro zákazníky",
-      text: "Pravidelný e-mail stávajícím zákazníkům: nové zakázky, technologie a volné kapacity. Připomenete se dřív, než zavolají konkurenci.",
-    },
-  ],
   foundingOffer: "Prvním třem firmám dávám zakládající cenu výměnou za souhlas s uvedením jako reference.",
   vat: "{[DPH_VETA]}",
 };
 
+export const demos = {
+  title: "Dva ukázkové weby strojíren",
+  intro:
+    "SETINA a HRANOL jsou smyšlené firmy. Navrhl jsem pro ně weby od textů po kód, ať vidíte, jak může vypadat web technické firmy. Obě ukázky jsou rozsáhlejší než základní web na klíč.",
+  label: "Smyšlená firma, ukázkový web",
+  live: "Spustit živou ukázku",
+  liveNote: "Web se načte přímo tady a můžete ho procházet.",
+  close: "Zpět na snímek",
+  desktop: "Počítač",
+  phone: "Telefon",
+  open: "Otevřít celý web",
+  repo: "Kód na GitHubu",
+  newWindow: "(otevře se v novém okně)",
+  frameTitle: (name: string) => `Živá ukázka webu ${name}`,
+  shotAlt: (name: string) => `Snímek celé úvodní stránky ukázkového webu ${name}`,
+};
+
 export const work = {
-  title: "Na čem pracuji",
+  title: "Weby pro klienty",
   inProgress: "Právě pracuji na…",
 };
 
@@ -115,17 +117,17 @@ export const process = {
 };
 
 export const about = {
-  title: "O mně",
-  heading: "Rozumím řeči techniků.",
+  title: "Rozumím řeči techniků",
   intro:
-    "{Od roku [ROK_OD] dělám|Dělám} marketing pro firmu z průmyslové automatizace a studuji automatizaci na VUT. Když mluvíte o rozvaděčích nebo servisních smlouvách, nemusíte mi nic překládat. Zakázku vedu osobně od prvního rozhovoru po spuštění.",
+    "{Od roku [ROK_OD] dělám|Dělám} marketing pro firmu z průmyslové automatizace a studuji automatizaci na VUT. Když mluvíte o rozvaděčích nebo servisních smlouvách, nemusíte mi nic překládat.",
   facts: [
     "Pro firmu z průmyslové automatizace spravuji weby a připravuji newslettery.",
     "Studuji automatizaci a měřicí techniku na VUT FEKT a ekonomii na MUNI ECON.",
+    "Zakázku vedu osobně od prvního rozhovoru po spuštění.",
     "Komunikuji česky i anglicky.",
-    "Rád za vámi přijedu do firmy. Provoz je nejlepší vidět na vlastní oči.",
   ],
-  capacity: "Beru nejvýš dva nové projekty za půl roku. Každému se věnuji naplno.",
+  capacity: "Beru nejvýš dva nové projekty za půl roku.",
+  capacityText: "Každý vedu osobně, takže na něj mám vyhrazený čas a termín z nabídky platí.",
   cta: "Domluvit konzultaci",
   linkedin: "Profil na LinkedInu",
 };
@@ -136,27 +138,19 @@ export const faq = {
 };
 
 export const contact = {
-  titleEyebrow: "Kontakt",
   title: "Pojďme se podívat na váš web",
   phoneLabel: "Telefon",
   emailLabel: "E-mail",
   /** Ukáže se jen s vyplněným telefonem. */
   phoneNote: "{Telefon beru [CASY_TELEFON], jinak|Když hovor nestihnu,} zavolám zpět ještě týž den.",
-  note: "Působím v Brně, Vyškově, Rousínově a okolí. Rád za vámi přijedu do firmy.",
+  note: "Rád za vámi přijedu do firmy, provoz je nejlepší vidět na vlastní oči. Konzultace je zdarma a nezávazná.",
   cta: "Domluvit konzultaci zdarma",
   /** Tlačítko na e-mail s předvyplněným předmětem a osnovou zprávy. */
   emailCta: "Napsat e-mail",
   emailBody: "Dobrý den,\n\nfirma:\nweb:\ns čím potřebujeme pomoct:\n\n",
-  /** Panel vedle kontaktů, když není formulář. */
-  next: {
-    title: "Co bude následovat",
-    steps: [
-      "Napíšete nebo zavoláte. Do 24 hodin v pracovní dny se ozvu a domluvíme termín.",
-      "Za 20 minut projdeme váš web a cíle. Ukážu vám tři konkrétní věci, které bych zlepšil.",
-      "Do dvou pracovních dnů dostanete nabídku s pevnou cenou a termínem.",
-    ],
-    note: "Konzultace je zdarma a nezávazná.",
-  },
+  mapTitle: "Kde působím",
+  mapAlt: "Mapa: Brno, Rousínov a Vyškov na dálnici D1. Za firmami v tomto okolí rád přijedu.",
+  mapCredit: "Trasa D1 © přispěvatelé OpenStreetMap",
 };
 
 export const form = {
@@ -192,10 +186,11 @@ export const form = {
 };
 
 export const footer = {
-  tagline: "Weby a marketing pro technické firmy z Brna, Vyškova a okolí.",
+  tagline: "Weby pro technické firmy z Brna, Vyškova, Rousínova a okolí.",
   register: "Fyzická osoba zapsaná v živnostenském rejstříku",
   privacy: "Zásady ochrany osobních údajů",
   linkedin: "LinkedIn",
+  font: "Sázeno písmem Special Gothic",
 };
 
 export const notFound = {

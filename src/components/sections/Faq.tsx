@@ -3,20 +3,20 @@ import { faq as texts } from "@/content/texts";
 import { t } from "@/lib/typography";
 import { Section } from "../Section";
 
-/** Akordeon z nativních <details>; plynulé rozbalení řeší CSS, funguje i bez JavaScriptu. */
+/** Akordeon z nativních <details>, řádky oddělené linkou. Plynulé rozbalení řeší CSS, funguje i bez JavaScriptu. */
 export function Faq() {
   return (
-    <Section id="faq" eyebrow="FAQ" title={texts.title} intro={texts.intro}>
-      <div className="grid gap-2 md:gap-3">
-        {faq.map((item, index) => (
-          <details key={item.question} data-reveal style={{ "--d": index % 4 } as React.CSSProperties} className="faq-item card group">
-            <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 font-semibold md:gap-6 md:px-8 md:py-5 md:text-lg">
+    <Section id="faq" title={texts.title} intro={texts.intro}>
+      <div className="lg:ml-[calc((100%+1.5rem)*5/12)]">
+        {faq.map((item) => (
+          <details key={item.question} className="faq-item group border-t-[length:var(--rule)] border-ink last:border-b-[length:var(--rule)]">
+            <summary className="flex cursor-pointer items-center justify-between gap-6 py-4 text-lg font-bold md:py-5 md:text-xl">
               {t(item.question)}
-              <span aria-hidden="true" className="faq-icon grid size-8 shrink-0 md:size-9 place-items-center rounded-full bg-bg text-xl leading-none">
-                +
-              </span>
+              <svg aria-hidden="true" viewBox="0 0 20 20" className="faq-icon size-5 shrink-0">
+                <path d="M10 2v16M2 10h16" stroke="currentColor" strokeWidth="2.5" />
+              </svg>
             </summary>
-            <p className="prose-width px-5 pb-5 text-muted md:px-8 md:pb-6">{t(item.answer)}</p>
+            <p className="measure pb-5 md:pb-6">{t(item.answer)}</p>
           </details>
         ))}
       </div>

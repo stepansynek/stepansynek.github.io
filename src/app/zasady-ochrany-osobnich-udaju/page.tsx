@@ -26,18 +26,18 @@ export default function PrivacyPolicy() {
   return (
     <main id="obsah" className="py-16 md:py-24">
       <Container>
-        <article className="prose-width">
-          <h1 className="h2 text-balance">{privacy.title}</h1>
-          <p className="mt-6">{t(privacy.intro)}</p>
+        <article className="measure">
+          <h1 className="h2">{privacy.title}</h1>
+          <p className="mt-6 text-lg">{t(privacy.intro)}</p>
           {privacy.sections.map((section) => (
-            <section key={section.heading} className="mt-12 border-t border-line pt-6">
-              <h2 className="text-xl font-semibold tracking-tight">{t(section.heading)}</h2>
+            <section key={section.heading} className="mt-12 border-t-[length:var(--rule)] border-ink pt-5">
+              <h2 className="h3">{t(section.heading)}</h2>
               {section.blocks.map((block, index) => {
                 if (typeof block !== "string") {
                   // Služby, které web zatím nepoužívá (nevyplněný údaj v config.ts), se v produkci neuvádějí.
                   const items = block.flatMap((item) => (typeof item === "string" ? [item] : isShown(item.when) ? [item.text] : []));
                   return (
-                    <ul key={index} className="mt-4 list-disc space-y-1 pl-6 marker:text-muted">
+                    <ul key={index} className="mt-4 list-[square] space-y-1 pl-6 marker:text-orange">
                       {items.map((item) => (
                         <li key={item}>{t(item)}</li>
                       ))}

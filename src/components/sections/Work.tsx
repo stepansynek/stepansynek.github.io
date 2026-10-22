@@ -5,71 +5,60 @@ import { cs, t } from "@/lib/typography";
 import { Photo } from "../Photo";
 import { Section } from "../Section";
 
+/** Rozsah a rok jako jeden řádek údajů pod popisem. */
 function Scope({ scope, year }: { scope: string[]; year?: number }) {
   return (
-    <ul className="mt-6 flex flex-wrap gap-2">
-      {scope.map((item) => (
-        <li key={item} className="rounded-full border border-line bg-bg px-3 py-1 text-[0.9375rem]">
-          {cs(item)}
-        </li>
-      ))}
-      {year ? <li className="rounded-full border border-line px-3 py-1 text-[0.9375rem] text-muted">{year}</li> : null}
-    </ul>
+    <p className="small mt-5 text-ink-soft">
+      {cs(scope.join(", "))}
+      {year ? `, ${year}` : null}
+    </p>
   );
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectRow({ project }: { project: Project }) {
   const name = project.consent ? project.client : project.anonymous;
 
   if (project.status !== "published") {
     return (
-      <article className="card relative overflow-hidden p-6 md:p-10">
-        <div className="relative">
-          <p className="flex items-center gap-2.5 text-[0.9375rem] font-semibold">
-            <span className="live-dot" aria-hidden="true" />
-            {work.inProgress}
-          </p>
-          <h3 className="mt-4 text-[clamp(1.75rem,4vw,3rem)] leading-[1.05] font-[740] tracking-[-0.035em] [font-stretch:115%]">
-            {t(name)}
-          </h3>
-          {project.summary ? <p className="prose-width mt-4 text-lg text-muted">{t(project.summary)}</p> : null}
-          <Scope scope={project.scope} year={project.year} />
-        </div>
+      <article className="border-t-[length:var(--rule)] border-ink pt-5">
+        <p className="small font-bold">{work.inProgress}</p>
+        <h3 className="h2 mt-3">{t(name)}</h3>
+        {project.summary ? <p className="measure mt-4 text-lg">{t(project.summary)}</p> : null}
+        <Scope scope={project.scope} year={project.year} />
       </article>
     );
   }
 
   return (
-    <article className="card overflow-hidden">
+    <article className="border-t-[length:var(--rule)] border-ink pt-5">
       {project.images?.length ? (
-        <div className="grid gap-1 p-1 sm:grid-cols-2">
+        <div className="grid gap-3 sm:grid-cols-2">
           {project.images.map((image) => (
-            <Photo key={image.src} name={image.src} alt={image.alt} sizes="(min-width: 640px) 50vw, 100vw" className="aspect-[3/2] w-full rounded-[1.25rem]" />
+            <Photo key={image.src} name={image.src} alt={image.alt} sizes="(min-width: 640px) 50vw, 100vw" className="aspect-[3/2] w-full" />
           ))}
         </div>
       ) : null}
-      <div className="p-6 md:p-10">
-        <h3 className="h3">{t(name)}</h3>
-        {project.summary ? <p className="prose-width mt-3 text-muted">{t(project.summary)}</p> : null}
-        <Scope scope={project.scope} year={project.year} />
-        {project.quote ? (
-          <figure className="mt-8 border-t border-line pt-6">
-            <blockquote className="prose-width text-xl font-medium">„{t(project.quote)}“</blockquote>
-            {project.quoteAuthor ? <figcaption className="mt-2 text-muted">{t(project.quoteAuthor)}</figcaption> : null}
-          </figure>
-        ) : null}
-      </div>
+      <h3 className="h2 mt-6">{t(name)}</h3>
+      {project.summary ? <p className="measure mt-3 text-lg">{t(project.summary)}</p> : null}
+      <Scope scope={project.scope} year={project.year} />
+      {project.quote ? (
+        <figure className="mt-8 bg-orange p-6 text-overprint md:p-8">
+          <blockquote className="measure text-xl font-medium">„{t(project.quote)}“</blockquote>
+          {project.quoteAuthor ? <figcaption className="small mt-3">{t(project.quoteAuthor)}</figcaption> : null}
+        </figure>
+      ) : null}
     </article>
   );
 }
 
+/** Skutečné zakázky z src/content/projects.ts. Bez souhlasu klienta se v produkci neukáže nic. */
 export function Work() {
   return (
-    <Section id="prace" eyebrow="Práce" title={work.title}>
-      <ul className="grid gap-4">
+    <Section id="prace" title={work.title}>
+      <ul className="grid gap-14">
         {visibleProjects.map((project) => (
-          <li key={project.slug} data-reveal>
-            <ProjectCard project={project} />
+          <li key={project.slug}>
+            <ProjectRow project={project} />
           </li>
         ))}
       </ul>

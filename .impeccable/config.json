@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "oversized-h1",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/assigned.html"
+        ],
+        "createdAt": "2026-10-22T08:19:08.076Z",
+        "reason": "Decision-page sketch (gitignored, not shipped); the user picked this composition on the decision page. Shipped hero keeps lead, CTA and spec table in the first viewport at 390, 1024 and 1440 px."
+      }
+    ]
+  }
+}

@@ -1,17 +1,23 @@
 @import "tailwindcss";
 
-/* Design tokeny v6: světlý, technicky střídmý. Inkoust, papír a bezpečnostní žlutá. */
+/*
+ * Design tokeny v7: dvoubarevný exportní prospekt.
+ * Bílý křídový papír a dvě tiskové barvy. Modrá nese text, linky a fotky, oranžová jen desky a rastry.
+ * Kde se obě potkají (multiply), vznikne skoro černý přetisk.
+ */
 :root {
-  /* Chladná papírová bílá, inkoust, bezpečnostní žlutá, signální modrá. */
-  --bg: #f5f6f8;
-  --surface: #ffffff;
-  --text: #0e1116;
-  /* Vedlejší text, 6,6 : 1 na pozadí. */
-  --text-muted: #525866;
-  --line: rgb(14 17 22 / 0.09);
-  --line-strong: rgb(14 17 22 / 0.24);
-  --accent: #ffc700;
-  --orange: #ff8a00;
+  --paper: #ffffff;
+  /* Modrá na papíře 9,5 : 1. */
+  --ink: #1f3c9e;
+  /* Modrá v rastru 75 %, vedlejší text, 4,9 : 1 na papíře. */
+  --ink-soft: #576db6;
+  /* Rastr 10 % pro neaktivní a podkladové plochy. */
+  --ink-tint: #e9ecf5;
+  --orange: #ff5a14;
+  --orange-tint: #ffe6da;
+  /* Modrá přes oranžovou. Text na oranžové desce, 5,7 : 1. */
+  --overprint: #1f150c;
+  --rule: 1.5px;
 
   --header-height: 4.5rem;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -20,22 +26,22 @@
 
 @theme inline {
   --color-*: initial;
-  --color-bg: var(--bg);
-  --color-surface: var(--surface);
-  --color-text: var(--text);
-  --color-muted: var(--text-muted);
-  --color-line: var(--line);
-  --color-line-strong: var(--line-strong);
-  --color-accent: var(--accent);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-tint: var(--ink-tint);
   --color-orange: var(--orange);
+  --color-orange-tint: var(--orange-tint);
+  --color-overprint: var(--overprint);
   --color-white: #ffffff;
 
-  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-gothic), ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
+    scrollbar-color: var(--ink) var(--ink-tint);
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -45,40 +51,50 @@
   }
 
   body {
-    background-color: var(--bg);
-    color: var(--text);
+    background-color: var(--paper);
+    color: var(--ink);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
-    line-height: 1.6;
+    line-height: 1.55;
+    font-kerning: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: clip;
   }
 
   ::selection {
-    background-color: var(--accent);
-    color: var(--text);
+    background-color: var(--orange);
+    color: var(--overprint);
+  }
+
+  input,
+  textarea {
+    caret-color: var(--orange);
   }
 
   :focus-visible {
-    outline: 2px solid var(--text);
-    outline-offset: 2px;
+    outline: 3px solid var(--orange);
+    outline-offset: 3px;
+  }
+
+  /* Na oranžové desce by oranžový rámeček zmizel. */
+  .bg-orange :focus-visible {
+    outline-color: var(--ink);
   }
 
   [id] {
-    scroll-margin-top: calc(var(--header-height) + 1.5rem);
+    scroll-margin-top: calc(var(--header-height) + 1rem);
   }
 
-  /* Bez osamocených slov na konci odstavců; nadpisy s vyrovnanými řádky. H1 má vlastní zalomení. */
   p,
   li,
   dd {
     text-wrap: pretty;
   }
 
+  h1,
   h2,
   h3,
-  h4,
   summary {
     text-wrap: balance;
   }
@@ -93,280 +109,147 @@
 }
 
 @layer components {
+  /* Titulky: zúžená groteska jako v prospektech šedesátých let. */
   .display {
-    font-size: clamp(2.5rem, 5.6vw, 5.5rem);
-    font-weight: 760;
-    font-stretch: 118%;
-    line-height: 0.98;
-    letter-spacing: -0.045em;
+    font-weight: 700;
+    font-stretch: 75%;
+    font-size: clamp(3.25rem, 9.4vw, 9.25rem);
+    line-height: 0.86;
+    letter-spacing: -0.012em;
   }
 
   .h2 {
-    font-size: clamp(2rem, 4.4vw, 3.6rem);
-    font-weight: 740;
-    font-stretch: 115%;
-    line-height: 1.02;
-    letter-spacing: -0.04em;
+    font-weight: 700;
+    font-stretch: 75%;
+    font-size: clamp(2.5rem, 5.6vw, 5rem);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
   }
 
   .h3 {
-    font-size: 1.375rem;
-    font-weight: 650;
-    font-stretch: 108%;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    font-weight: 700;
+    font-stretch: 75%;
+    font-size: clamp(1.625rem, 2.4vw, 2.125rem);
+    line-height: 1;
   }
 
-  .label {
-    font-size: 0.875rem;
-    line-height: 1.4;
-    font-weight: 500;
-    color: var(--text-muted);
+  /* Popisky a malé údaje: o něco užší text. */
+  .small {
+    font-size: 0.9375rem;
+    line-height: 1.45;
   }
 
-  /* Štítek sekce: pilulka s číslem a tečkou. */
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    border: 1px solid var(--line);
-    background: rgb(255 255 255 / 0.7);
-    border-radius: 999px;
-    padding: 0.35rem 0.85rem 0.35rem 0.55rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--text);
-  }
-
-  .eyebrow::before {
-    content: "";
-    width: 0.5rem;
-    height: 0.5rem;
-    background: var(--accent);
-    transform: rotate(45deg);
-  }
-
-  .price {
-    font-variant-numeric: tabular-nums;
-    font-weight: 600;
-    font-stretch: 108%;
-  }
-
-  .prose-width {
-    max-width: 62ch;
+  .measure {
+    max-width: 38rem;
   }
 
   .link {
     text-decoration-line: underline;
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: var(--rule);
     text-underline-offset: 0.2em;
-    transition: text-decoration-thickness 150ms ease;
+    transition: text-decoration-color 150ms ease;
   }
 
   .link:hover {
-    text-decoration-thickness: 2px;
+    text-decoration-color: var(--orange);
   }
 
-  /* Zvýraznění klíčového slova: inkoust na žlutém pruhu jako zvýrazňovač. */
-  .grad-text {
-    color: var(--text);
-    background: linear-gradient(transparent 58%, var(--accent) 58%, var(--accent) 90%, transparent 90%);
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-  }
-
-  /* Karta: bílá, jemný stín, světlo pod kurzorem (--mx, --my nastavuje Effects.tsx). */
-  .card {
-    position: relative;
-    isolation: isolate;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1.5rem;
-    box-shadow:
-      0 1px 2px rgb(14 17 22 / 0.04),
-      0 12px 32px -12px rgb(14 17 22 / 0.08);
-    transition:
-      transform 400ms var(--ease-out),
-      box-shadow 400ms var(--ease-out),
-      border-color 400ms var(--ease-out);
-  }
-
-  .card::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    z-index: -1;
-    border-radius: inherit;
-    padding: 1px;
-    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgb(14 17 22 / 0.45), rgb(14 17 22 / 0.12) 40%, transparent 70%);
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 300ms ease;
-  }
-
-  .card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    border-radius: inherit;
-    background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgb(255 199 0 / 0.08), transparent 60%);
-    opacity: 0;
-    transition: opacity 300ms ease;
-  }
-
-  .card:hover::before,
-  .card:hover::after {
-    opacity: 1;
-  }
-
-  .card-lift:hover {
-    transform: translateY(-4px);
-    box-shadow:
-      0 1px 2px rgb(14 17 22 / 0.04),
-      0 24px 48px -16px rgb(14 17 22 / 0.16);
-  }
-
-  /* Tlačítka: pilulky. */
+  /* Tlačítka: plná modrá, po najetí přetisk. Pravé úhly jako ořez archu. */
   .btn {
-    position: relative;
     display: inline-flex;
-    min-height: 3rem;
+    min-height: 3.25rem;
     align-items: center;
     justify-content: center;
     gap: 0.6rem;
-    overflow: hidden;
-    border-radius: 999px;
     padding: 0 1.5rem;
-    font-weight: 650;
-    font-size: 1rem;
-    font-stretch: 105%;
-    white-space: nowrap;
+    font-weight: 700;
+    font-stretch: 87%;
+    font-size: 1.0625rem;
+    line-height: 1.1;
+    text-align: center;
     transition:
-      transform 250ms var(--ease-out),
-      background-color 200ms ease,
-      color 200ms ease,
-      box-shadow 250ms var(--ease-out);
+      background-color 160ms ease,
+      color 160ms ease,
+      box-shadow 160ms ease;
   }
 
-  .btn:active {
-    transform: scale(0.97);
-  }
-
-  .btn-primary {
-    background: var(--accent);
-    color: var(--text);
-    box-shadow:
-      inset 0 0 0 1px var(--text);
-  }
-
-  .btn-primary:hover {
-    box-shadow:
-      inset 0 0 0 1px var(--text),
-      0 3px 0 0 var(--text);
-    transform: translateY(-2px);
-  }
-
-  .btn-dark {
-    background: var(--text);
+  .btn-ink {
+    background: var(--ink);
     color: #fff;
   }
 
-  .btn-dark:hover {
-    background: #23252d;
+  .btn-ink:hover {
+    background: var(--overprint);
   }
 
-  .btn-ghost {
-    background: rgb(255 255 255 / 0.6);
-    color: var(--text);
-    box-shadow: inset 0 0 0 1px var(--line-strong);
+  .btn-line {
+    color: var(--ink);
+    box-shadow: inset 0 0 0 var(--rule) var(--ink);
   }
 
-  .btn-ghost:hover {
+  .btn-line:hover {
+    background: var(--ink-tint);
+  }
+
+  .btn-orange {
+    background: var(--orange);
+    color: var(--overprint);
+  }
+
+  .btn-orange:hover {
     background: #fff;
   }
 
-  .btn .arrow {
-    transition: transform 250ms var(--ease-out);
+  .btn-white-line {
+    color: #fff;
+    box-shadow: inset 0 0 0 var(--rule) rgb(255 255 255 / 0.7);
   }
 
-  .btn:hover .arrow {
-    transform: translateX(3px);
+  .btn-white-line:hover {
+    background: rgb(255 255 255 / 0.12);
   }
 
-  /* Pozadí hero: tečkovaná mřížka, která se rozsvítí kolem kurzoru. */
-  .dot-grid {
-    background-image: radial-gradient(rgb(14 17 22 / 0.14) 1px, transparent 1px);
-    background-size: 22px 22px;
-    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 75%);
-    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 75%);
+  /* Tabulka Technické údaje: řádky oddělené linkou, hodnota tučně vpravo. */
+  .spec > div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: var(--rule) solid currentColor;
+    padding: 0.55rem 0;
   }
 
-  .dot-grid-glow {
-    background-image: radial-gradient(rgb(14 17 22 / 0.55) 1.3px, transparent 1.2px);
-    background-size: 22px 22px;
-    -webkit-mask-image: radial-gradient(220px circle at var(--mx, -500px) var(--my, -500px), #000, transparent 70%);
-    mask-image: radial-gradient(220px circle at var(--mx, -500px) var(--my, -500px), #000, transparent 70%);
+  .spec dd {
+    font-weight: 700;
+    text-align: right;
   }
 
-  .glass {
-    background: rgb(255 255 255 / 0.72);
-    -webkit-backdrop-filter: blur(16px) saturate(1.6);
-    backdrop-filter: blur(16px) saturate(1.6);
-    border: 1px solid rgb(255 255 255 / 0.8);
-    box-shadow:
-      0 0 0 1px var(--line),
-      0 12px 40px -16px rgb(14 17 22 / 0.18);
+  /* Užší sloupec: popisek nad hodnotou, nic se neláme doprava. */
+  .spec-stack > div {
+    display: grid;
+    gap: 0.1rem;
   }
 
-  /* Střídající se slovo v H1: tři slova nad sebou, posouvají se svisle. */
-  .rotator {
-    display: inline-grid;
-    height: 1.02em;
-    overflow: hidden;
-    vertical-align: bottom;
-    padding-bottom: 0.08em;
-    box-sizing: content-box;
+  .spec-stack dt {
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
   }
 
-  .rotator > span {
-    grid-area: 1 / 1;
-    display: block;
+  .spec-stack dd {
+    text-align: left;
   }
 
-  .marquee {
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  /* Duotónový portrét v přetisku na oranžové desce. */
+  .overprint {
+    mix-blend-mode: multiply;
   }
 
-  .live-dot {
-    position: relative;
-    display: inline-block;
-    width: 0.55rem;
-    height: 0.55rem;
-    border-radius: 999px;
-    background: #16a34a;
-  }
-
-  .live-dot::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: inherit;
-  }
-
-  /* FAQ: plynulé rozbalení obsahu (prohlížeče s ::details-content). */
   .faq-item::details-content {
     block-size: 0;
     overflow: hidden;
     transition:
-      block-size 400ms var(--ease-out),
-      content-visibility 400ms allow-discrete;
+      block-size 350ms var(--ease-out),
+      content-visibility 350ms allow-discrete;
   }
 
   .faq-item[open]::details-content {
@@ -374,104 +257,85 @@
   }
 
   .faq-icon {
-    transition: transform 400ms var(--ease-out), background-color 200ms ease;
+    transition: transform 300ms var(--ease-out);
   }
 
   .faq-item[open] .faq-icon {
     transform: rotate(45deg);
-    background: var(--accent);
+  }
+
+  /* Snímek ukázky projíždí rámem podle scrollu (--ratio = výška / šířka snímku, --frame = poměr rámu). */
+  .travel {
+    --frame: 0.5625;
+    --ratio: var(--ratio-d);
+    aspect-ratio: 16 / 9;
+    container-type: inline-size;
+    view-timeline: --travel block;
+  }
+
+  @media (max-width: 767px) {
+    .travel {
+      --frame: 1.7778;
+      --ratio: var(--ratio-m);
+      aspect-ratio: 9 / 16;
+    }
+  }
+
+  .travel-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
   }
 }
 
-/* Animace jen pro ty, kdo nemají omezený pohyb. */
 @media (prefers-reduced-motion: no-preference) {
   html {
     interpolate-size: allow-keywords;
   }
 
-  .rotator > span {
-    animation: rotate-word 7.5s var(--ease-out) infinite;
+  /* Jediný moment při načtení: nejdřív se vytiskne oranžová deska, pak dosedne modrá do soutisku. */
+  .print-plate {
+    animation: plate 700ms var(--ease-out) backwards;
   }
 
-  .rotator > span:nth-child(1) {
-    animation-delay: 0s;
+  .print-register {
+    animation: register 650ms 380ms var(--ease-out) backwards;
   }
 
-  .rotator > span:nth-child(2) {
-    animation-delay: 2.5s;
+  @supports (animation-timeline: view()) {
+    .travel-image {
+      animation: travel linear both;
+      animation-timeline: --travel;
+      animation-range: cover 18% cover 82%;
+    }
   }
+}
 
-  .rotator > span:nth-child(3) {
-    animation-delay: 5s;
+@keyframes plate {
+  from {
+    clip-path: inset(0 0 100% 0);
   }
-
-  /* Bez animace ukazujeme jen první slovo. */
-  .rotator > span:not(:first-child) {
-    transform: translateY(110%);
+  to {
+    clip-path: inset(0 0 0 0);
   }
+}
 
-  .marquee-track {
-    animation: marquee 32s linear infinite;
+@keyframes register {
+  from {
+    transform: translate(-7px, 5px);
   }
-
-  .marquee:hover .marquee-track {
-    animation-play-state: paused;
-  }
-
-  .live-dot::after {
-    animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
-  }
-
-  /* Odkrývání při scrollu jen od tabletu; na mobilu by při listování působilo jako prázdné místo.
-     Třídu js přidá skript v <head>, bez JS je vše vidět. */
-  @media (min-width: 768px) {
-  .js [data-reveal] {
-    opacity: 0;
-    transform: translateY(28px);
-    transition:
-      opacity 900ms var(--ease-out),
-      transform 900ms var(--ease-out);
-    transition-delay: calc(var(--d, 0) * 90ms);
-  }
-
-  .js [data-reveal].is-visible {
-    opacity: 1;
+  to {
     transform: none;
   }
-  }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .rotator > span:not(:first-child) {
-    display: none;
-  }
-}
-
-@keyframes rotate-word {
-  0% {
-    transform: translateY(110%);
-  }
-  6%,
-  30% {
+/* Posun o celou výšku snímku bez výšky rámu, v jednotkách šířky rámu. */
+@keyframes travel {
+  from {
     transform: translateY(0);
   }
-  36%,
-  100% {
-    transform: translateY(-110%);
-  }
-}
-
-@keyframes marquee {
   to {
-    transform: translateX(-50%);
+    transform: translateY(calc((var(--frame) - var(--ratio)) * 100cqw));
   }
 }
-
-@keyframes ping {
-  75%,
-  100% {
-    transform: scale(2.6);
-    opacity: 0;
-  }
-}
-

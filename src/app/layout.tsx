@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo } from "next/font/google";
-import { Effects } from "@/components/Effects";
+import { Special_Gothic } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { site } from "@/content/config";
@@ -8,12 +7,14 @@ import { seo, skipLink } from "@/content/texts";
 import "./globals.css";
 
 // next/font stáhne písmo při buildu a servíruje ho z vlastní domény.
-// Archivo je variabilní i v šířce: nadpisy jsou rozšířené, text normální.
-const archivo = Archivo({
+// Special Gothic je variabilní i v šířce: titulky zúžené na 75 %, text v plné šířce.
+const gothic = Special_Gothic({
   subsets: ["latin", "latin-ext"],
   display: "swap",
   axes: ["wdth"],
-  variable: "--font-archivo",
+  variable: "--font-gothic",
+  // Next pro Special Gothic nemá metriky náhradního písma; zúžené titulky by s nimi stejně neseděly.
+  adjustFontFallback: false,
 });
 
 const ogImage = { url: "/og.png", width: 1200, height: 630, alt: seo.title };
@@ -44,28 +45,23 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f5f6f8",
+  themeColor: "#ffffff",
   colorScheme: "light",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="cs" className={archivo.variable} suppressHydrationWarning>
-      <head>
-        {/* Třída js zapne animace odkrývání; bez JavaScriptu zůstane obsah vidět. */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
-      </head>
+    <html lang="cs" className={gothic.variable}>
       <body>
         <a
           href="#obsah"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-full focus:bg-surface focus:px-4 focus:py-2 focus:font-medium"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:bg-ink focus:px-4 focus:py-3 focus:font-bold focus:text-white"
         >
           {skipLink}
         </a>
         <Header />
         {children}
         <Footer />
-        <Effects />
       </body>
     </html>
   );

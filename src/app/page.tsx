@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
-import { Facts } from "@/components/sections/Facts";
+import { Demos } from "@/components/sections/Demos";
 import { Faq } from "@/components/sections/Faq";
 import { Hero } from "@/components/sections/Hero";
-import { Marquee } from "@/components/sections/Marquee";
 import { Process } from "@/components/sections/Process";
 import { Services } from "@/components/sections/Services";
 import { Work } from "@/components/sections/Work";
@@ -20,9 +19,8 @@ export default function Home() {
     <main id="obsah">
       <JsonLd />
       <Hero />
-      <Marquee />
-      <Facts />
       <Services />
+      <Demos />
       {visibleProjects.length > 0 ? <Work /> : null}
       <Process />
       <About />

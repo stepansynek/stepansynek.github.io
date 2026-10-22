@@ -15,7 +15,7 @@ export function PhoneReveal({ encoded, className }: { encoded: string; className
 
   if (phone) {
     return (
-      <a href={phoneHref(phone)} className={cn("link tabular-nums", className)}>
+      <a href={phoneHref(phone)} className={cn("link", className)}>
         {cs(phone)}
       </a>
     );
@@ -28,12 +28,12 @@ export function PhoneReveal({ encoded, className }: { encoded: string; className
         if (event.isTrusted) setPhone(decodePhone(encoded));
       }}
       aria-label="Zobrazit telefonní číslo"
-      className={cn("group inline-flex cursor-pointer items-center gap-[0.4em] text-left tabular-nums", className)}
+      className={cn("group inline-flex cursor-pointer items-center gap-[0.45em] text-left", className)}
     >
       <span aria-hidden="true">+420 ••• ••• •••</span>
       <span
         aria-hidden="true"
-        className="rounded-full border border-current px-[0.7em] py-[0.2em] text-[max(0.75rem,0.4em)] leading-none font-semibold tracking-normal opacity-70 transition-opacity duration-150 group-hover:opacity-100"
+        className="border-[length:var(--rule)] border-current px-[0.6em] py-[0.3em] text-[max(0.8125rem,0.38em)] leading-none font-bold [font-stretch:100%] transition-colors duration-150 group-hover:border-orange"
       >
         zobrazit
       </span>

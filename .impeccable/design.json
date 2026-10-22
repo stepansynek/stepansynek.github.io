@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-22T12:00:00Z",
+  "title": "Design System: Štěpán Synek",
+  "extensions": {
+    "colorMeta": {
+      "ink": { "role": "primary", "displayName": "Ultramarín tiskové barvy", "canonical": "#1f3c9e", "tonalRamp": ["#0c183f", "#13245f", "#19307e", "#1f3c9e", "#576db6", "#9aa7d3", "#c7cee7", "#e9ecf5"] },
+      "ink-soft": { "role": "primary", "displayName": "Rastr modré 75 %", "canonical": "#576db6", "tonalRamp": ["#232c49", "#34416d", "#465792", "#576db6", "#8999cc", "#b3bdde", "#d5daed", "#eef0f8"] },
+      "ink-tint": { "role": "primary", "displayName": "Rastr modré 10 %", "canonical": "#e9ecf5", "tonalRamp": ["#5d5e62", "#8c8e93", "#babdc4", "#d7dcee", "#e9ecf5", "#f0f2f8", "#f5f6fa", "#fdfdfe"] },
+      "orange": { "role": "secondary", "displayName": "Signální oranžová deska", "canonical": "#ff5a14", "tonalRamp": ["#662408", "#99360c", "#cc4810", "#ff5a14", "#ff8c5a", "#ffb595", "#ffd6c4", "#ffe6da"] },
+      "orange-tint": { "role": "secondary", "displayName": "Světlý rastr oranžové", "canonical": "#ffe6da", "tonalRamp": ["#665c57", "#998a83", "#ccb8ae", "#ffe6da", "#ffeee5", "#fff4ee", "#fff9f6", "#fffcfb"] },
+      "paper": { "role": "neutral", "displayName": "Bílý křídový papír", "canonical": "#ffffff", "tonalRamp": ["#262626", "#404040", "#666666", "#999999", "#cccccc", "#e6e6e6", "#f5f5f5", "#ffffff"] },
+      "overprint": { "role": "neutral", "displayName": "Přetisk", "canonical": "#1f150c", "tonalRamp": ["#0c0805", "#130d07", "#19110a", "#1f150c", "#625b55", "#9a9692", "#c7c4c2", "#e9e8e7"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Jen titulek obálky; řádky se nelámou a přetékají přes oranžovou desku v přetisku." },
+      "headline": { "displayName": "Headline", "purpose": "Nadpisy sekcí, titulky oranžových desek, hlavní položka ceníku." },
+      "title": { "displayName": "Title", "purpose": "Řádky ceníku, kroky postupu, nadpisy tabulek a formuláře." },
+      "body": { "displayName": "Body", "purpose": "Odstavce do 38rem; menu a odkazy 500." },
+      "label": { "displayName": "Label", "purpose": "Popisky, poznámky, popisky fotek, patička. Bez kapitálek." },
+      "button": { "displayName": "Údaj / tlačítko", "purpose": "Tlačítka, ceny a kontaktní údaje na šířce 87 %." }
+    },
+    "shadows": [],
+    "rules": [
+      { "name": "rule", "value": "1.5px solid currentColor", "purpose": "Linka, která otevírá sekce, řádky ceníku, kroky a otázky; obrys tlačítek, polí a rámu." },
+      { "name": "focus", "value": "outline: 3px solid var(--orange); outline-offset: 3px", "purpose": "Jediný focus ring v celém systému." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Tisk desky, soutisk, rozbalení otázek a menu." },
+      { "name": "plate", "value": "clip-path inset(0 0 100% 0) -> inset(0), 700ms ease-out", "purpose": "Jednou při načtení: vytiskne se oranžová deska obálky." },
+      { "name": "register", "value": "translate(-7px, 5px) -> none, 650ms, delay 380ms, ease-out", "purpose": "Modrá (titulek) dosedne do soutisku s deskou." },
+      { "name": "travel", "value": "scroll-driven view-timeline, cover 18% to cover 82%", "purpose": "Snímek ukázky projíždí rámem podle scrollu." },
+      { "name": "state", "value": "150-160ms ease", "purpose": "Změny barvy tlačítek, polí a podtržení." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Tlačítko ink",
+      "kind": "button",
+      "refersTo": "button-ink",
+      "description": "Hlavní akce: plná modrá, po najetí přetisk.",
+      "html": "<a href=\"#\" class=\"ds-btn ds-btn-ink\">Domluvit konzultaci zdarma</a>",
+      "css": ".ds-btn { display: inline-flex; min-height: 3.25rem; align-items: center; justify-content: center; gap: 0.6rem; padding: 0 1.5rem; font-family: var(--font-gothic, ui-sans-serif, system-ui, sans-serif); font-weight: 700; font-stretch: 87%; font-size: 1.0625rem; line-height: 1.1; text-decoration: none; border-radius: 0; transition: background-color 160ms ease, color 160ms ease; } .ds-btn-ink { background: #1f3c9e; color: #fff; } .ds-btn-ink:hover { background: #1f150c; } .ds-btn:focus-visible { outline: 3px solid #ff5a14; outline-offset: 3px; }"
+    },
+    {
+      "name": "Tlačítko line",
+      "kind": "button",
+      "refersTo": "button-line",
+      "description": "Vedlejší akce na papíře: modrá linka 1,5 px, po najetí rastr 10 %.",
+      "html": "<a href=\"#\" class=\"ds-btn-line\">Otevřít celý web</a>",
+      "css": ".ds-btn-line { display: inline-flex; min-height: 3.25rem; align-items: center; padding: 0 1.5rem; font-family: var(--font-gothic, ui-sans-serif, system-ui, sans-serif); font-weight: 700; font-stretch: 87%; font-size: 1.0625rem; color: #1f3c9e; text-decoration: none; box-shadow: inset 0 0 0 1.5px #1f3c9e; transition: background-color 160ms ease; } .ds-btn-line:hover { background: #e9ecf5; } .ds-btn-line:focus-visible { outline: 3px solid #ff5a14; outline-offset: 3px; }"
+    },
+    {
+      "name": "Tlačítko orange",
+      "kind": "button",
+      "refersTo": "button-orange",
+      "description": "Akce na modré zadní straně: oranžová deska s textem v přetisku, po najetí bílá.",
+      "html": "<div style=\"background:#1f3c9e;padding:24px\"><a href=\"#\" class=\"ds-btn-orange\">Napsat e-mail</a></div>",
+      "css": ".ds-btn-orange { display: inline-flex; min-height: 3.5rem; align-items: center; padding: 0 1.75rem; font-family: var(--font-gothic, ui-sans-serif, system-ui, sans-serif); font-weight: 700; font-stretch: 87%; font-size: 1.125rem; background: #ff5a14; color: #1f150c; text-decoration: none; transition: background-color 160ms ease; } .ds-btn-orange:hover { background: #fff; } .ds-btn-orange:focus-visible { outline: 3px solid #ff5a14; outline-offset: 3px; }"
+    },
+    {
+      "name": "Tlačítko white line",
+      "kind": "button",
+      "refersTo": "button-white-line",
+      "description": "Vedlejší akce na modré ploše: bílá linka se 70% krytím.",
+      "html": "<div style=\"background:#1f3c9e;padding:24px\"><a href=\"#\" class=\"ds-btn-wl\">Domluvit konzultaci</a></div>",
+      "css": ".ds-btn-wl { display: inline-flex; min-height: 3.5rem; align-items: center; padding: 0 1.75rem; font-family: var(--font-gothic, ui-sans-serif, system-ui, sans-serif); font-weight: 700; font-stretch: 87%; font-size: 1.125rem; color: #fff; text-decoration: none; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.7); transition: background-color 160ms ease; } .ds-btn-wl:hover { background: rgb(255 255 255 / 0.12); } .ds-btn-wl:focus-visible { outline: 3px solid #ff5a14; outline-offset: 3px; }"
+    },
+    {
+      "name": "Pole formuláře",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Pravoúhlé pole s modrou linkou, popisek tučně nad ním; chyba oranžovým okrajem a hláškou na světlém rastru.",
+      "html": "<label class=\"ds-label\" for=\"ds-f\">Jméno</label><input id=\"ds-f\" class=\"ds-input\" placeholder=\"Jan Novák\"><p class=\"ds-error\">Vyplňte prosím jméno.</p>",
+      "css": ".ds-label { display: block; margin-bottom: 0.375rem; font-family: var(--font-gothic, ui-sans-serif, system-ui, sans-serif); font-weight: 700; color: #1f3c9e; } .ds-input { display: block; width: 100%; border: 1.5px solid #1f3c9e; border-radius: 0; background: #fff; padding: 0.75rem 0.875rem; font: inherit; font-size: 1rem; color: #1f3c9e; caret-color: #ff5a14; transition: background-color 150ms, border-color 150ms; } .ds-input:hover { background: #e9ecf5; } .ds-input:focus { background: #fff; } .ds-input:focus-visible { outline: 3px solid #ff5a14; outline-offset: 3px; } .ds-error { margin-top: 0.375rem; background: #ffe6da; padding: 0.25rem 0.5rem; font-size: 0.9375rem; font-weight: 500; color: #1f3c9e; }"
+    },
+    {
+      "name": "Hlavní menu",
+      "kind": "nav",
+      "description": "Položky 500 v plné šířce; po najetí modré podtržení 3 px, aktuální sekce oranžové.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">Služby</a><a href=\"#\" aria-current=\"location\">Ukázky</a><a href=\"#\">Postup</a><a href=\"#\">Kontakt</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 0.25rem; font-family: var(--font-gothic, ui-sans-serif, system-ui, sans-serif); } .ds-nav a { display: block; padding: 0.5rem 0.75rem; font-size: 1.0625rem; font-weight: 500; color: #1f3c9e; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 0.45em; text-decoration-color: transparent; transition: text-decoration-color 150ms; } .ds-nav a:hover { text-decoration-color: #1f3c9e; } .ds-nav a[aria-current] { text-decoration-color: #ff5a14; } .ds-nav a:focus-visible { outline: 3px solid #ff5a14; outline-offset: 3px; }"
+    },
+    {
+      "name": "Tabulka Technické údaje",
+      "kind": "custom",
+      "description": "Definiční seznam s linkou mezi řádky, hodnota tučně vpravo. Místo karet a počítadel.",
+      "html": "<div class=\"ds-spec-wrap\"><p class=\"ds-spec-title\">Technické údaje</p><dl class=\"ds-spec\"><div><dt>Web na klíč</dt><dd>od 15 000 Kč</dd></div><div><dt>Nabídka s pevnou cenou</dt><dd>do 2 pracovních dnů</dd></div><div><dt>Úvodní konzultace</dt><dd>20 minut zdarma</dd></div></dl></div>",
+      "css": ".ds-spec-wrap { font-family: var(--font-gothic, ui-sans-serif, system-ui, sans-serif); color: #1f3c9e; background: #fff; max-width: 28rem; } .ds-spec-title { margin: 0; font-weight: 700; font-stretch: 75%; font-size: 2.125rem; line-height: 1; } .ds-spec { margin: 0.75rem 0 0; } .ds-spec > div { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-top: 1.5px solid currentColor; padding: 0.55rem 0; } .ds-spec dd { margin: 0; font-weight: 700; text-align: right; }"
+    },
+    {
+      "name": "Oranžová deska",
+      "kind": "card",
+      "refersTo": "plate-orange",
+      "description": "Plochá oranžová deska s jedním sdělením, text v přetisku.",
+      "html": "<div class=\"ds-plate\"><p class=\"ds-plate-title\">Web patří vám</p><p class=\"ds-plate-text\">Doménu, kód i obsah máte na své jméno.</p></div>",
+      "css": ".ds-plate { background: #ff5a14; color: #1f150c; padding: 2.5rem; font-family: var(--font-gothic, ui-sans-serif, system-ui, sans-serif); } .ds-plate-title { margin: 0; font-weight: 700; font-stretch: 75%; font-size: clamp(2.5rem, 5.6vw, 5rem); line-height: 0.9; letter-spacing: -0.01em; } .ds-plate-text { margin: 0.75rem 0 0; max-width: 38rem; font-size: 1.125rem; line-height: 1.55; }"
+    },
+    {
+      "name": "Signet",
+      "kind": "custom",
+      "description": "Dva čtverce v soutisku, překryv je přetisk. Stejný tvar má favicon a OG obrázek.",
+      "html": "<svg class=\"ds-signet\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"0\" y=\"8\" width=\"16\" height=\"16\" fill=\"#ff5a14\"/><rect x=\"8\" y=\"0\" width=\"16\" height=\"16\" fill=\"#1f3c9e\"/><rect x=\"8\" y=\"8\" width=\"8\" height=\"8\" fill=\"#1f150c\"/></svg>",
+      "css": ".ds-signet { width: 2rem; height: 2rem; display: block; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Exportní prospekt",
+    "overview": "Web je tištěný prospekt jedné služby ve dvou tiskových barvách na bílém křídovém papíře. Ultramarín je klíčová barva: nese veškerý text, linky, ikony a duotónové fotky. Oranžová je druhá barva a existuje jen jako plochá deska nebo rastr, nikdy jako písmo. Kde se obě barvy potkají v přetisku (multiply), vzniká skoro černá třetí barva, která se nikde nemíchá zvlášť, jen se tiskne.\n\nSazba je technická a věcná jako katalog strojírny: zúžená groteska v titulcích, tabulky Technické údaje s linkou mezi řádky, nabídka sazená jako ceník, pravé úhly a linky 1,5 px. Hloubku nedělají stíny, ale soutisk a přetisk. Plné barvy patří jen skutečné práci: snímky ukázek jsou barevná příloha prospektu, všechno ostatní je ve dvou barvách.\n\nPohyb je tiskový. Při načtení se jednou vytiskne oranžová deska (clip-path shora) a modrá do ní dosedne do soutisku. Jinak se hýbe jen to, co spustí uživatel: snímek ukázky projíždí rámem podle scrollu, otázky se rozbalují, menu se odvíjí.",
+    "keyCharacteristics": [
+      "Dvě tiskové barvy na bílém papíře, třetí vzniká jen přetiskem.",
+      "Jedno písmo, Special Gothic, ve dvou šířkách: 75 % titulky, 100 % text.",
+      "Pravé úhly všude, linky 1,5 px v barvě textu.",
+      "Tabulky Technické údaje a ceník místo karet a štítků.",
+      "Žádné stíny; hloubka je soutisk desky a modré.",
+      "Plnobarevné jsou jen snímky hotové práce."
+    ],
+    "rules": [
+      { "name": "The Plate Not Ink Rule", "body": "Oranžová je deska nebo rastr, nikdy barva písma, číslic ani ikon. Text na oranžové je buď přetisk, nebo modrá v režimu multiply.", "section": "colors" },
+      { "name": "The Two Inks Rule", "body": "Na ploše jsou jen dvě tiskové barvy a jejich rastry. Třetí tón se nemíchá, tiskne se přetiskem. Žádná další barva kromě plnobarevných snímků hotové práce.", "section": "colors" },
+      { "name": "The Color Supplement Rule", "body": "Plné barvy jsou vyhrazené skutečné práci: snímkům ukázek v rámu a živému iframe. Portrét a ostatní fotky jdou přes duotón (scripts/images.mjs).", "section": "colors" },
+      { "name": "The Two Widths Rule", "body": "Titulky jsou vždy 700 na 75 %, text vždy 400–500 na 100 %. Mezi nimi jen 87 % pro tlačítka a údaje.", "section": "typography" },
+      { "name": "The No Kicker Rule", "body": "Nad nadpisem nic není: žádné štítky, kapitálky ani prostrkané popisky. Sekci otevírá linka a nadpis.", "section": "typography" },
+      { "name": "The Rule Opens Rule", "body": "Každá sekce, řádek ceníku, krok postupu i otázka začínají linkou 1,5 px přes celou šířku sloupce v barvě textu. Linka je hrana stránky, ne dekorace.", "section": "layout" },
+      { "name": "The Registration Not Shadow Rule", "body": "Vrstvy se vrství soutiskem a přetiskem, ne stínem ani rozmazáním. Žádné skleněné ani průsvitné hlavičky.", "section": "elevation" }
+    ],
+    "dos": [
+      "**Do** sázet veškerý text, číslice a ikony modrou (ink), na modré ploše bílou.",
+      "**Do** psát na oranžovou desku jen přetiskem (overprint) nebo modrou přes `mix-blend-mode: multiply`.",
+      "**Do** otevírat sekce a řádky linkou 1,5 px (rule) v barvě textu.",
+      "**Do** dávat údaje do tabulky Technické údaje nebo ceníku.",
+      "**Do** tisknout fotky lidí a provozu duotónem v modré; plné barvy nechat jen snímkům hotové práce.",
+      "**Do** držet titulky 700 na 75 % a text na 100 %.",
+      "**Do** omezit pohyb na tisk desky při načtení a na pohyb vyvolaný uživatelem, vše za `prefers-reduced-motion: no-preference`."
+    ],
+    "donts": [
+      "**Don't** používat oranžovou jako barvu textu, číslic nebo ikon.",
+      "**Don't** přidávat štítky, chipy, odznaky, eyebrow popisky ani kapitálky nad nadpisy.",
+      "**Don't** používat stíny, zaoblené rohy, sklo ani rozmazání.",
+      "**Don't** přidávat třetí barvu nebo gradient; tmavý tón vzniká jen přetiskem.",
+      "**Don't** skládat obsah do stejných karet s ikonou nebo do počítadel.",
+      "**Don't** dávat do odkazů šipky ani dekorativní pohyb bez významu."
+    ]
+  }
+}
