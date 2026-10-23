@@ -40,14 +40,14 @@ export const demos: Demo[] = [
     name: "HRANOL s.r.o.",
     kind: "Smyšlená strojírna z Rousínova: obrábění, svařence a montáž podsestav.",
     summary:
-      "Web vypadá jako stánek firmy na strojírenském veletrhu. Na úvodní stránce je volná kapacita strojů na osm týdnů dopředu, která se sama posouvá s kalendářem, a pult, na který přetáhnete výkres a ten pak čeká v poptávce. Stránka O firmě ukazuje půdorys haly, vyhledávání najde stroj, materiál i referenci.",
+      "Web má barvy, které dostane ocel při ohřevu: slámovou plochu, písmo modré jako popuštěná ocel a fotky z dílny sladěné do těchto dvou tónů. Stejnou řadou od slámové po modrou je obarvená volná kapacita na osm týdnů, která se sama posouvá s kalendářem. Výkres přetáhnete na pult v úvodu a v poptávce už na vás čeká.",
     url: "https://stepansynek.com/ukazka-hranol/",
     repo: "https://github.com/stepansynek/ukazka-hranol",
     facts: [
       { label: "Stránky", value: "6" },
-      { label: "Na webu", value: "kapacita na 8 týdnů, 3D příruba, pult na výkresy, půdorys haly" },
+      { label: "Na webu", value: "kapacita na 8 týdnů, pult na výkresy, kontrola rozměru dílu, půdorys haly" },
+      { label: "Obrázky", value: "fotky v jednom barevném ladění, vlastní rendery dílů" },
       { label: "Hledání", value: "po celém webu, zkratka Ctrl K" },
-      { label: "Logo", value: "navržené pro ukázku" },
     ],
     shots: { desktop: "ukazka-hranol", mobile: "ukazka-hranol-mobil" },
   },
