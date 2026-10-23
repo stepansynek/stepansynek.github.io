@@ -1,0 +1,259 @@
+<!doctype html>
+<!--
+  Stránka s heslem, kterou StatiCrypt vloží místo každé zašifrované stránky (scripts/zamknout.mjs).
+  Styly a písmo si půjčuje z webu: skript sem dosadí odkazy na CSS a třídu písma z out/index.html.
+  Proměnné ve tvaru /*[|nazev|]*/0 doplní StatiCrypt.
+-->
+<html class="__HTML_CLASS__" lang="cs">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Štěpán Synek</title>
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <!-- styly webu -->
+    <style>
+      .hidden {
+        display: none !important;
+      }
+
+      .lock {
+        display: flex;
+        min-height: 100svh;
+        flex-direction: column;
+        padding: 0 1rem;
+      }
+
+      .lock-top,
+      .lock-main {
+        width: 100%;
+        max-width: 26rem;
+        margin: 0 auto;
+      }
+
+      .lock-top {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1.5rem 0;
+        border-bottom: var(--rule) solid var(--ink);
+        font-weight: 700;
+        font-stretch: 75%;
+        font-size: 1.625rem;
+        line-height: 1;
+      }
+
+      .lock-top svg {
+        width: 1.75rem;
+        height: 1.75rem;
+        flex-shrink: 0;
+      }
+
+      .lock-main {
+        padding: clamp(3rem, 14vh, 8rem) 0 4rem;
+      }
+
+      .lock-title {
+        margin: 0;
+        font-weight: 700;
+        font-stretch: 75%;
+        font-size: clamp(2.5rem, 9vw, 3.25rem);
+        line-height: 0.95;
+        letter-spacing: -0.01em;
+        text-wrap: balance;
+      }
+
+      .lock-lead {
+        margin: 1rem 0 2.5rem;
+        color: var(--ink-soft);
+        font-size: 1.0625rem;
+        line-height: 1.5;
+      }
+
+      .lock-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+      }
+
+      .lock-field {
+        position: relative;
+      }
+
+      .lock-input {
+        display: block;
+        width: 100%;
+        min-height: 3.25rem;
+        padding: 0 6rem 0 1rem;
+        border: var(--rule) solid var(--ink);
+        border-radius: 0;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+        font-size: 1.0625rem;
+      }
+
+      .lock-input[aria-invalid="true"] {
+        box-shadow: inset 0 0 0 var(--rule) var(--ink);
+      }
+
+      .lock-toggle {
+        position: absolute;
+        top: 50%;
+        right: 0.25rem;
+        transform: translateY(-50%);
+        padding: 0.6rem 0.75rem;
+        color: var(--ink);
+        font-size: 0.9375rem;
+        text-decoration-line: underline;
+        text-decoration-thickness: var(--rule);
+        text-underline-offset: 0.2em;
+        cursor: pointer;
+      }
+
+      .lock-toggle:hover {
+        text-decoration-color: var(--orange);
+      }
+
+      .lock-error {
+        margin: 0.75rem 0 0;
+        font-weight: 700;
+      }
+
+      .lock-remember {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 1.25rem 0 1.75rem;
+        cursor: pointer;
+      }
+
+      .lock-remember input {
+        width: 1.25rem;
+        height: 1.25rem;
+        margin: 0;
+        accent-color: var(--ink);
+      }
+
+      .lock .btn {
+        width: 100%;
+        cursor: pointer;
+      }
+
+      .lock .btn:disabled {
+        cursor: progress;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="staticrypt_content" class="lock hidden">
+      <header class="lock-top">
+        <!-- Signet jako v hlavičce webu (src/components/Signet.tsx). -->
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+          <rect x="0" y="8" width="16" height="16" fill="var(--orange)" />
+          <rect x="8" y="0" width="16" height="16" fill="var(--ink)" />
+          <rect x="8" y="8" width="8" height="8" fill="var(--overprint)" />
+        </svg>
+        Štěpán Synek
+      </header>
+
+      <main class="lock-main">
+        <h1 class="lock-title">Web je zatím neveřejný</h1>
+        <p class="lock-lead">Pokud jste ode mě dostali heslo, zadejte ho níže.</p>
+
+        <form id="staticrypt-form" action="#" method="post" novalidate>
+          <label class="lock-label" for="staticrypt-password">Heslo</label>
+          <div class="lock-field">
+            <input
+              id="staticrypt-password"
+              class="lock-input"
+              type="password"
+              name="password"
+              autocomplete="current-password"
+              aria-describedby="lock-error"
+              required
+            />
+            <button id="lock-toggle" class="lock-toggle" type="button" aria-pressed="false">Zobrazit</button>
+          </div>
+          <p id="lock-error" class="lock-error" role="alert"></p>
+
+          <label id="staticrypt-remember-label" class="lock-remember hidden">
+            <input id="staticrypt-remember" type="checkbox" name="remember" checked />
+            Zapamatovat na tomto zařízení
+          </label>
+
+          <button id="lock-submit" class="btn btn-ink" type="submit">Otevřít</button>
+        </form>
+      </main>
+    </div>
+
+    <script>
+      // these variables will be filled when generating the file - the template format is '/*[|variable_name|]*/0'
+      const staticryptInitiator = /*[|js_staticrypt|]*/ 0;
+      const templateError = "/*[|template_error|]*/0",
+        isRememberEnabled = /*[|is_remember_enabled|]*/ 0,
+        staticryptConfig = /*[|staticrypt_config|]*/ 0;
+
+      // Vlastní klíče, ať se nepletou s /nahledy/ na stejné doméně.
+      const templateConfig = {
+        rememberExpirationKey: "web_heslo_expiration",
+        rememberPassphraseKey: "web_heslo_passphrase",
+        replaceHtmlCallback: null,
+        clearLocalStorageCallback: null,
+      };
+
+      const staticrypt = staticryptInitiator.init(staticryptConfig, templateConfig);
+
+      const form = document.getElementById("staticrypt-form"),
+        input = document.getElementById("staticrypt-password"),
+        toggle = document.getElementById("lock-toggle"),
+        submit = document.getElementById("lock-submit"),
+        error = document.getElementById("lock-error");
+
+      // Uložené heslo (nebo odkaz s heslem) odemkne stránku hned, formulář se vůbec neukáže.
+      window.onload = async function () {
+        const { isSuccessful } = await staticrypt.handleDecryptOnLoad();
+        if (isSuccessful) return;
+
+        document.getElementById("staticrypt_content").classList.remove("hidden");
+        if (isRememberEnabled) document.getElementById("staticrypt-remember-label").classList.remove("hidden");
+        input.focus();
+      };
+
+      toggle.addEventListener("click", function () {
+        const show = input.type === "password";
+        input.type = show ? "text" : "password";
+        toggle.textContent = show ? "Skrýt" : "Zobrazit";
+        toggle.setAttribute("aria-pressed", String(show));
+        input.focus();
+      });
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        if (!input.value) {
+          input.setAttribute("aria-invalid", "true");
+          error.textContent = "Zadejte heslo.";
+          input.focus();
+          return;
+        }
+
+        submit.disabled = true;
+        submit.textContent = "Otevírám…";
+        const remember = document.getElementById("staticrypt-remember").checked;
+        const { isSuccessful } = await staticrypt.handleDecryptionOfPage(input.value, remember);
+
+        if (!isSuccessful) {
+          submit.disabled = false;
+          submit.textContent = "Otevřít";
+          input.setAttribute("aria-invalid", "true");
+          error.textContent = templateError;
+          input.select();
+        }
+      });
+    </script>
+  </body>
+</html>

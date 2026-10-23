@@ -12,6 +12,7 @@
     "dev": "next dev",
     "prebuild": "node scripts/images.mjs",
     "build": "next build",
+    "lock": "node scripts/zamknout.mjs",
     "start": "npx serve@14 out",
     "typecheck": "tsc --noEmit",
     "og": "node scripts/og.mjs",
@@ -29,6 +30,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "sharp": "^0.35.5",
+    "staticrypt": "3.5.4",
     "tailwindcss": "4.3.3",
     "typescript": "^5.9.3"
   }

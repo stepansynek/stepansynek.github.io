@@ -18,6 +18,7 @@ npm run build        # statický export do out/
 npm start            # náhled buildu z out/
 npm run typecheck    # kontrola typů
 npm run check:launch # brána před spuštěním (viz níže)
+SITE_PASSWORD="…" npm run lock  # zamkne hotový out/ heslem (viz Neveřejný web)
 ```
 
 ## Kde co upravit
@@ -92,7 +93,7 @@ ho spusťte znovu a výsledek commitněte.
 ## Nasazení
 
 GitHub Actions (`.github/workflows/deploy.yml`) při pushi do `main`: instalace, kontrola typů,
-**brána před spuštěním**, build a nasazení na GitHub Pages. Pull requesty se jen sestaví.
+**brána před spuštěním**, build, **zamčení heslem** a nasazení na GitHub Pages. Pull requesty se jen sestaví.
 
 Brána (`scripts/check-launch.mjs`) zastaví nasazení, dokud v `config.ts` nejsou vyplněné `ICO`, `SIDLO`,
 `TELEFON`, `EMAIL` (na @stepansynek.com), `CASY_TELEFON`, `ROZSAH_ZAKLAD`, `CENA_PECE`, `DPH_VETA`
@@ -100,3 +101,20 @@ a dokud chybí `public/photos/me.jpg`. Schválení textů hlídá Štěpán sám
 
 Jednorázově: **Settings → Pages → Source: GitHub Actions**, Custom domain `stepansynek.com`, Enforce HTTPS.
 Soubor `CNAME` je v `public/` a do buildu se zkopíruje sám.
+
+## Neveřejný web
+
+Web je zatím zamčený heslem. Po buildu `scripts/zamknout.mjs` zašifruje StatiCryptem každé HTML v `out/`
+a místo stránky se ukáže `scripts/heslo.html` („Web je zatím neveřejný“). Kdo heslo zadá, uvidí web
+normálně; se zaškrtnutým „Zapamatovat“ se mu web 30 dní odemyká sám. Stránka s heslem má `noindex`,
+sitemap je dočasně pryč, takže web z vyhledávání vypadne. Soubory `.txt` s daty pro navigaci Next.js
+skript maže, protože obsahují celé texty. Veřejně dostupné zůstávají fotky, CSS a JS (v JS jsou jen
+popisky formuláře). A dokud je repozitář veřejný, jsou texty čitelné i v `src/content/`.
+
+- **Heslo** je v tajemství repozitáře `SITE_PASSWORD` (Settings → Secrets and variables → Actions), ne v kódu.
+  Změna: `gh secret set SITE_PASSWORD` a znovu spustit nasazení (`gh workflow run deploy.yml`).
+- **Sůl** v `.staticrypt.json` je veřejná a musí zůstat stejná, jinak se uložená hesla po nasazení zneplatní.
+- **Zveřejnění webu:** smazat krok „Zamčení heslem“ v `deploy.yml` a vrátit `src/app/sitemap.ts`
+  (`git log --diff-filter=D -- src/app/sitemap.ts`) i odkaz na sitemap v `src/app/robots.ts`.
+
+Ukázky na `stepansynek.com/<repo>/` (SETINA, HRANOL) jsou samostatné repozitáře a zámek se jich netýká.

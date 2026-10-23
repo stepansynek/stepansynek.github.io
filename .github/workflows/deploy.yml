@@ -45,6 +45,15 @@ jobs:
       - name: Build (statický export do out/)
         run: npm run build
 
+      # Web je neveřejný: každá stránka se zašifruje heslem z tajemství SITE_PASSWORD
+      # (Settings → Secrets and variables → Actions). Bez hesla krok selže a nic se nenasadí.
+      # Zveřejnění: smazat tento krok a vrátit src/app/sitemap.ts (viz README).
+      - name: Zamčení heslem
+        if: github.event_name != 'pull_request'
+        env:
+          SITE_PASSWORD: ${{ secrets.SITE_PASSWORD }}
+        run: npm run lock
+
       - uses: actions/upload-pages-artifact@v5
         if: github.event_name != 'pull_request'
         with:
